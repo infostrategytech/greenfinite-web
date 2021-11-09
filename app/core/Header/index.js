@@ -5,10 +5,11 @@ import {
   CssBaseline,
   Toolbar,
   Typography,
-  makeStyles,
   useTheme,
   useMediaQuery,
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+// import classes from "./styles/Home.module.css";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -19,11 +20,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    maxWidth: "100%",
   },
   navlinks: {
     // marginLeft: theme.spacing(10),
     display: "flex",
-    justifyContent: "space-between",
+
+    justifyContent: "center",
   },
   logo: {
     flexGrow: "1",
@@ -34,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#000",
     fontSize: "20px",
     marginLeft: theme.spacing(10),
+    cursor: "pointer",
   },
 }));
 
@@ -72,7 +76,7 @@ function Header() {
                     About us
                   </Typography>
                   <Typography variant="body1" className={classes.links}>
-                    Contact us
+                    Contact uss
                   </Typography>
                 </>
               )}
