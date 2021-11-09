@@ -1,7 +1,19 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
+import Head from "next/head";
+
+import AppLayout from "../app/core/Layout";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Head>
+        <title></title>
+      </Head>
+      <AppLayout>
+        <Component {...pageProps} />
+      </AppLayout>
+    </>
+  );
 }
 
-export default MyApp
+export default MyApp;
