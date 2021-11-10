@@ -79,7 +79,7 @@ function Header() {
         <Toolbar>
           <Grid
             container
-            justifyContent={isMobile ? "space-between" : "center"}
+            justifycontent={isMobile ? "space-between" : "center"}
             className={classes.container}
           >
             <Grid item sm={3}>

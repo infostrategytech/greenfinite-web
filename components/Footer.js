@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Grid, Typography, makeStyles } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 import { Facebook, Instagram, Twitter, LinkedIn } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -71,7 +72,7 @@ const Footer = () => {
               info@greenfinite.ng{" "}
             </Typography>
             <Typography variant="h4" className={classes.footerList}>
-              25D, Drive 3, Prince and Princess Estate, Abuja
+              25D, Drive 3, Prince and Princess Estate, Abuja fct
             </Typography>
             <Typography variant="h4" className={classes.icon}>
               <span className={classes.icons}>
@@ -91,14 +92,14 @@ const Footer = () => {
           <Grid item container xs={12} sm={12} md={6}>
             <Grid item xs={12} sm={12} md={6}>
               <Typography variant="h4" className={classes.header}>
-                Company{" "}
+                Company
               </Typography>
               <Typography
                 onClick={() => router.push()}
                 variant="h4"
                 className={classes.footerList}
               >
-                About us{" "}
+                About u{" "}
               </Typography>
               <Typography
                 onClick={() => router.push()}

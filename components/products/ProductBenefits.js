@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Grid, Typography, makeStyles } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -8,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
   wrapper: {
     width: "80%",
-    margin: "2em 0",
+    margin: "2em 0 5em 0",
   },
   container: {
     display: "flex",
@@ -24,9 +25,9 @@ const useStyles = makeStyles((theme) => ({
   },
   content1: {
     fontFamily: "Poppins",
-    fontSize: "14px",
+    fontSize: "15px",
     fontWeight: "400",
-    lineHeight: "22px",
+    lineHeight: "28px",
     marginTop: ".2em",
     marginBottom: "1em",
   },

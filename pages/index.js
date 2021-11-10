@@ -7,8 +7,10 @@ import {
   Card,
 } from "@material-ui/core";
 import Footer from "../components/Footer";
+import HowToUse from "../components/HowToUse";
 import ProductBenefits from "../components/products/ProductBenefits";
 import Products from "../components/products/Products";
+import ProductSection from "../components/products/ProductSection";
 import styles from "../styles/Home.module.css";
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -103,6 +105,8 @@ export default function Home() {
         </Box>
         <Box>
           <ProductBenefits />
+          <ProductSection />
+          <HowToUse />
         </Box>
       </div>
     </>

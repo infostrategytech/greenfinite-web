@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, Typography, Grid, Button, makeStyles } from "@material-ui/core";
+import { Card, Typography, Grid, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   cards: {
@@ -56,7 +57,7 @@ const Products = () => {
   const classes = useStyles();
   return (
     <Card elevation={0} className={classes.cards}>
-      <Grid container xs={12} sm={12} md={12} justifyContent="space-between">
+      <Grid container justifyContent="space-between">
         <Grid
           item
           container
@@ -110,7 +111,7 @@ const Products = () => {
             <Typography variant="body1" className={classes.content1}>
               flesh of Dates Fruit which have been dried and ground into fine
               powder.
-              <small className={classes.grams}>200g and 500g</small>
+              <small className={classes.grams}>200g and 5000g</small>
             </Typography>
             <Button variat="contained" className={classes.button1}>
               Buy Now
