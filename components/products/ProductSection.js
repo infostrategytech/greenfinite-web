@@ -81,6 +81,16 @@ const useStyles = makeStyles((theme) => ({
   container: {
     margin: "2em 0",
   },
+  order2: {
+    [theme.breakpoints.down("md")]: {
+      order: "2",
+    },
+  },
+  order1: {
+    [theme.breakpoints.down("md")]: {
+      order: "1",
+    },
+  },
 }));
 const ProductSection = () => {
   const classes = useStyles();
@@ -147,14 +157,14 @@ const ProductSection = () => {
               spacing={4}
               className={classes.fruitContainer}
             >
-              <Grid item md style={{ order: "2" }}>
+              <Grid item md className={classes.order2}>
                 <img
                   src="./images/productgroup.png"
                   alt="Powdered nuts"
                   className={classes.logo1}
                 />
               </Grid>
-              <Grid item md style={{ order: "1" }}>
+              <Grid item md className={classes.order1}>
                 <Typography variant="h3" className={classes.title1}>
                   Date Syrup
                 </Typography>

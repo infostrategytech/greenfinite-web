@@ -22,15 +22,16 @@ const useStyles = makeStyles((theme) => ({
   },
   wrapper: {
     background: "#FFF1DA",
-    height: "120vh",
+    height: "100vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
     position: "relative",
     [theme.breakpoints.down("md")]: {
-      // marginTop: "4em",
+      // marginBottom: "8em",
       padding: "0 2em",
+      // height: "80vh",
     },
   },
   container: {
@@ -41,6 +42,10 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     maxWidth: "100%",
+    [theme.breakpoints.only("sm")]: {
+      width: "300px",
+      height: "300px",
+    },
   },
   title: {
     fontFamily: "Poppins",
@@ -48,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "700",
     lineHeight: "50px",
     [theme.breakpoints.down("md")]: {
-      fontSize: "24px",
+      fontSize: "36px",
       lineHeight: "30px",
     },
   },
@@ -74,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontSize: "18px",
     fontWeight: "500",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "105px",
       height: "43px",
       fontSize: "14px",
@@ -85,6 +90,20 @@ const useStyles = makeStyles((theme) => ({
     width: "80%",
     position: "relative",
     top: "-120px",
+    [theme.breakpoints.down("sm")]: {
+      top: "0",
+      width: "100%",
+    },
+  },
+  order2: {
+    [theme.breakpoints.down("sm")]: {
+      order: "2",
+    },
+  },
+  order1: {
+    [theme.breakpoints.down("sm")]: {
+      order: "1",
+    },
   },
 }));
 export default function Home() {
@@ -94,7 +113,7 @@ export default function Home() {
       <div className={classes.main}>
         <Box className={classes.wrapper}>
           <Grid container className={classes.container}>
-            <Grid item xs={12} sm={12} md={5} style={{ order: "2" }}>
+            <Grid item xs={12} sm={12} md={5} className={classes.order2}>
               <Box>
                 <Typography variant="h3" className={classes.title}>
                   Healthy sweateners <br /> made from Date fruits
@@ -108,7 +127,7 @@ export default function Home() {
                 </Button>
               </Box>
             </Grid>
-            <Grid item item xs={12} sm={12} md={5} style={{ order: "1" }}>
+            <Grid item item xs={12} sm={12} md={5} className={classes.order1}>
               <img
                 src="./images/bowl.png"
                 alt="Powdered nuts"

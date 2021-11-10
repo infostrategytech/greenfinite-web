@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
       padding: 0,
       paddingRight: "8px",
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       justifyContent: "space-between",
     },
   },
@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#000",
     fontSize: "16px",
     cursor: "pointer",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "14px",
+    },
   },
   account: {
     border: "1px solid #646464",
@@ -72,7 +75,7 @@ function Header() {
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const classes = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const closehandler = () => {
     setOpenDrawer(false);
   };
@@ -96,14 +99,11 @@ function Header() {
                 />
               </Typography>
             </Grid>
-            <Grid item sm={7}>
-              <div className={classes.navlinks}>
-                {isMobile ? (
-                  <DrawerComponent
-                    openDrawer={openDrawer}
-                    close={closehandler}
-                  />
-                ) : (
+            {isMobile ? (
+              <DrawerComponent openDrawer={openDrawer} close={closehandler} />
+            ) : (
+              <Grid item sm={7}>
+                <div className={classes.navlinks}>
                   <>
                     <Typography variant="body1" className={classes.links}>
                       Home
@@ -138,9 +138,9 @@ function Header() {
                       Cart
                     </Typography>
                   </>
-                )}
-              </div>
-            </Grid>
+                </div>
+              </Grid>
+            )}
           </Grid>
         </Toolbar>
       </AppBar>
