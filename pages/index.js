@@ -7,6 +7,7 @@ import {
   Card,
 } from "@material-ui/core";
 import Footer from "../components/Footer";
+import ProductBenefits from "../components/products/ProductBenefits";
 import Products from "../components/products/Products";
 import styles from "../styles/Home.module.css";
 const useStyles = makeStyles((theme) => ({
@@ -99,6 +100,9 @@ export default function Home() {
         </Box>
         <Box className={classes.products}>
           <Products />
+        </Box>
+        <Box>
+          <ProductBenefits />
         </Box>
       </div>
     </>

@@ -71,7 +71,7 @@ const Footer = () => {
               info@greenfinite.ng{" "}
             </Typography>
             <Typography variant="h4" className={classes.footerList}>
-              25D, Drive 3, Prince and Princess Estate, Abuja{" "}
+              25D, Drive 3, Prince and Princess Estate, Abuja
             </Typography>
             <Typography variant="h4" className={classes.icon}>
               <span className={classes.icons}>
