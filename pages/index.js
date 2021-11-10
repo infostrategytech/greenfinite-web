@@ -22,12 +22,16 @@ const useStyles = makeStyles((theme) => ({
   },
   wrapper: {
     background: "#FFF1DA",
-    height: "100vh",
+    height: "120vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
     position: "relative",
+    [theme.breakpoints.down("md")]: {
+      // marginTop: "4em",
+      padding: "0 2em",
+    },
   },
   container: {
     display: "flex",
@@ -43,6 +47,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "40px",
     fontWeight: "700",
     lineHeight: "50px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "24px",
+      lineHeight: "30px",
+    },
   },
   content: {
     fontFamily: "Poppins",
@@ -51,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "30px",
     marginTop: ".8em",
     marginBottom: "1.5em",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "16px",
+    },
   },
   button: {
     borderRadius: "50px",
@@ -63,6 +74,11 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontSize: "18px",
     fontWeight: "500",
+    [theme.breakpoints.down("md")]: {
+      width: "105px",
+      height: "43px",
+      fontSize: "14px",
+    },
   },
 
   products: {
@@ -78,7 +94,7 @@ export default function Home() {
       <div className={classes.main}>
         <Box className={classes.wrapper}>
           <Grid container className={classes.container}>
-            <Grid item xs={12} sm={12} md={5}>
+            <Grid item xs={12} sm={12} md={5} style={{ order: "2" }}>
               <Box>
                 <Typography variant="h3" className={classes.title}>
                   Healthy sweateners <br /> made from Date fruits
@@ -92,7 +108,7 @@ export default function Home() {
                 </Button>
               </Box>
             </Grid>
-            <Grid item item xs={12} sm={12} md={5}>
+            <Grid item item xs={12} sm={12} md={5} style={{ order: "1" }}>
               <img
                 src="./images/bowl.png"
                 alt="Powdered nuts"

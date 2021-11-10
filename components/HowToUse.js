@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
     position: "relative",
+    [theme.breakpoints.down("md")]: {
+      height: "100%",
+    },
   },
   wrapper: {
     width: "80%",
@@ -20,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     margin: "0 3.5em",
+    [theme.breakpoints.down("md")]: {
+      margin: 0,
+    },
   },
   logo: {
     maxWidth: "100%",

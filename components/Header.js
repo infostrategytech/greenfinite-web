@@ -26,9 +26,14 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
+
     "& .MuiIconButton-root": {
       padding: 0,
       paddingRight: "8px",
+    },
+    [theme.breakpoints.down("md")]: {
+      justifyContent: "space-between",
     },
   },
   headerlinks: {
@@ -67,7 +72,7 @@ function Header() {
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const classes = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const closehandler = () => {
     setOpenDrawer(false);
   };
@@ -79,7 +84,7 @@ function Header() {
         <Toolbar>
           <Grid
             container
-            justifycontent={isMobile ? "space-between" : "center"}
+            justifyContent={isMobile ? "space-between" : "center"}
             className={classes.container}
           >
             <Grid item sm={3}>
@@ -91,7 +96,7 @@ function Header() {
                 />
               </Typography>
             </Grid>
-            <Grid item sm={8}>
+            <Grid item sm={7}>
               <div className={classes.navlinks}>
                 {isMobile ? (
                   <DrawerComponent

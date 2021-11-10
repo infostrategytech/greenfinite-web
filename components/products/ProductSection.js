@@ -18,12 +18,19 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     height: "50px",
     width: "50px",
+    [theme.breakpoints.down("md")]: {
+      height: "40px",
+      width: "40px",
+    },
   },
   logo1: {
     maxWidth: "100%",
     width: "450px",
     height: "400px",
-    // objectFit: "cover",
+    [theme.breakpoints.down("md")]: {
+      width: "80px",
+      height: "80px",
+    },
   },
   content1: {
     fontFamily: "Poppins",
@@ -32,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "22px",
     marginTop: ".2em",
     marginBottom: "1em",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "15px",
+      lineHeight: "20px",
+    },
   },
   title: {
     fontFamily: "Poppins",
@@ -39,10 +50,14 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "700",
     lineHeight: "60px",
     marginBottom: "20px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "30px",
+      lineHeight: "20px",
+    },
   },
   title1: {
     fontFamily: "Poppins",
-    fontSize: "30px",
+    fontSize: "24px",
     fontWeight: "600",
     lineHeight: "60px",
 
@@ -53,6 +68,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "18px",
     fontWeight: "500",
     lineHeight: "30px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "15px",
+      lineHeight: "20px",
+      fontWeight: "300",
+    },
   },
   fruitContainer: {
     display: "flex",
@@ -127,14 +147,14 @@ const ProductSection = () => {
               spacing={4}
               className={classes.fruitContainer}
             >
-              <Grid item md>
+              <Grid item md style={{ order: "2" }}>
                 <img
                   src="./images/productgroup.png"
                   alt="Powdered nuts"
                   className={classes.logo1}
                 />
               </Grid>
-              <Grid item md>
+              <Grid item md style={{ order: "1" }}>
                 <Typography variant="h3" className={classes.title1}>
                   Date Syrup
                 </Typography>

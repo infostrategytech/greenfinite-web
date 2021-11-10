@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
   wrapper: {
     width: "80%",
     margin: "2em 0 5em 0",
+    [theme.breakpoints.down("md")]: {
+      margin: "1em 0 3em 0",
+    },
   },
   container: {
     display: "flex",
@@ -22,6 +25,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "700",
     lineHeight: "60px",
     marginLeft: "10px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "30px",
+      fontWeight: "700",
+      lineHeight: "40px",
+      textAlign: "center",
+    },
   },
   content1: {
     fontFamily: "Poppins",
@@ -30,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "28px",
     marginTop: ".2em",
     marginBottom: "1em",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "14px",
+      lineHeight: "30px",
+    },
   },
 }));
 
@@ -55,7 +68,7 @@ function ProductBenefits() {
                 <li className={classes.content1}>
                   They are a good source probiotics, phytonutrients and soluble
                   fibre which improves digestive health and may prevent colon
-                  cancer
+                  cancer.
                 </li>
               </ul>
             </Grid>

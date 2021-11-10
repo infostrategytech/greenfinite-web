@@ -10,14 +10,18 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px -1px 29px 8px rgba(210,210,210,0.15)",
   },
   fruitContainer: {
-    display: "flex",
-    alignItems: "center",
+    // display: "flex",
+    // alignItems: "center",
   },
   logo1: {
     maxWidth: "100%",
     width: "120px",
     height: "240px",
     objectFit: "cover",
+    [theme.breakpoints.down("md")]: {
+      width: "80px",
+      height: "140px",
+    },
   },
   title1: {
     fontFamily: "Poppins",
