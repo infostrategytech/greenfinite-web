@@ -1,0 +1,99 @@
+import React from "react";
+import {
+  Box,
+  Button,
+  Grid,
+  Typography,
+  makeStyles,
+  Card,
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  box: {
+    height: "60vh",
+    background: " #EFF8F2;",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    position: "relative",
+  },
+  wrapper: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  container: {
+    width: "80%",
+    margin: "2em 0 5em 0",
+    height: "60vh",
+  },
+  logo: {
+    maxWidth: "100%",
+  },
+  title: {
+    textAlign: "center",
+    fontFamily: "Poppins",
+    fontSize: "40px",
+    fontWeight: "700",
+    lineHeight: "60px",
+  },
+  content: {
+    fontFamily: "Poppins",
+    fontSize: "20px",
+    fontWeight: "800",
+    lineHeight: "30px",
+    marginTop: ".8em",
+    marginBottom: "1.5em",
+    textAlign: "center",
+  },
+  button: {
+    fontFamily: "Poppins",
+    borderRadius: "100px",
+    background: "#3D8754",
+    color: "#fff",
+    padding: "20px",
+    textTransform: "capitalize",
+    width: "280px",
+    height: "65px",
+    fontSize: "18px",
+    fontWeight: "500",
+  },
+  item: {
+    display: "flex",
+  },
+  items: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+  },
+}));
+const Distributor = () => {
+  const classes = useStyles();
+  return (
+    <>
+      <Box className={classes.wrapper}>
+        <Grid container className={classes.container}>
+          <Grid item xs={12} sm={12} className={classes.item}>
+            <Box className={classes.items}>
+              <Typography variant="h3" className={classes.title}>
+                Become a Distributor
+              </Typography>
+              <Typography variant="body1" className={classes.content}>
+                Our goal is to empower as many people as possible to make extra
+                income by partnering with us . <br /> To become a Greenfinite
+                distributor , please Click the Join Us button
+              </Typography>
+              <Button variat="contained" className={classes.button}>
+                Join Us
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+    </>
+  );
+};
+
+export default Distributor;

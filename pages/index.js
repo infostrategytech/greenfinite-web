@@ -6,6 +6,7 @@ import {
   makeStyles,
   Card,
 } from "@material-ui/core";
+import Distributor from "../components/Distributor";
 import Footer from "../components/Footer";
 import HowToUse from "../components/HowToUse";
 import ProductBenefits from "../components/products/ProductBenefits";
@@ -107,6 +108,7 @@ export default function Home() {
           <ProductBenefits />
           <ProductSection />
           <HowToUse />
+          <Distributor />
         </Box>
       </div>
     </>
