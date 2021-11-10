@@ -6,7 +6,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 import { makeStyles } from "@material-ui/core/styles";
-import AppLayout from "../app/core/Layout";
+import AppLayout from "../components/Layout";
 import Router from "next/router";
 
 const useStyles = makeStyles((theme) => ({
@@ -17,11 +17,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function MyApp({ Component, pageProps }) {
-  // const store = useStore(pageProps.initialReduxState)
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [progress, setProgress] = React.useState(10);
-
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
@@ -87,6 +82,4 @@ MyApp.propTypes = {
   pageProps: PropTypes.object.isRequired,
 };
 
-//withRedux wrapper that passes the store to the App Component
 export default MyApp;
-// export default withRedux(makeStore)(MyApp);
