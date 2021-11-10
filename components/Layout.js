@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./Footer";
 import Header from "./Header";
 
 function AppLayout({ children }) {
@@ -8,7 +9,7 @@ function AppLayout({ children }) {
       <Header />
       {children}
       {/* footer */}
-      <h2>Footer</h2>
+      <Footer />
     </>
   );
 }

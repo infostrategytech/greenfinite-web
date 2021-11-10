@@ -12,7 +12,6 @@ import {
   Badge,
 } from "@material-ui/core";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import { ShoppingCart } from "@material-ui/icons/";
 import { makeStyles } from "@material-ui/core/styles";
 import DrawerComponent from "./Drawer";
@@ -20,7 +19,7 @@ import DrawerComponent from "./Drawer";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    backgroundColor: "transparent",
+    backgroundColor: "#FFF1DA",
     color: "#000",
     width: "100vw",
   },
@@ -82,7 +81,7 @@ function Header() {
             justifyContent={isMobile ? "space-between" : "center"}
             className={classes.container}
           >
-            <Grid item sm={2}>
+            <Grid item sm={3}>
               <Typography variant="h4" className={classes.logo}>
                 <img
                   src="./images/Logo.png"
