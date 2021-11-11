@@ -45,7 +45,7 @@ function Item() {
               </Box>
 
               <Box style={{ marginTop: 2 + "rem" }}>
-                <button>Add</button>{" "}
+                <button style={{ border: "1px solid #3D8754", borderRadius: 100 + "%", fontSize: 24, cursor: "pointer", width: 32 + "px", height: 32 + "px"}}>-</button>{" "}
                 <span
                   style={{
                     fontSize: 22,
@@ -56,7 +56,7 @@ function Item() {
                 >
                   2
                 </span>{" "}
-                <button>Remove</button>
+                <button style={{ border: "none", borderRadius: 100 , backgroundColor: "#3D8754", color: "#ffff", fontSize: 24, cursor: "pointer", width: 32 + "px", height: 32 + "px" }}>+</button>
               </Box>
 
               <Box style={{ fontSize: 16,
