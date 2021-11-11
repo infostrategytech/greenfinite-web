@@ -12,6 +12,7 @@ import {
   Box,
   Grid,
   Button,
+  Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -29,19 +30,20 @@ function Cart() {
     // <Container style={{ marginTop: 5 + "rem", marginLeft: 10 + "rem" }}>
     <Container style={{ marginTop: 7 + "rem" }}>
       <Grid xs={12}>
-        <Box>
-          <h1
-            style={{
-              fontFamily: "Poppins",
-              fontWeight: 600,
-              fontSize: 30,
-              lineHeight: 45 + "px",
-              letterSpacing: 0.01 + "em",
-            }}
-          >
-            Cart (1 item)
-          </h1>
-        </Box>
+        <Typography
+          style={{
+            fontFamily: "Poppins",
+            fontWeight: 600,
+            fontSize: 30,
+            lineHeight: 45 + "px",
+            letterSpacing: 0.01 + "em",
+          }}
+        >
+          <span style={{ marginRight: 10 + "px" }}>
+            <img src="../images/cartIcon.png" alt="cart icon" />
+          </span>
+          Cart (1 item)
+        </Typography>
 
         <Box style={{ marginTop: 3 + "rem", marginBottom: 3 + "rem" }}>
           <TableContainer component={Paper}>
@@ -90,78 +92,77 @@ function Cart() {
           </TableContainer>
         </Box>
 
-        <Box style={{ paddingRight: 2 + "rem" }}>
-          <Grid xs={12} style={{ textAlign: "right" }}>
-            <h1
+        <Grid xs={12} style={{ textAlign: "right" }}>
+          <Typography
+            style={{
+              fontFamily: "Poppins",
+              fontWeight: "bold",
+              fontSize: 24 + "px",
+              lineHeight: 36 + "px",
+              marginRight: 20 + "px",
+            }}
+          >
+            Total:{" "}
+            <span
               style={{
                 fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 24 + "px",
-                lineHeight: 36 + "px",
+                fontWeight: 500,
+                fontSize: 30 + "px",
+                lineHeight: 40 + "px",
+                marginLeft: 50 + "px",
               }}
             >
-              Total:{" "}
-              <span
-                style={{
-                  fontFamily: "Poppins",
-                  fontWeight: 500,
-                  fontSize: 30 + "px",
-                  lineHeight: 40 + "px",
-                  marginLeft: 10,
-                }}
-              >
-                N10,000
-              </span>
-            </h1>
-          </Grid>
-        </Box>
+              N10,000
+            </span>
+          </Typography>
+        </Grid>
 
-        <Box style={{ marginTop: 10 + "rem" }}>
-          <Grid xs={12} style={{ textAlign: "right" }}>
-            <Link href="/shop" underline="none">
-              <button
-                style={{
-                  fontFamily: "Poppins",
-                  fontSize: 18,
-                  fontWeight: 500,
-                  lineHeight: 24 + "px",
-                  backgroundColor: "white",
-                  color: "#3F6A0F",
-                  paddingTop: 16 + "px",
-                  paddingBottom: 16 + "px",
-                  paddingLeft: 45 + "px",
-                  paddingRight: 45 + "px",
-                  border: 1 + "px" + "solid" + "#3F6A0F",
-                  borderRadius: 50,
-                  marginRight: 3 + "rem",
-                }}
-              >
-                Buy More
-              </button>
-            </Link>
+        {/* <Box style={{ marginTop: 10 + "rem" }}> */}
+        <Grid xs={12} style={{ textAlign: "right", marginTop: 130 + "px" }}>
+          <Link href="/shop" underline="none">
+            <button
+              style={{
+                fontFamily: "Poppins",
+                fontSize: 18,
+                fontWeight: 500,
+                lineHeight: 24 + "px",
+                backgroundColor: "white",
+                color: "#3F6A0F",
+                paddingTop: 16 + "px",
+                paddingBottom: 16 + "px",
+                paddingLeft: 45 + "px",
+                paddingRight: 45 + "px",
+                border: 1 + "px" + "solid" + "#3F6A0F",
+                borderRadius: 50,
+                marginRight: 3 + "rem",
+              }}
+            >
+              Buy More
+            </button>
+          </Link>
 
-            <Link href="/check-out" underline="none">
-              <button
-                style={{
-                  fontFamily: "Poppins",
-                  fontSize: 18,
-                  fontWeight: 500,
-                  lineHeight: 27 + "px",
-                  backgroundColor: "#3F6A0F",
-                  color: "white",
-                  paddingTop: 16 + "px",
-                  paddingBottom: 16 + "px",
-                  paddingLeft: 60 + "px",
-                  paddingRight: 60 + "px",
-                  border: "none",
-                  borderRadius: 50,
-                }}
-              >
-                Checkout
-              </button>
-            </Link>
-          </Grid>
-        </Box>
+          <Link href="/check-out" underline="none">
+            <button
+              style={{
+                fontFamily: "Poppins",
+                fontSize: 18,
+                fontWeight: 500,
+                lineHeight: 27 + "px",
+                backgroundColor: "#3F6A0F",
+                color: "white",
+                paddingTop: 16 + "px",
+                paddingBottom: 16 + "px",
+                paddingLeft: 60 + "px",
+                paddingRight: 60 + "px",
+                border: "none",
+                borderRadius: 50,
+              }}
+            >
+              Checkout
+            </button>
+          </Link>
+        </Grid>
+        {/* </Box> */}
       </Grid>
     </Container>
   );

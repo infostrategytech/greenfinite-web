@@ -271,12 +271,12 @@ function CheckOut() {
 
             <Box style={{ marginBottom: 2 + "rem" }}>
               <Grid container spacing={2}>
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                   <Box>
-                    <img src="" alt="product image" />
+                    <img src="../images/checkoutItem.png" alt="product image" />
                   </Box>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={9}>
                   <Box>
                     <Box
                       style={{
@@ -337,7 +337,7 @@ function CheckOut() {
               </Grid>
             </Box>
 
-            <Divider style={{ border: "1px solid #A2A2A2"}} />
+            <Divider style={{ border: "1px solid #A2A2A2" }} />
 
             <Box sx={{ paddingTop: 20 + "px" }}>
               <Grid container spacing={2}>
@@ -449,13 +449,17 @@ function CheckOut() {
             </Box>
           </Box>
 
-          <Box style={{ marginTop: 115 + "px" }}>
+          <Box style={{ marginTop: 48 + "px" }}>
+            <Box>
+              <img src="../images/paymentOptions.png" alt="payment options" />
+            </Box>
             <Box
               style={{
                 fontFamily: "Poppins",
                 fontSize: 30 + "px",
                 fontWeight: 600,
                 lineHeight: 30 + "px",
+                marginTop: 19 + "px",
                 marginBottom: 10 + "px",
               }}
             >
