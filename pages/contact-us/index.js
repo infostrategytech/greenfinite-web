@@ -9,8 +9,13 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: 100,
     },
     powderImg:{
-        height: 463,
-        width: 294,
+        [theme.breakpoints.down('sm')]: {
+            maxWidth:'100%'
+        },
+        [theme.breakpoints.up('md')]: {
+            height: 463,
+            width: 294,
+        },
         marginTop: 16
     },
     parentContainer:{
@@ -68,11 +73,13 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     form:{
+        [theme.breakpoints.up('md')]: {
+            paddingTop: 40,
+            paddingBottom: 40,
+        },
         border: 'solid 1px #A1A1A1',
         textAlign: 'center',
         padding: 8,
-        paddingTop: 16,
-        paddingBottom: 32,
         borderRadius: 10
     },
     contactItem:{
@@ -131,7 +138,7 @@ function ContactUs() {
                         <Button 
                             className={classes.btn}
                             variant="contained"
-                            color="secondary"
+                            color="primary"
                             size="large"
                         >
                             Send

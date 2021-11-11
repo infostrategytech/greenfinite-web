@@ -6,9 +6,13 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: 100,
     },
     powderImg:{
-        height: 463,
-        width: 294,
-        // maxWidth: '100%',
+        [theme.breakpoints.up('md')]: {
+            height: 539,
+            width: 400,
+        },
+        [theme.breakpoints.down('sm')]: {
+            maxWidth: '100%',
+        },
         marginTop: 16
     },
     parentContainer:{
@@ -23,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
     headerText:{
         fontWeight: 700,
-        fontSize: 40,
+        fontSize: 30,
         marginBottom: 16
     },
     formfield:{
@@ -126,7 +130,7 @@ function Distributors() {
                         <Button 
                             className={classes.btn}
                             variant="contained"
-                            color="secondary"
+                            color="primary"
                             size="large"
                         >
                             Send
