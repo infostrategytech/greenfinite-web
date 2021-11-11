@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "50px",
     [theme.breakpoints.down("md")]: {
       fontSize: "36px",
-      lineHeight: "30px",
+      lineHeight: "50px",
     },
   },
   content: {

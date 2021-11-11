@@ -25,20 +25,6 @@ function MyApp({ Component, pageProps }) {
     }
   }, []);
 
-  Router.events.on("routeChangeStart", (url) => {
-    NProgress.start();
-    setOpen(true);
-  });
-
-  Router.events.on("routeChangeComplete", (url) => {
-    NProgress.done();
-    setOpen(false);
-  });
-
-  const HandleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <React.Fragment>
       <Head>
@@ -48,12 +34,7 @@ function MyApp({ Component, pageProps }) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
-          integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ=="
-          crossOrigin="anonymous"
-        />
+
         {/* <script
           src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
           integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"

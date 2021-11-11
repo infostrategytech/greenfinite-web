@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import { ShoppingCart } from "@material-ui/icons/";
+import router from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import DrawerComponent from "./Drawer";
 // import classes from "./styles/Home.module.css";
@@ -108,16 +109,32 @@ function Header() {
                     <Typography variant="body1" className={classes.links}>
                       Home
                     </Typography>
-                    <Typography variant="body1" className={classes.links}>
+                    <Typography
+                      variant="body1"
+                      className={classes.links}
+                      onClick={() => router.push("/shop")}
+                    >
                       Shop
                     </Typography>
-                    <Typography variant="body1" className={classes.links}>
+                    <Typography
+                      onClick={() => router.push("/distributors")}
+                      variant="body1"
+                      className={classes.links}
+                    >
                       Distributors
                     </Typography>
-                    <Typography variant="body1" className={classes.links}>
+                    <Typography
+                      onClick={() => router.push("/about-us")}
+                      variant="body1"
+                      className={classes.links}
+                    >
                       About us
                     </Typography>
-                    <Typography variant="body1" className={classes.links}>
+                    <Typography
+                      onClick={() => router.push("/contact-us")}
+                      variant="body1"
+                      className={classes.links}
+                    >
                       Contact us
                     </Typography>
                     <Typography
