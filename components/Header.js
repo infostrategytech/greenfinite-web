@@ -155,7 +155,13 @@ function Header() {
                       </IconButton>
                       Account
                     </Typography>
-                    <Typography variant="body1" className={classes.links}>
+                    <Typography
+                      variant="body1"
+                      className={classes.links}
+                      onClick={() => router.push("/cart")}
+                      variant="body1"
+                      className={classes.links}
+                    >
                       <IconButton>
                         <Badge badgeContent={3} color="secondary">
                           <ShoppingCart />
