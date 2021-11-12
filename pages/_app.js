@@ -1,24 +1,30 @@
-import React, { useState, useEffect } from "react";
-import Head from "next/head";
-import "../styles/globals.css";
-import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import theme from "../src/theme";
+import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
+import '../styles/globals.css';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from '../src/theme';
 // import { useStore } from '../redux/store';
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import AppLayout from "../components/Layout";
+import { createWrapper } from 'next-redux-wrapper';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor } from '../redux/store';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import AppLayout from '../components/Layout';
+import { Provider } from 'react-redux';
+import withRedux from 'next-redux-wrapper';
+import { store } from '../redux/store';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: "#fff",
+    color: '#fff',
   },
 }));
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
+    const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
@@ -47,14 +53,22 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-
-        <AppLayout>
-          <Component {...pageProps} />
-        </AppLayout>
+        <Provider store={store}>
+          <CssBaseline />
+          <PersistGate loading={null} persistor={persistor}>
+            <AppLayout>
+              <Component {...pageProps} />
+            </AppLayout>
+          </PersistGate>
+        </Provider>
       </ThemeProvider>
     </React.Fragment>
   );
 }
 
-export default MyApp;
+const makeStore = () => store;
+const wrapper = createWrapper(makeStore);
+//withRedux wrapper that passes the store to the App Component
+export default wrapper.withRedux(MyApp);
+
+// export default MyApp;
