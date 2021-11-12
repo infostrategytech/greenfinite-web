@@ -1,0 +1,24 @@
+.side {
+  background: url('../public/voucher.png') center center/cover no-repeat;
+}
+.showAcctBtn{
+  text-transform: none;
+  width: 40%;
+  background: #28AA63;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 10px auto;
+  border-radius: 4px;
+  color: #FFFFFF;
+  padding: 10px 16px;
+  text-transform: none;
+  /* "&:hover": {
+    background: 28AA63
+    color: #FFFFFF
+  }, */
+}
+@media screen and (min-width: 480px) {
+  .showAcctBtn {
+    width: 100%;
+  }
+}
