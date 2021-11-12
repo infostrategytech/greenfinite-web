@@ -9,37 +9,198 @@ import {
   Card,
   CardContent,
   Divider,
+  Checkbox,
+  makeStyles,
 } from "@material-ui/core";
 
+const useStyles = makeStyles((theme) => ({
+  mainHeader: {
+    fontFamily: "Poppins",
+    fontSize: 30 + "px",
+    fontWeight: 600,
+    lineHeight: 45 + "px",
+  },
+  subHeader: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: "normal",
+    lineHeight: 27 + "px",
+    marginTop: 7 + "px",
+  },
+  shippingInfo: {
+    marginTop: 52 + "px",
+  },
+  createAccount: {
+    marginTop: 25 + "px",
+    fontFamily: "Poppins",
+    fontSize: 16 + "px",
+    fontWeight: "normal",
+    lineHeight: 30 + "px",
+  },
+  billingDetail: {
+    marginTop: 100 + "px",
+  },
+  billingDetailHeader: {
+    fontFamily: "Poppins",
+    fontSize: 30 + "px",
+    fontWeight: 600,
+    lineHeight: 45 + "px",
+    marginBottom: 33 + "px",
+  },
+  orderBox: {
+    border: "1px solid #A2A2A2",
+    boxSizing: "border-box",
+    borderRadius: 5 + "px",
+    margin: 0,
+    padding: 30 + "px",
+  },
+  orderHeader: {
+    fontFamily: "Poppins",
+    fontSize: 24 + "px",
+    fontWeight: "bold",
+    lineHeight: 36 + "px",
+    paddingBottom: 40 + "px",
+  },
+  orderDetailBox: {
+    marginBottom: 2 + "rem",
+  },
+  itemNameHeader: {
+    fontFamily: "Poppins",
+    fontSize: 20 + "px",
+    fontWeight: 600,
+    lineHeight: 30 + "px",
+    paddingBottom: 6 + "px",
+  },
+  itemNameSubHeader: {
+    fontFamily: "Poppins",
+    fontSize: 16 + "px",
+    fontWeight: 500,
+    lineHeight: 24 + "px",
+  },
+  quantityHeader: {
+    fontFamily: "Poppins",
+    fontSize: 16 + "px",
+    fontWeight: 500,
+    lineHeight: 24 + "px",
+  },
+  unitPrice: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: 600,
+    lineHeight: 40 + "px",
+  },
+  unitPriceSpan: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: "normal",
+    lineHeight: 40 + "px",
+    paddingLeft: 5,
+  },
+  divider: {
+    border: "1px solid #A2A2A2",
+  },
+  priceSectoin: {
+    paddingTop: 20 + "px",
+  },
+  priceKey: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: 600,
+    lineHeight: 27 + "px",
+    paddingTop: 16 + "px",
+    paddingLeft: 20 + "px",
+  },
+  priceKeySpan: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: 500,
+    lineHeight: 27 + "px",
+  },
+  priceValueAlign: {
+    textAlign: "right",
+  },
+  priceValue: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: 500,
+    lineHeight: 40 + "px",
+    paddingTop: 16 + "px",
+    paddingRight: 20 + "px",
+  },
+  priceTotalBox: {
+    padding: "30px 20px",
+    background: "#EFF8F2",
+    borderRadius: 5 + "px",
+  },
+  priceTotalBoxPadding: {
+    padding: "32px 20px",
+  },
+  totalKey: {
+    fontFamily: "Poppins",
+    fontSize: 24 + "px",
+    fontWeight: "bold",
+    lineHeight: 36 + "px",
+  },
+  totalValue: {
+    fontFamily: "Poppins",
+    fontSize: 24 + "px",
+    fontWeight: 600,
+    lineHeight: 40 + "px",
+  },
+  paymentBox: {
+    marginTop: 48 + "px",
+  },
+  paymentOptionHeader: {
+    fontFamily: "Poppins",
+    fontSize: 30 + "px",
+    fontWeight: 600,
+    lineHeight: 30 + "px",
+    marginTop: 19 + "px",
+    marginBottom: 10 + "px",
+  },
+  paymentOptionSub: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: 400,
+    lineHeight: 30 + "px",
+    marginBottom: 25 + "px",
+  },
+  paymentOptionText: {
+    fontFamily: "Avenir",
+    fontSize: 16 + "px",
+    fontWeight: "normal",
+    lineHeight: 20 + "px",
+    marginBottom: 60 + "px",
+  },
+  paymentButton: {
+    backgroundColor: "#3D8754",
+    color: "#ffff",
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 500,
+    lineHeight: 27 + "px",
+    paddingTop: 18 + "px",
+    paddingBottom: 18 + "px",
+    paddingLeft: 40 + "px",
+    paddingRight: 40 + "px",
+    border: "none",
+    borderRadius: 50,
+  },
+}));
+
 function CheckOut() {
+  const classes = useStyles();
   return (
     <Container style={{ marginTop: 10 + "rem", marginBottom: 20 + "rem" }}>
       <Grid container spacing={10}>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Box>
-            <Box
-              style={{
-                fontFamily: "Poppins",
-                fontSize: 30 + "px",
-                fontWeight: 600,
-                lineHeight: 45 + "px",
-              }}
-            >
-              Shipping information
-            </Box>
-            <Box
-              style={{
-                fontFamily: "Poppins",
-                fontSize: 18 + "px",
-                fontWeight: "normal",
-                lineHeight: 27 + "px",
-                marginTop: 7 + "px",
-              }}
-            >
-              Shipping to a different location?
+            <Box className={classes.mainHeader}>Shipping information</Box>
+            <Box className={classes.subHeader}>
+              <Checkbox defaultChecked /> Shipping to a different location?
             </Box>
 
-            <Box style={{ marginTop: 52 + "px" }}>
+            <Box className={classes.shippingInfo}>
               <form>
                 <Grid container spacing={3}>
                   <Grid item md={6} xs={12}>
@@ -126,30 +287,12 @@ function CheckOut() {
             </Box>
           </Box>
 
-          <Box
-            style={{
-              marginTop: 25 + "px",
-              fontFamily: "Poppins",
-              fontSize: 16 + "px",
-              fontWeight: "normal",
-              lineHeight: 30 + "px",
-            }}
-          >
-            Create an account?
+          <Box className={classes.createAccount}>
+            <Checkbox /> Create an account?
           </Box>
 
-          <Box style={{ marginTop: 100 + "px" }}>
-            <Box
-              style={{
-                fontFamily: "Poppins",
-                fontSize: 30 + "px",
-                fontWeight: 600,
-                lineHeight: 45 + "px",
-                marginBottom: 33 + "px",
-              }}
-            >
-              Billing Details
-            </Box>
+          <Box className={classes.billingDetail}>
+            <Box className={classes.billingDetailHeader}>Billing Details</Box>
             <form>
               <Grid container spacing={3}>
                 <Grid item md={6} xs={12}>
@@ -244,32 +387,11 @@ function CheckOut() {
           </Box>
         </Grid>
 
-        <Grid item xs={6}>
-          <Box
-            style={{
-              border: "1px solid #A2A2A2",
-              boxSizing: "border-box",
-              borderRadius: 5 + "px",
-              margin: 0,
-              padding: 30 + "px",
-            }}
-          >
-            {/* <Box> */}
-            <Box>
-              <h1
-                style={{
-                  fontFamily: "Poppins",
-                  fontSize: 24 + "px",
-                  fontWeight: "bold",
-                  lineHeight: 36 + "px",
-                  paddingBottom: 40 + "px",
-                }}
-              >
-                Your Order
-              </h1>
-            </Box>
+        <Grid item xs={12} md={6}>
+          <Box className={classes.orderBox}>
+            <Typography className={classes.orderHeader}>Your Order</Typography>
 
-            <Box style={{ marginBottom: 2 + "rem" }}>
+            <Box className={classes.orderDetailBox}>
               <Grid container spacing={2}>
                 <Grid item xs={3}>
                   <Box>
@@ -278,214 +400,82 @@ function CheckOut() {
                 </Grid>
                 <Grid item xs={9}>
                   <Box>
-                    <Box
-                      style={{
-                        fontFamily: "Poppins",
-                        fontSize: 20 + "px",
-                        fontWeight: 600,
-                        lineHeight: 30 + "px",
-                        paddingBottom: 6 + "px",
-                      }}
-                    >
+                    <Typography className={classes.itemNameHeader}>
                       Item Name{" "}
-                      <span
-                        style={{
-                          fontFamily: "Poppins",
-                          fontSize: 16 + "px",
-                          fontWeight: 500,
-                          lineHeight: 24 + "px",
-                        }}
-                      >
-                        (250g)
-                      </span>
-                    </Box>
+                      <span className={classes.itemNameSubHeader}>(250g)</span>
+                    </Typography>
 
-                    <Box
-                      style={{
-                        fontFamily: "Poppins",
-                        fontSize: 16 + "px",
-                        fontWeight: 500,
-                        lineHeight: 24 + "px",
-                      }}
-                    >
+                    <Typography className={classes.quantityHeader}>
                       Quantity: 5
-                    </Box>
+                    </Typography>
 
-                    <Box
-                      style={{
-                        fontFamily: "Poppins",
-                        fontSize: 18 + "px",
-                        fontWeight: 600,
-                        lineHeight: 40 + "px",
-                      }}
-                    >
-                      N10,000{" "}
-                      <span
-                        style={{
-                          fontFamily: "Poppins",
-                          fontSize: 18 + "px",
-                          fontWeight: "normal",
-                          lineHeight: 40 + "px",
-                          paddingLeft: 5,
-                        }}
-                      >
-                        x5
-                      </span>
-                    </Box>
+                    <Typography className={classes.unitPrice}>
+                      N10,000 <span className={classes.unitPriceSpan}>x5</span>
+                    </Typography>
                   </Box>
                 </Grid>
               </Grid>
             </Box>
 
-            <Divider style={{ border: "1px solid #A2A2A2" }} />
+            <Divider className={classes.divider} />
 
-            <Box sx={{ paddingTop: 20 + "px" }}>
+            <Box className={classes.priceSectoin}>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
-                  <Box
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: 18 + "px",
-                      fontWeight: 600,
-                      lineHeight: 27 + "px",
-                      paddingTop: 16 + "px",
-                      paddingLeft: 20 + "px",
-                    }}
-                  >
-                    Subtotal
-                  </Box>
+                  <Typography className={classes.priceKey}>Subtotal</Typography>
                 </Grid>
-                <Grid item xs={6} style={{ textAlign: "right" }}>
-                  <Box
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: 18 + "px",
-                      fontWeight: 500,
-                      lineHeight: 40 + "px",
-                      paddingTop: 16 + "px",
-                      paddingRight: 20 + "px",
-                    }}
-                  >
+                <Grid item xs={6} className={classes.priceValueAlign}>
+                  <Typography className={classes.priceValue}>
                     N 50,000
-                  </Box>
+                  </Typography>
                 </Grid>
               </Grid>
 
               <Grid container spacing={2}>
                 <Grid item xs={6}>
-                  <Box
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: 18 + "px",
-                      fontWeight: 600,
-                      lineHeight: 27 + "px",
-                      paddingTop: 16 + "px",
-                      paddingLeft: 20 + "px",
-                    }}
-                  >
+                  <Typography className={classes.priceKey}>
                     Shipping{" "}
-                    <span
-                      style={{
-                        fontFamily: "Poppins",
-                        fontSize: 18 + "px",
-                        fontWeight: 500,
-                        lineHeight: 27 + "px",
-                      }}
-                    >
-                      (Flate rate)
-                    </span>
-                  </Box>
+                    <span className={classes.priceKeySpan}>(Flate rate)</span>
+                  </Typography>
                 </Grid>
-                <Grid item xs={6} style={{ textAlign: "right" }}>
-                  <Box
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: 18 + "px",
-                      fontWeight: 500,
-                      lineHeight: 40 + "px",
-                      paddingTop: 16 + "px",
-                      paddingRight: 20 + "px",
-                    }}
-                  >
+                <Grid item xs={6} className={classes.priceValueAlign}>
+                  <Typography className={classes.priceValue}>
                     N 2,000
-                  </Box>
+                  </Typography>
                 </Grid>
               </Grid>
 
-              <Box
-                style={{
-                  padding: "30px 20px",
-                  background: "#EFF8F2",
-                  borderRadius: 5 + "px",
-                }}
-              >
-                <Grid container spacing={2} sx={{ padding: "32px 20px" }}>
+              <Box className={classes.priceTotalBox}>
+                <Grid
+                  container
+                  spacing={2}
+                  className={classes.priceTotalBoxPadding}
+                >
                   <Grid item xs={6}>
-                    <Box
-                      style={{
-                        fontFamily: "Poppins",
-                        fontSize: 24 + "px",
-                        fontWeight: "bold",
-                        lineHeight: 36 + "px",
-                      }}
-                    >
-                      Total
-                    </Box>
+                    <Typography className={classes.totalKey}>Total</Typography>
                   </Grid>
-                  <Grid item xs={6} style={{ textAlign: "right" }}>
-                    <Box
-                      style={{
-                        fontFamily: "Poppins",
-                        fontSize: 24 + "px",
-                        fontWeight: 600,
-                        lineHeight: 40 + "px",
-                      }}
-                    >
+                  <Grid item xs={6} className={classes.priceValueAlign}>
+                    <Typography className={classes.totalValue}>
                       N 52,000.00
-                    </Box>
+                    </Typography>
                   </Grid>
                 </Grid>
               </Box>
             </Box>
           </Box>
 
-          <Box style={{ marginTop: 48 + "px" }}>
+          <Box className={classes.paymentBox}>
             <Box>
               <img src="../images/paymentOptions.png" alt="payment options" />
             </Box>
-            <Box
-              style={{
-                fontFamily: "Poppins",
-                fontSize: 30 + "px",
-                fontWeight: 600,
-                lineHeight: 30 + "px",
-                marginTop: 19 + "px",
-                marginBottom: 10 + "px",
-              }}
-            >
+            <Box className={classes.paymentOptionHeader}>
               PayStack Payment Gateway
             </Box>
-            <Box
-              style={{
-                fontFamily: "Poppins",
-                fontSize: 18 + "px",
-                fontWeight: 400,
-                lineHeight: 30 + "px",
-                marginBottom: 25 + "px",
-              }}
-            >
+            <Box className={classes.paymentOptionSub}>
               Make Payment Using Your Credit Card
             </Box>
 
-            <Box
-              style={{
-                fontFamily: "Avenir",
-                fontSize: 16 + "px",
-                fontWeight: "normal",
-                lineHeight: 20 + "px",
-                marginBottom: 60 + "px",
-              }}
-            >
+            <Box className={classes.paymentOptionText}>
               Your personal data will be used to process your order, support
               your experience throughout this website, and for other purposes
               described in our privacy policy.
@@ -493,23 +483,7 @@ function CheckOut() {
 
             <Box>
               <Link href="shop/2" underline="none">
-                <button
-                  href="shop/2"
-                  style={{
-                    backgroundColor: "#3D8754",
-                    color: "#ffff",
-                    fontFamily: "Poppins",
-                    fontSize: 18,
-                    fontWeight: 500,
-                    lineHeight: 27 + "px",
-                    paddingTop: 18 + "px",
-                    paddingBottom: 18 + "px",
-                    paddingLeft: 40 + "px",
-                    paddingRight: 40 + "px",
-                    border: "none",
-                    borderRadius: 50,
-                  }}
-                >
+                <button href="shop/2" className={classes.paymentButton}>
                   Proceed to Payment
                 </button>
               </Link>
