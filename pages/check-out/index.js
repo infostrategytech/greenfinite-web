@@ -14,6 +14,14 @@ import {
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
+  main: {
+    marginTop: 10 + "rem",
+    marginBottom: 20 + "rem",
+    [theme.breakpoints.down("md")]: {
+      marginTop: 5 + "rem",
+      marginBottom: 10 + "rem",
+    }
+  },
   mainHeader: {
     fontFamily: "Poppins",
     fontSize: 30 + "px",
@@ -29,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
   },
   shippingInfo: {
     marginTop: 52 + "px",
+    [theme.breakpoints.down("md")]: {
+      marginTop: 10 + "px",
+    },
   },
   createAccount: {
     marginTop: 25 + "px",
@@ -39,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
   },
   billingDetail: {
     marginTop: 100 + "px",
+    [theme.breakpoints.down("md")]: {
+      marginTop: 45 + "px",
+    }
   },
   billingDetailHeader: {
     fontFamily: "Poppins",
@@ -70,6 +84,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     lineHeight: 30 + "px",
     paddingBottom: 6 + "px",
+    [theme.breakpoints.down("md")]: {
+      marginLeft: "25px",
+    },
   },
   itemNameSubHeader: {
     fontFamily: "Poppins",
@@ -82,12 +99,18 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16 + "px",
     fontWeight: 500,
     lineHeight: 24 + "px",
+    [theme.breakpoints.down("md")]: {
+      marginLeft: "25px",
+    },
   },
   unitPrice: {
     fontFamily: "Poppins",
     fontSize: 18 + "px",
     fontWeight: 600,
     lineHeight: 40 + "px",
+    [theme.breakpoints.down("md")]: {
+      marginLeft: "25px",
+    },
   },
   unitPriceSpan: {
     fontFamily: "Poppins",
@@ -100,7 +123,12 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #A2A2A2",
   },
   priceSectoin: {
-    paddingTop: 20 + "px",
+    [theme.breakpoints.up("md")]: {
+      paddingTop: 20 + "px",
+    },
+    [theme.breakpoints.down("md")]: {
+      paddingTop: 10 + "px",
+    },
   },
   priceKey: {
     fontFamily: "Poppins",
@@ -109,12 +137,24 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 27 + "px",
     paddingTop: 16 + "px",
     paddingLeft: 20 + "px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: 18 + "px",
+      lineHeight: 17 + "px",
+      paddingTop: 10 + "px",
+      paddingLeft: 10 + "px",
+    },
   },
   priceKeySpan: {
     fontFamily: "Poppins",
     fontSize: 18 + "px",
     fontWeight: 500,
     lineHeight: 27 + "px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: 14 + "px",
+      fontWeight: 400,
+      lineHeight: 17 + "px",
+      marginTop: 10 + "px"
+    },
   },
   priceValueAlign: {
     textAlign: "right",
@@ -126,30 +166,53 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 40 + "px",
     paddingTop: 16 + "px",
     paddingRight: 20 + "px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: 18 + "px",
+      lineHeight: 17 + "px",
+      paddingTop: 10 + "px",
+      paddingRight: 10 + "px",
+    },
   },
   priceTotalBox: {
     padding: "30px 20px",
     background: "#EFF8F2",
     borderRadius: 5 + "px",
+    [theme.breakpoints.down("md")]: {
+      padding: "20px 10px",
+    }
   },
   priceTotalBoxPadding: {
     padding: "32px 20px",
+    [theme.breakpoints.down("md")]: {
+      padding: "10px 5px",
+    }
   },
   totalKey: {
     fontFamily: "Poppins",
     fontSize: 24 + "px",
     fontWeight: "bold",
     lineHeight: 36 + "px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: 18 + "px",
+      fontWeight: "bold",
+      lineHeight: 30 + "px",
+    }
   },
   totalValue: {
     fontFamily: "Poppins",
     fontSize: 24 + "px",
     fontWeight: 600,
     lineHeight: 40 + "px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: 18 + "px",
+      fontWeight: 600,
+      lineHeight: 35 + "px",
+    }
   },
   paymentBox: {
     marginTop: 48 + "px",
   },
+  paymentImage: {},
   paymentOptionHeader: {
     fontFamily: "Poppins",
     fontSize: 30 + "px",
@@ -172,6 +235,11 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 20 + "px",
     marginBottom: 60 + "px",
   },
+  btnAlign: {
+    [theme.breakpoints.down("md")]: {
+      textAlign: "center"
+    }
+  },
   paymentButton: {
     backgroundColor: "#3D8754",
     color: "#ffff",
@@ -191,8 +259,8 @@ const useStyles = makeStyles((theme) => ({
 function CheckOut() {
   const classes = useStyles();
   return (
-    <Container style={{ marginTop: 10 + "rem", marginBottom: 20 + "rem" }}>
-      <Grid container spacing={10}>
+    <Container className={classes.main}>
+      <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Box>
             <Box className={classes.mainHeader}>Shipping information</Box>
@@ -466,7 +534,11 @@ function CheckOut() {
 
           <Box className={classes.paymentBox}>
             <Box>
-              <img src="../images/paymentOptions.png" alt="payment options" />
+              <img
+                className={classes.paymentImage}
+                src="../images/paymentOptions.png"
+                alt="payment options"
+              />
             </Box>
             <Box className={classes.paymentOptionHeader}>
               PayStack Payment Gateway
@@ -481,7 +553,7 @@ function CheckOut() {
               described in our privacy policy.
             </Box>
 
-            <Box>
+            <Box className={classes.btnAlign}>
               <Link href="shop/2" underline="none">
                 <button href="shop/2" className={classes.paymentButton}>
                   Proceed to Payment
