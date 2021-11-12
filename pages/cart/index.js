@@ -15,6 +15,7 @@ import LocalMallOutlinedIcon from '@material-ui/icons/LocalMallOutlined';
 const useStyles = makeStyles((theme) => ({
   root:{
     paddingTop: 100,
+    backgroundColor: '#fff'
   },
   cell:{
     border: "solid 1px black"
