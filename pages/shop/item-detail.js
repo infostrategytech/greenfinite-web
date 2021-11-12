@@ -118,9 +118,9 @@ function Item() {
                     <Grid item xs={8}>
                       <Grid>
                         <Box style={{ textAlign: "right" }}>
-                          <Link href="shop/2" underline="none">
+                          <Link href="/cart" underline="none">
                             <button
-                              href="shop/2"
+                              href="/cart"
                               style={{
                                 backgroundColor: "#3D8754",
                                 color: "white",
