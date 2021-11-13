@@ -8,25 +8,52 @@ import {
   CircularProgress,
   Container,
   Grid,
+  IconButton,
   Typography,
+  makeStyles,
 } from "@material-ui/core";
-import { getSingleProduct } from "../../redux/actions/products";
+import RemoveRoundedIcon from "@material-ui/icons/RemoveRounded";
+import AddIcon from "@material-ui/icons/Add";
 
+import { getAllProduct, getSingleProduct } from "../../redux/actions/products";
+import { addToCart } from "../../redux/actions/cart";
+
+const useStyles = makeStyles((theme) => ({
+  quantityValue: {
+    [theme.breakpoints.up("md")]: {
+      marginLeft: 16,
+      marginRight: 16,
+    },
+    color: "#000",
+  },
+  iconBtn: {
+    color: "#000",
+  },
+  button: {
+    display: "flex",
+    alignItems: "center",
+  },
+}));
 function ItemDetails() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { product } = useSelector((state) => state.products);
+
   useEffect(() => {
     const productID = router.query.itemId;
-    console.log(productID);
     setLoading(true);
+    dispatch(getAllProduct(() => {}));
     dispatch(
       getSingleProduct(productID, () => {
         setLoading(false);
       })
     );
   }, []);
+  const addCart = (id) => {
+    dispatch(addToCart(id));
+  };
   return (
     <Container style={{ marginTop: 10 + "rem", marginBottom: 115 + "px" }}>
       <Grid container spacing={2}>
@@ -99,70 +126,47 @@ function ItemDetails() {
                   </Box>
                   <Grid container spacing={2}>
                     <Grid item xs={4}>
-                      <Box style={{ margin: "17px 0" }}>
-                        <button
-                          style={{
-                            border: "1px solid #3D8754",
-                            borderRadius: 100 + "%",
-                            fontSize: 24,
-                            cursor: "pointer",
-                            width: 32 + "px",
-                            height: 32 + "px",
-                          }}
+                      <Box
+                        style={{ margin: "17px 0" }}
+                        className={classes.button}
+                      >
+                        <IconButton className={classes.iconBtn}>
+                          <RemoveRoundedIcon />
+                        </IconButton>
+                        <Typography
+                          variant="h5"
+                          className={classes.quantityValue}
                         >
-                          -
-                        </button>{" "}
-                        <span
-                          style={{
-                            fontSize: 22,
-                            fontWeight: 750,
-                            marginLeft: 15,
-                            marginRight: 15,
-                          }}
-                        >
-                          2
-                        </span>{" "}
-                        <button
-                          style={{
-                            border: "none",
-                            borderRadius: 100,
-                            backgroundColor: "#3D8754",
-                            color: "#ffff",
-                            fontSize: 24,
-                            cursor: "pointer",
-                            width: 32 + "px",
-                            height: 32 + "px",
-                          }}
-                        >
-                          +
-                        </button>
+                          5
+                        </Typography>
+                        <IconButton className={classes.iconBtn}>
+                          <AddIcon />
+                        </IconButton>
                       </Box>
                     </Grid>
                     <Grid item xs={8}>
                       <Grid>
                         <Box style={{ textAlign: "right" }}>
-                          <Link href="/cart" underline="none">
-                            <button
-                              href="/cart"
-                              style={{
-                                backgroundColor: "#3D8754",
-                                color: "white",
-                                paddingTop: 20 + "px",
-                                paddingBottom: 20 + "px",
-                                paddingLeft: 35 + "px",
-                                paddingRight: 35 + "px",
-                                borderRadius: 50,
-                                fontSize: 18,
-                                fontWeight: "Poppins",
-                                fontWeight: 500,
-                                lineHeight: 24 + "px",
-                                border: "none",
-                                cursor: "pointer",
-                              }}
-                            >
-                              Add to cart
-                            </button>
-                          </Link>
+                          <button
+                            onClick={() => addCart(product.product_id)}
+                            style={{
+                              backgroundColor: "#3D8754",
+                              color: "white",
+                              paddingTop: 20 + "px",
+                              paddingBottom: 20 + "px",
+                              paddingLeft: 35 + "px",
+                              paddingRight: 35 + "px",
+                              borderRadius: 50,
+                              fontSize: 18,
+                              fontWeight: "Poppins",
+                              fontWeight: 500,
+                              lineHeight: 24 + "px",
+                              border: "none",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Add to cart
+                          </button>
                         </Box>
                       </Grid>
                     </Grid>

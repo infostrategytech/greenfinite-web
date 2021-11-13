@@ -1,8 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { Box, Divider, Grid, Container } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 function Shop() {
+  const { products } = useSelector((state) => state.products);
+  console.log(products);
   return (
     <Container style={{ marginTop: 10 + "rem" }}>
       {/* <Grid style={{ textAlign: 'center' }}></Grid> */}

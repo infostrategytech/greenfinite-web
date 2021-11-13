@@ -5,13 +5,17 @@ import {
   Typography,
   makeStyles,
   Card,
+  CircularProgress,
 } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import Distributor from "../components/Distributor";
 import Footer from "../components/Footer";
 import HowToUse from "../components/HowToUse";
 import ProductBenefits from "../components/products/ProductBenefits";
 import Products from "../components/products/Products";
 import ProductSection from "../components/products/ProductSection";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllProduct } from "../redux/actions/products";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -110,6 +114,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Home() {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    dispatch(getAllProduct(() => setLoading(false)));
+  }, []);
   const classes = useStyles();
   return (
     <>
@@ -140,7 +150,7 @@ export default function Home() {
           </Grid>
         </Box>
         <Box className={classes.products}>
-          <Products />
+          {loading ? <CircularProgress /> : <Products />}
         </Box>
         <Box>
           <ProductBenefits />
