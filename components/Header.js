@@ -99,8 +99,8 @@ function Header() {
             <Grid item sm={2}>
               <Typography variant="h4" className={classes.logo}>
                 <img
-                  src="./images/Logo.png"
-                  alt="Greenfinite logo"
+                  src="/images/Logo.png"
+                  alt=" logo"
                   className={classes.logo}
                 />
               </Typography>
@@ -163,7 +163,7 @@ function Header() {
                       className={classes.links}
                     >
                       <IconButton>
-                        <Badge badgeContent={3} color="secondary">
+                        <Badge badgeContent={3} color="primary">
                           <ShoppingCart />
                         </Badge>
                       </IconButton>{" "}

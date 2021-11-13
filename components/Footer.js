@@ -57,7 +57,7 @@ const Footer = () => {
           <Grid item xs={12} sm={12} md={6}>
             <Box>
               <img
-                src="./images/footerLogo.png"
+                src="/images/footerLogo.png"
                 alt="Footer logo"
                 className={classes.footerLogo}
               />

@@ -132,7 +132,7 @@ export default function Home() {
             </Grid>
             <Grid item item xs={12} sm={12} md={5} className={classes.order1}>
               <img
-                src="./images/bowl.png"
+                src="/images/bowl.png"
                 alt="Powdered nuts"
                 className={classes.logo}
               />

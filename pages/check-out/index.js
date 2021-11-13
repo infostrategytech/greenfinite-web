@@ -1,136 +1,297 @@
 import React from "react";
-import Link from "next/link"
+import Link from "next/link";
 import {
   Container,
   Grid,
   Box,
   TextField,
   Typography,
-  Card,
-  CardContent,
   Divider,
+  Checkbox,
+  makeStyles,
 } from "@material-ui/core";
 
+const useStyles = makeStyles((theme) => ({
+  mainHeader: {
+    fontFamily: "Poppins",
+    fontSize: 30 + "px",
+    fontWeight: 600,
+    lineHeight: 45 + "px",
+  },
+  subHeader: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: "normal",
+    lineHeight: 27 + "px",
+    marginTop: 7 + "px",
+  },
+  shippingInfo: {
+    marginTop: 52 + "px",
+  },
+  createAccount: {
+    marginTop: 25 + "px",
+    fontFamily: "Poppins",
+    fontSize: 16 + "px",
+    fontWeight: "normal",
+    lineHeight: 30 + "px",
+  },
+  billingDetail: {
+    marginTop: 100 + "px",
+  },
+  billingDetailHeader: {
+    fontFamily: "Poppins",
+    fontSize: 30 + "px",
+    fontWeight: 600,
+    lineHeight: 45 + "px",
+    marginBottom: 33 + "px",
+  },
+  orderBox: {
+    border: "1px solid #A2A2A2",
+    boxSizing: "border-box",
+    borderRadius: 5 + "px",
+    margin: 0,
+    padding: 30 + "px",
+  },
+  orderHeader: {
+    fontFamily: "Poppins",
+    fontSize: 24 + "px",
+    fontWeight: "bold",
+    lineHeight: 36 + "px",
+    paddingBottom: 40 + "px",
+  },
+  orderDetailBox: {
+    marginBottom: 2 + "rem",
+  },
+  itemNameHeader: {
+    fontFamily: "Poppins",
+    fontSize: 20 + "px",
+    fontWeight: 600,
+    lineHeight: 30 + "px",
+    paddingBottom: 6 + "px",
+  },
+  itemNameSubHeader: {
+    fontFamily: "Poppins",
+    fontSize: 16 + "px",
+    fontWeight: 500,
+    lineHeight: 24 + "px",
+  },
+  quantityHeader: {
+    fontFamily: "Poppins",
+    fontSize: 16 + "px",
+    fontWeight: 500,
+    lineHeight: 24 + "px",
+  },
+  unitPrice: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: 600,
+    lineHeight: 40 + "px",
+  },
+  unitPriceSpan: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: "normal",
+    lineHeight: 40 + "px",
+    paddingLeft: 5,
+  },
+  divider: {
+    border: "1px solid #A2A2A2",
+  },
+  priceSectoin: {
+    paddingTop: 20 + "px",
+  },
+  priceKey: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: 600,
+    lineHeight: 27 + "px",
+    paddingTop: 16 + "px",
+    paddingLeft: 20 + "px",
+  },
+  priceKeySpan: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: 500,
+    lineHeight: 27 + "px",
+  },
+  priceValueAlign: {
+    textAlign: "right",
+  },
+  priceValue: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: 500,
+    lineHeight: 40 + "px",
+    paddingTop: 16 + "px",
+    paddingRight: 20 + "px",
+  },
+  priceTotalBox: {
+    padding: "30px 20px",
+    background: "#EFF8F2",
+    borderRadius: 5 + "px",
+  },
+  priceTotalBoxPadding: {
+    padding: "32px 20px",
+  },
+  totalKey: {
+    fontFamily: "Poppins",
+    fontSize: 24 + "px",
+    fontWeight: "bold",
+    lineHeight: 36 + "px",
+  },
+  totalValue: {
+    fontFamily: "Poppins",
+    fontSize: 24 + "px",
+    fontWeight: 600,
+    lineHeight: 40 + "px",
+  },
+  paymentBox: {
+    marginTop: 48 + "px",
+  },
+  paymentOptionHeader: {
+    fontFamily: "Poppins",
+    fontSize: 30 + "px",
+    fontWeight: 600,
+    lineHeight: 30 + "px",
+    marginTop: 19 + "px",
+    marginBottom: 10 + "px",
+  },
+  paymentOptionSub: {
+    fontFamily: "Poppins",
+    fontSize: 18 + "px",
+    fontWeight: 400,
+    lineHeight: 30 + "px",
+    marginBottom: 25 + "px",
+  },
+  paymentOptionText: {
+    fontFamily: "Avenir",
+    fontSize: 16 + "px",
+    fontWeight: "normal",
+    lineHeight: 20 + "px",
+    marginBottom: 60 + "px",
+  },
+  paymentButton: {
+    backgroundColor: "#3D8754",
+    color: "#ffff",
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 500,
+    lineHeight: 27 + "px",
+    paddingTop: 18 + "px",
+    paddingBottom: 18 + "px",
+    paddingLeft: 40 + "px",
+    paddingRight: 40 + "px",
+    border: "none",
+    borderRadius: 50,
+  },
+}));
+
 function CheckOut() {
+  const classes = useStyles();
   return (
     <Container style={{ marginTop: 10 + "rem", marginBottom: 20 + "rem" }}>
       <Grid container spacing={10}>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Box>
-            <form>
-              <Box sx={{ my: 3 }}>
-                {/* <Typography color="textPrimary" variant="h2">
-                  Shipping information
-                </Typography>
-                <Typography color="textSecondary" gutterBottom variant="body2">
-                  Shipping to a different location?
-                </Typography> */}
-                <h1>Shipping information</h1>
-                <p style={{ fontSize: 18 }}>
-                  Shipping to a different location?
-                </p>
-              </Box>
-              <Grid container spacing={3}>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="First Name"
-                    margin="normal"
-                    name="firstName"
-                    variant="outlined"
-                  />
+            <Box className={classes.mainHeader}>Shipping information</Box>
+            <Box className={classes.subHeader}>
+              <Checkbox defaultChecked /> Shipping to a different location?
+            </Box>
+
+            <Box className={classes.shippingInfo}>
+              <form>
+                <Grid container spacing={3}>
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="First Name"
+                      margin="normal"
+                      name="firstName"
+                      variant="outlined"
+                    />
+                  </Grid>
+
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Last Name"
+                      margin="normal"
+                      name="lastName"
+                      variant="outlined"
+                    />
+                  </Grid>
                 </Grid>
 
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Last Name"
-                    margin="normal"
-                    name="lastName"
-                    variant="outlined"
-                  />
-                </Grid>
-              </Grid>
+                <Grid container spacing={3}>
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Country/Region"
+                      margin="normal"
+                      name="country"
+                      variant="outlined"
+                    />
+                  </Grid>
 
-              <Grid container spacing={3}>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Country/Region"
-                    margin="normal"
-                    name="country"
-                    variant="outlined"
-                  />
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="State"
+                      margin="normal"
+                      name="state"
+                      variant="outlined"
+                    />
+                  </Grid>
                 </Grid>
 
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="State"
-                    margin="normal"
-                    name="state"
-                    variant="outlined"
-                  />
+                <Grid container spacing={3}>
+                  <Grid item md={12} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Street Address"
+                      margin="normal"
+                      name="firstName"
+                      variant="outlined"
+                    />
+                  </Grid>
                 </Grid>
-              </Grid>
 
-              <Grid container spacing={3}>
-                <Grid item md={12} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Street Address"
-                    margin="normal"
-                    name="firstName"
-                    variant="outlined"
-                  />
+                <Grid container spacing={3}>
+                  <Grid item md={12} xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Location"
+                      margin="normal"
+                      name="location"
+                      variant="outlined"
+                    />
+                  </Grid>
                 </Grid>
-              </Grid>
 
-              <Grid container spacing={3}>
-                <Grid item md={12} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Location"
-                    margin="normal"
-                    name="location"
-                    variant="outlined"
-                  />
+                <Grid container spacing={3}>
+                  <Grid item md={12} xs={12}>
+                    <TextField
+                      fullWidth
+                      id="outlined-multiline-static"
+                      label="Order Note"
+                      multiline
+                      rows={4}
+                      variant="outlined"
+                      // defaultValue="Default Value"
+                    />
+                  </Grid>
                 </Grid>
-              </Grid>
-
-              <Grid container spacing={3}>
-                <Grid item md={12} xs={12}>
-                  <TextField
-                    fullWidth
-                    id="outlined-multiline-static"
-                    label="Order Note"
-                    multiline
-                    rows={4}
-                    variant="outlined"
-                    // defaultValue="Default Value"
-                  />
-                </Grid>
-              </Grid>
-            </form>
+              </form>
+            </Box>
           </Box>
 
-          <Box margin={3}>
-            <Typography color="textPrimary" variant="subtitle2" component="div">
-              Create an account?
-            </Typography>
+          <Box className={classes.createAccount}>
+            <Checkbox /> Create an account?
           </Box>
 
-          <Box style={{ marginTop: 7 + "rem" }}>
+          <Box className={classes.billingDetail}>
+            <Box className={classes.billingDetailHeader}>Billing Details</Box>
             <form>
-              <Box sx={{ my: 3 }}>
-                {/* <Typography color="textPrimary" variant="h2">
-                  Shipping information
-                </Typography>
-                <Typography color="textSecondary" gutterBottom variant="body2">
-                  Shipping to a different location?
-                </Typography> */}
-                <h1>Billing Details</h1>
-              </Box>
               <Grid container spacing={3}>
                 <Grid item md={6} xs={12}>
                   <TextField
@@ -224,111 +385,107 @@ function CheckOut() {
           </Box>
         </Grid>
 
-        <Grid item xs={5}>
-          <Box style={{ border: 5 }}>
-            <Card>
-              <CardContent>
-                <Box margin={5}>
-                  <h1>Your Order</h1>
+        <Grid item xs={12} md={6}>
+          <Box className={classes.orderBox}>
+            <Typography className={classes.orderHeader}>Your Order</Typography>
 
-                  <Box style={{ marginBottom: 2 + "rem" }}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={4}>
-                        <p>Image</p>
-                      </Grid>
-                      <Grid item xs={8}>
-                        <h3>Item Name (250g)</h3>
-                        <Typography variant="subtitle2" component="div">
-                          Quantity: 5
-                        </Typography>
-
-                        <h3>
-                          <b>N10,000 x 5</b>
-                        </h3>
-                      </Grid>
-                    </Grid>
+            <Box className={classes.orderDetailBox}>
+              <Grid container spacing={2}>
+                <Grid item xs={3}>
+                  <Box>
+                    <img src="../images/checkoutItem.png" alt="product image" />
                   </Box>
+                </Grid>
+                <Grid item xs={9}>
+                  <Box>
+                    <Typography className={classes.itemNameHeader}>
+                      Item Name{" "}
+                      <span className={classes.itemNameSubHeader}>(250g)</span>
+                    </Typography>
 
-                  <Divider />
+                    <Typography className={classes.quantityHeader}>
+                      Quantity: 5
+                    </Typography>
 
-                  <Container>
-                    <Box>
-                      <Grid container spacing={2}>
-                        <Grid item xs={5}>
-                          <h3>Subtotal</h3>
-                        </Grid>
-                        <Grid item xs={7} style={{ textAlign: "right" }}>
-                          <Box>
-                            <h3>N 50,000</h3>
-                          </Box>
-                        </Grid>
-                      </Grid>
+                    <Typography className={classes.unitPrice}>
+                      N10,000 <span className={classes.unitPriceSpan}>x5</span>
+                    </Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
 
-                      <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                          <h3>Shipping(Flat rate)</h3>
-                        </Grid>
-                        <Grid item xs={6} style={{ textAlign: "right" }}>
-                          <h3>N 2,000</h3>
-                        </Grid>
-                      </Grid>
+            <Divider className={classes.divider} />
 
-                      <Box style={{ border: "block" }}>
-                        <Grid container spacing={2}>
-                          <Grid item xs={5}>
-                            <h3>Total</h3>
-                          </Grid>
-                          <Grid item xs={7} style={{ textAlign: "right" }}>
-                            <h3>N 52,000.00</h3>
-                          </Grid>
-                        </Grid>
-                      </Box>
-                    </Box>
-                  </Container>
-                </Box>
-              </CardContent>
-            </Card>
+            <Box className={classes.priceSectoin}>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <Typography className={classes.priceKey}>Subtotal</Typography>
+                </Grid>
+                <Grid item xs={6} className={classes.priceValueAlign}>
+                  <Typography className={classes.priceValue}>
+                    N 50,000
+                  </Typography>
+                </Grid>
+              </Grid>
+
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <Typography className={classes.priceKey}>
+                    Shipping{" "}
+                    <span className={classes.priceKeySpan}>(Flate rate)</span>
+                  </Typography>
+                </Grid>
+                <Grid item xs={6} className={classes.priceValueAlign}>
+                  <Typography className={classes.priceValue}>
+                    N 2,000
+                  </Typography>
+                </Grid>
+              </Grid>
+
+              <Box className={classes.priceTotalBox}>
+                <Grid
+                  container
+                  spacing={2}
+                  className={classes.priceTotalBoxPadding}
+                >
+                  <Grid item xs={6}>
+                    <Typography className={classes.totalKey}>Total</Typography>
+                  </Grid>
+                  <Grid item xs={6} className={classes.priceValueAlign}>
+                    <Typography className={classes.totalValue}>
+                      N 52,000.00
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>
           </Box>
 
-          <Box style={{ marginTop: 10 + "rem" }}>
-            <h1 style={{ fontSize: 33, lineHeight: 1 }}>
+          <Box className={classes.paymentBox}>
+            <Box>
+              <img src="../images/paymentOptions.png" alt="payment options" />
+            </Box>
+            <Box className={classes.paymentOptionHeader}>
               PayStack Payment Gateway
-            </h1>
-            <p style={{ fontSize: 18, lineHeight: 0, fontWeight: 402 }}>
+            </Box>
+            <Box className={classes.paymentOptionSub}>
               Make Payment Using Your Credit Card
-            </p>
+            </Box>
 
-            <p
-              style={{
-                marginTop: 3 + "rem",
-                marginBottom: 5 + "rem",
-                fontSize: 16,
-              }}
-            >
+            <Box className={classes.paymentOptionText}>
               Your personal data will be used to process your order, support
               your experience throughout this website, and for other purposes
               described in our privacy policy.
-            </p>
-          </Box>
+            </Box>
 
-          <Box>
-            <Link href="shop/2" underline="none">
-              <button
-                href="shop/2"
-                style={{
-                  backgroundColor: "green",
-                  color: "white",
-                  paddingTop: 18 + "px",
-                  paddingBottom: 18 + "px",
-                  paddingLeft: 40 + "px",
-                  paddingRight: 40 + "px",
-                  borderRadius: 50,
-                  fontSize: 19,
-                }}
-              >
-                Proceed to Payment
-              </button>
-            </Link>
+            <Box>
+              <Link href="shop/2" underline="none">
+                <button href="shop/2" className={classes.paymentButton}>
+                  Proceed to Payment
+                </button>
+              </Link>
+            </Box>
           </Box>
         </Grid>
       </Grid>

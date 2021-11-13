@@ -83,7 +83,7 @@ function Shop() {
                 </Container>
 
                 <Box>
-                  <Link href="shop/2" underline="none">
+                  <Link href="/shop/2" underline="none">
                     <button
                       href="shop/2"
                       style={{
