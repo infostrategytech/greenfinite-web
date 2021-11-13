@@ -1,9 +1,382 @@
 import React from 'react'
+import { Grid, Typography, makeStyles, TextField, Button, Box } from '@material-ui/core'
+import { mergeClasses } from '@material-ui/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root:{
+        paddingTop: 100,
+    },
+    datesImg:{
+        height: 400,
+        width: 300,
+        marginTop: 16
+    },
+    parentContainer:{
+        [theme.breakpoints.up('md')]: {
+            paddingTop:50,
+            paddingBottom: 200
+        },
+        [theme.breakpoints.down('sm')]: {
+            padding: 16,
+            paddingBottom: 100
+        },
+    },
+    headerText:{
+        fontWeight: 700,
+        fontSize: 40,
+        marginBottom: 16
+    },
+    headerTextSmall:{
+        fontWeight: 700,
+        fontSize: 24,
+        marginBottom: 16
+    },
+    subhead:{
+        marginBottom: 16,
+        fontWeight: 700
+    },
+    item1:{
+        [theme.breakpoints.up('md')]: {
+            paddingLeft: 100,
+            paddingRight: 100
+        },
+        textAlign: 'center',
+        marginBottom: 100,
+    },
+    item2:{
+        [theme.breakpoints.up('md')]: {
+            paddingLeft: 100,
+            paddingRight: 100
+        },
+    },
+    item3:{
+        [theme.breakpoints.up('md')]: {
+            paddingLeft: 100,
+            paddingRight: 100
+        },
+        [theme.breakpoints.down('sm')]: {
+          marginTop: 32
+        },
+        marginTop: 50
+    },
+    item4:{
+        textAlign: 'center',
+        marginTop: 100,
+        backgroundColor: '#EFF8F2',
+        paddingTop: 30,
+        paddingBottom: 30,
+    },
+    item5:{
+        [theme.breakpoints.up('md')]: {
+            paddingLeft: 200,
+            paddingRight: 200,
+            marginTop: 100
+        },
+        [theme.breakpoints.down('sm')]: {
+          marginTop: 32
+        },
+        marginTop: 50
+    },
+    imgContainer:{
+        [theme.breakpoints.up('md')]: {
+            display: 'flex',
+            justifyContent: 'flex-end'
+        },
+    },
+    box:{
+        marginTop: 16,
+        marginBottom: 100
+    },
+    value:{
+        padding: 8
+    },
+    clientImg:{
+        height: 81,
+        width: 153
+    }
+}));
 
 function AboutUs() {
+    const classes = useStyles()
     return (
-        <div>
-            this is the About Us page
+        <div className={classes.root}>
+            <Grid 
+                container
+                direction="column" 
+                className={classes.parentContainer}
+            >
+                <Grid
+                    item
+                    className={classes.item1}
+                >
+                    <Typography 
+                        variant="h3" 
+                        component="h1"
+                        className={classes.headerText}
+                    >
+                        About Us
+                    </Typography>
+                    <Typography
+                        variant="body1"
+                        component="p"
+                    >
+                        Your Favourite Sweetner, Alternative to Refined Sugar
+                    </Typography>
+                </Grid>
+                {/* ROW 2 */}
+                <Grid
+                    item
+                    container
+                    className={classes.item2}
+                >
+                    <Grid
+                        item
+                        xs={12}
+                        md={6}
+                    >
+                        <Box className={classes.box}>
+                            <Typography variant="h4" className={classes.subhead}>
+                                Our Vision
+                            </Typography>
+                            <Typography variant="body1">
+                                To be the go-to brand for trusted natural alternatives.
+                            </Typography>
+                        </Box>
+                        <Box className={classes.box}>
+                            <Typography variant="h4" className={classes.subhead}>
+                                Our Mission
+                            </Typography>
+                            <Typography variant="body1">
+                                Our infinite motive is to support the health and wellbeing
+                                of homes by providing the best natural sweetners and also
+                                enable financial growth and wealth creation by partnering with
+                                distributors worldwide. 
+                            </Typography>
+                        </Box>
+                    </Grid>
+
+                    <Grid 
+                        item
+                        xs={12}
+                        md={6}
+                        className={classes.imgContainer}
+                    >
+                        <img
+                            src="./images/bag-of-dates.png"
+                            alt="bag of dates"
+                            className={classes.datesImg}
+                        />
+                    </Grid>
+
+                </Grid>
+                {/* ROW 3 */}
+                <Grid
+                    item
+                    container
+                    direction="column"
+                    className={classes.item3}
+                >
+                    <Grid
+                        item
+                    >
+                        <Typography
+                            variant="h4"
+                            className={classes.subhead}
+                        >
+                            Our Core Values
+                        </Typography>
+                    </Grid>
+
+                    <Grid
+                        item
+                        container
+                    >
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h4" className={classes.headerTextSmall}>
+                                Quality
+                            </Typography>
+                            <Typography variant="body1" >
+                                Adhere to raw material selection criteria and ensure
+                                all production processes are strictly monitored and 
+                                carried out hygienically.
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h4" className={classes.headerTextSmall}>
+                                Customer Centric
+                            </Typography>
+                            <Typography variant="body1" >
+                            Honesty and uprightness in our dealings with customers, suppliers and employees.
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h4" className={classes.headerTextSmall}>
+                                Hygiene
+                            </Typography>
+                            <Typography variant="body1" >
+                            Ensure that every of our production process and staff meet the highest
+                             standards of hygiene.
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h4" className={classes.headerTextSmall}>
+                                Integrity
+                            </Typography>
+                            <Typography variant="body1" >
+                            Honesty and uprightness in our dealings with customers, suppliers and employees.
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h4" className={classes.headerTextSmall}>
+                                Education
+                            </Typography>
+                            <Typography variant="body1" >
+                                Constantly educate the public on the impact of food choices on their health
+                                and encourage healthier alternatives.
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h4" className={classes.headerTextSmall}>
+                                Corporate Values
+                            </Typography>
+                            <Typography variant="body1" >
+                                Teamwork, empathy, solidarity, honesty, openness, selfresponsibility 
+                                and social responsibility.
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h4" className={classes.headerTextSmall}>
+                                Excellence
+                            </Typography>
+                            <Typography variant="body1" >
+                                We are committed to delivering the best healthy alternatives and
+                                compromise-free products that we give to our own children
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h4" className={classes.headerTextSmall}>
+                                Creativity
+                            </Typography>
+                            <Typography variant="body1" >
+                                Innovate, develop and adapt to change drivers.
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                {/* ROW 4 */}
+                <Grid
+                    item
+                    container
+                    direction="column"
+                    className={classes.item4}
+                >
+                    <Grid item>
+                        <Typography 
+                            variant="h4"
+                            className={classes.subhead}
+                        >
+                            Our Products in Numbers
+                        </Typography>
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        justifyContent="space-evenly"
+                    >
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h3">
+                                1000
+                            </Typography>
+                            <Typography variant="h6" component="p">
+                                Products Supplied
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h3">
+                                97
+                            </Typography>
+                            <Typography variant="h6" component="p">
+                                Distributors
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h3">
+                                100%
+                            </Typography>
+                            <Typography variant="h6" component="p">
+                                Satisfied Customers
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={3} className={classes.value}>
+                            <Typography variant="h4" component="h3">
+                                2
+                            </Typography>
+                            <Typography variant="h6" component="p">
+                                States
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                {/* ROW 5 */}
+                <Grid item container className={classes.item5}>
+                    <Grid item xs={6} md={3} className={classes.value}>
+                        <img
+                            src="./images/next.png"
+                            alt="next cash and carry"
+                            className={classes.clientImg}
+                        />
+                    </Grid>
+                    <Grid item xs={6} md={3} className={classes.value}>
+                        <img
+                            src="./images/tonia.png"
+                            alt="tonia pharmacy"
+                            className={classes.clientImg}
+                        />
+                    </Grid>
+                    <Grid item xs={6} md={3} className={classes.value}>
+                        <img
+                            src="./images/pyramid.png"
+                            alt="pyramid pharmacy"
+                            className={classes.clientImg}
+                        />
+                    </Grid>
+                    <Grid item xs={6} md={3} className={classes.value}>
+                        <img
+                            src="./images/mcray.png"
+                            alt="mcray supermarket"
+                            className={classes.clientImg}
+                        />
+                    </Grid>
+                    <Grid item xs={6} md={3} className={classes.value}>
+                        <img
+                            src="./images/bakan-gizo.png"
+                            alt="bakan gizo"
+                            className={classes.clientImg}
+                        />
+                    </Grid>
+                    <Grid item xs={6} md={3} className={classes.value}>
+                        <img
+                            src="./images/dunes.png"
+                            alt="dunes center"
+                            className={classes.clientImg}
+                        />
+                    </Grid>
+                    <Grid item xs={6} md={3} className={classes.value}>
+                        <img
+                            src="./images/maple.png"
+                            alt="maple"
+                            className={classes.clientImg}
+                        />
+                    </Grid>
+                    <Grid item xs={6} md={3} className={classes.value}>
+                        <img
+                            src="./images/tefcon.png"
+                            alt="tefcon"
+                            className={classes.clientImg}
+                        />
+                    </Grid>
+                </Grid>
+            </Grid>
         </div>
     )
 }
