@@ -16,7 +16,7 @@ import RemoveRoundedIcon from "@material-ui/icons/RemoveRounded";
 import AddIcon from "@material-ui/icons/Add";
 
 import { getAllProduct, getSingleProduct } from "../../redux/actions/products";
-import { addToCart } from "../../redux/actions/cart";
+import { addToCart, adjustQuantity } from "../../redux/actions/cart";
 
 const useStyles = makeStyles((theme) => ({
   quantityValue: {
@@ -35,14 +35,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function ItemDetails() {
+  const [prodValue, setProdValue] = useState(1);
+  const [cartCount, setCartCount] = useState(0);
   const classes = useStyles();
   const dispatch = useDispatch();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const { product } = useSelector((state) => state.products);
+  const {
+    product,
+    cart,
+    id: productID,
+  } = useSelector((state) => state.products);
 
   useEffect(() => {
-    const productID = router.query.itemId;
+    // const productID = router.query.itemId;
     setLoading(true);
     dispatch(getAllProduct(() => {}));
     dispatch(
@@ -51,13 +57,28 @@ function ItemDetails() {
       })
     );
   }, []);
+
+  useEffect(() => {
+    let cartCount = 0;
+    cart.forEach((item) => {
+      cartCount += item.qty;
+      setCartCount(cartCount);
+    });
+  }, [cart, cartCount]);
   const addCart = (id) => {
     dispatch(addToCart(id));
+  };
+  const increment = (id) => {
+    // setProdValue((prevState) => prevState + 1)
+    dispatch(adjustQuantity(id, prodValue));
+  };
+  const decrement = () => {
+    setProdValue((prevState) => prevState - 1);
   };
   return (
     <Container style={{ marginTop: 10 + "rem", marginBottom: 115 + "px" }}>
       <Grid container spacing={2}>
-        <Grid item xs={4} md={12}>
+        <Grid item xs={4} md={6}>
           {loading && <CircularProgress />}
           <Box>
             <img
@@ -67,7 +88,7 @@ function ItemDetails() {
             />
           </Box>
         </Grid>
-        <Grid item xs={8} md={12}>
+        <Grid item xs={8} md={6}>
           <Box style={{ marginLeft: 57 + "px" }}>
             <Grid xs={8}>
               <Box>
@@ -130,16 +151,22 @@ function ItemDetails() {
                         style={{ margin: "17px 0" }}
                         className={classes.button}
                       >
-                        <IconButton className={classes.iconBtn}>
+                        <IconButton
+                          className={classes.iconBtn}
+                          onClick={decrement}
+                        >
                           <RemoveRoundedIcon />
                         </IconButton>
                         <Typography
                           variant="h5"
                           className={classes.quantityValue}
                         >
-                          5
+                          {prodValue}
                         </Typography>
-                        <IconButton className={classes.iconBtn}>
+                        <IconButton
+                          className={classes.iconBtn}
+                          onClick={() => increment(product.product_id)}
+                        >
                           <AddIcon />
                         </IconButton>
                       </Box>
@@ -183,7 +210,7 @@ function ItemDetails() {
                     marginTop: 10 + "px",
                   }}
                 >
-                  2 items
+                  {cartCount} items
                   <Typography
                     component="span"
                     style={{

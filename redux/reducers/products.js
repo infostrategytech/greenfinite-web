@@ -4,12 +4,14 @@ import {
   GET_SINGLE_PRODUCTS,
   REMOVE_FROM_CART,
   ADJUST_QTY,
+  GET_ID,
 } from "../actions/Contants";
 
 const initState = {
   products: [],
   cart: [],
   product: {},
+  id: "",
 };
 
 export const productsReducer = (state = initState, action) => {
@@ -29,13 +31,10 @@ export const productsReducer = (state = initState, action) => {
         (prod) => prod.product_id === action.payload
       );
 
-      const isInCart = state.cart.find((prod) => {
-        console.log(prod);
-        prod.product_id === action.payload;
-        // console.log(action.payload, prod.product_id);
-      });
-      console.log(state.cart);
-      console.log(isInCart, "incart");
+      const isInCart = state.cart.find((item) =>
+        item.product_id === action.payload ? true : false
+      );
+
       return {
         ...state,
         cart: isInCart
@@ -49,18 +48,26 @@ export const productsReducer = (state = initState, action) => {
     case REMOVE_FROM_CART:
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload.itemId),
+        cart: state.cart.filter((item) => item.product_id !== action.payload),
       };
     case ADJUST_QTY:
       return {
         ...state,
-        cart: state.cart.map((item) =>
-          item.id === action.payload.itemId
+        cart: state.cart.map((item) => {
+          console.log(item);
+          item.product_id === action.payload.itemId
             ? { ...item, qty: action.payload.qty }
-            : item
-        ),
+            : item;
+        }),
+        // cart: state.cart.map((item) => {
+        //   console.log(item);
+        // }),
       };
-
+    case GET_ID:
+      return {
+        ...state,
+        id: action.payload,
+      };
     default:
       return state;
   }

@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Button, Typography, IconButton, Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 // import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import RemoveRoundedIcon from "@material-ui/icons/RemoveRounded";
 import AddIcon from "@material-ui/icons/Add";
-import LocalMallOutlinedIcon from "@material-ui/icons/LocalMallOutlined";
+import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../../redux/actions/cart";
-import CartItem from "../../components/CartItem";
+import { adjustQuantity, removeFromCart } from "../redux/actions/cart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -158,14 +156,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 16,
   },
 }));
-
-function Cart() {
+const CartItem = ({ item }) => {
+  //   console.log(item);
   const dispatch = useDispatch();
-
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const { cart } = useSelector((state) => state.products);
-  // console.log(cart);
+  const [input, setInput] = useState(item?.qty);
   const classes = useStyles();
   useEffect(() => {
     let quantity = 0;
@@ -176,67 +173,69 @@ function Cart() {
     });
     setTotalQuantity(totalQuantity);
     setTotalPrice(price);
-  }, [totalPrice]);
+  }, [totalQuantity, totalPrice]);
+  const removeItems = (id) => {
+    dispatch(removeFromCart(id));
+  };
 
+  const onAddHandler = (e) => {
+    // setInput((prevState) => prevState + 1);
+    dispatch(adjustQuantity(item.product_id, input));
+    // console.log(item.product_id);
+  };
+  const onReduceHandler = () => {
+    setInput((prevState) => prevState - 1);
+  };
   return (
-    <div className={classes.root}>
-      <Grid container direction="column" className={classes.parentContainer}>
-        {/* ROW 1 */}
-        <Grid item className={classes.row1}>
-          <Typography variant="h4" className={classes.bold}>
-            <LocalMallOutlinedIcon className={classes.bagIcon} />
-            <span>Cart ({cart.length} item)</span>
-          </Typography>
+    <Grid item container>
+      <Grid item container xs={6} className={classes.cell}>
+        <Grid item xs={4}>
+          <img
+            src={item?.image_url}
+            alt="dates powder"
+            className={classes.powderImg}
+          />
         </Grid>
-        {/* ROW 2 */}
-        <Grid item container>
-          <Grid item xs={6}>
-            <Typography variant="body2" className={classes.heading}>
-              Product
-            </Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Typography variant="body2" className={classes.heading}>
-              Quantity
-            </Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Typography variant="body2" className={classes.heading}>
-              Unit Price
-            </Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Typography variant="body2" className={classes.heading}>
-              Subtotal
-            </Typography>
-          </Grid>
-        </Grid>
-        {cart && cart.length > 0 ? (
-          cart.map((item) => <CartItem item={item} />)
-        ) : (
-          <Typography variant="h6">Cart is empty</Typography>
-        )}
-        {/* ROW 3 */}
-        <Grid item className={classes.row3}>
-          <Typography variant="body1" className={classes.totalText}>
-            Total
+        <Grid item xs={8}>
+          <Typography
+            variant="h5"
+            component="h6"
+            className={classes.productName}
+          >
+            {item.name} ({item.net_weight}g)
           </Typography>
-          <Typography variant="body2" className={classes.total}>
-            ₦{totalPrice}
-          </Typography>
-        </Grid>
-        {/* ROW 4 */}
-        <Grid item className={classes.row4}>
-          <Button variant="outlined" color="primary" className={classes.btn2}>
-            Buy More
-          </Button>
-          <Button variant="contained" color="primary" className={classes.btn}>
-            Checkout
-          </Button>
+          <IconButton
+            aria-label="delete"
+            className={classes.remove}
+            onClick={() => removeItems(item.product_id)}
+          >
+            <DeleteForeverIcon /> Remove
+          </IconButton>
         </Grid>
       </Grid>
-    </div>
+      <Grid item xs={2} className={classes.quantityCell}>
+        <IconButton className={classes.iconBtn} onClick={onReduceHandler}>
+          <RemoveRoundedIcon />
+        </IconButton>
+        <Typography variant="h5" className={classes.quantityValue}>
+          {input}
+        </Typography>
+        <IconButton className={classes.iconBtn} onClick={onAddHandler}>
+          <AddIcon />
+        </IconButton>
+      </Grid>
+      <Grid item xs={2} className={classes.quantityCell}>
+        <Typography variant="caption" className={classes.money}>
+          ₦{item.amount}
+        </Typography>
+      </Grid>
+      <Grid item xs={2} className={classes.lastCell}>
+        <Typography variant="caption" className={classes.money}>
+          ₦{totalPrice}
+        </Typography>
+      </Grid>
+    </Grid>
   );
-}
+};
 
-export default Cart;
+export default CartItem;
