@@ -92,14 +92,14 @@ function Header() {
     setOpenDrawer(false);
   };
   const cartLength = cart.length;
-  useEffect(() => {
-    let cartCount = 0;
-    cart.forEach((item) => {
-      console.log("header", item);
-      cartCount += item.qty;
-      setCartCount(cartCount);
-    });
-  }, [cart, cartCount]);
+  // useEffect(() => {
+  //   let cartCount = 0;
+  //   cart.forEach((item) => {
+  //     console.log("header", item);
+  //     cartCount += item.qty;
+  //     setCartCount(cartCount);
+  //   });
+  // }, [cart, cartCount]);
 
   return (
     <>
@@ -223,7 +223,7 @@ function Header() {
                       className={classes.links}
                     >
                       <IconButton>
-                        <Badge badgeContent={`${cartCount}`} color="primary">
+                        <Badge badgeContent={`${cartLength}`} color="primary">
                           <ShoppingCart />
                         </Badge>
                       </IconButton>{" "}

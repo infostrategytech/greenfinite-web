@@ -173,6 +173,7 @@ function Cart() {
     cart.forEach((item) => {
       quantity += item.qty;
       price += item.qty * item.amount;
+      console.log(price);
     });
     setTotalQuantity(totalQuantity);
     setTotalPrice(price);

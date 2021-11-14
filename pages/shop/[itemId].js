@@ -69,8 +69,8 @@ function ItemDetails() {
     dispatch(addToCart(id));
   };
   const increment = (id) => {
-    // setProdValue((prevState) => prevState + 1)
-    dispatch(adjustQuantity(id, prodValue));
+    setProdValue((prevState) => prevState + 1);
+    // dispatch(adjustQuantity(id, prodValue));
   };
   const decrement = () => {
     setProdValue((prevState) => prevState - 1);
@@ -210,7 +210,7 @@ function ItemDetails() {
                     marginTop: 10 + "px",
                   }}
                 >
-                  {cartCount} items
+                  {product.qty} items
                   <Typography
                     component="span"
                     style={{

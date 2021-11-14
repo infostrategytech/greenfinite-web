@@ -179,9 +179,8 @@ const CartItem = ({ item }) => {
   };
 
   const onAddHandler = (e) => {
-    // setInput((prevState) => prevState + 1);
-    dispatch(adjustQuantity(item.product_id, input));
-    // console.log(item.product_id);
+    setInput((prevState) => prevState + 1);
+    // dispatch(adjustQuantity(item.product_id, input));
   };
   const onReduceHandler = () => {
     setInput((prevState) => prevState - 1);
@@ -231,7 +230,7 @@ const CartItem = ({ item }) => {
       </Grid>
       <Grid item xs={2} className={classes.lastCell}>
         <Typography variant="caption" className={classes.money}>
-          ₦{totalPrice}
+          ₦{item.amount * item.qty}
         </Typography>
       </Grid>
     </Grid>
