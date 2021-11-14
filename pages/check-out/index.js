@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Link from "next/link";
 import {
   Container,
@@ -9,7 +9,11 @@ import {
   Divider,
   Checkbox,
   makeStyles,
+  CircularProgress,
 } from "@material-ui/core";
+import { useSelector,useDispatch } from "react-redux";
+import { createOrder } from "../../redux/actions/checkout";
+import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
   mainHeader: {
@@ -184,10 +188,39 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     borderRadius: 50,
   },
+  spinner:{
+    color: '#fff'
+  }
 }));
 
 function CheckOut() {
   const classes = useStyles();
+  const dispatch = useDispatch()
+  const {cart} = useSelector(state=>state.products)
+  const [loading, setLoading] = useState(false)
+
+  const placeOrder = ()=>{
+    let idArray = []
+    if(cart.length>0){
+      cart.map(item=>idArray.push(item.product_id))
+    }
+    if(idArray.length>0){
+      setLoading(true)
+      let data = {
+        products: idArray,
+        info: ""
+      }
+      dispatch(createOrder(data,()=>{
+        setLoading(false)
+      }))
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No products in order'
+      })
+    }
+  }
   return (
     <Container style={{ marginTop: 10 + "rem", marginBottom: 20 + "rem" }}>
       <Grid container spacing={10}>
@@ -480,11 +513,17 @@ function CheckOut() {
             </Box>
 
             <Box>
-              <Link href="shop/2" underline="none">
-                <button href="shop/2" className={classes.paymentButton}>
-                  Proceed to Payment
+              {/* <Link href="shop/2" underline="none"> */}
+                <button 
+                  // href="shop/2" 
+                  className={classes.paymentButton}
+                  onClick={placeOrder}
+                  disabled={loading}
+                >
+                  {loading?<CircularProgress className={classes.spinner} /> :'Proceed to Payment'}
+                 
                 </button>
-              </Link>
+              {/* </Link> */}
             </Box>
           </Box>
         </Grid>

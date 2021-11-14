@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
   baseURL: base_url,
 });
 
-export function publicRoute(url, data, method, config) {
+export function publicRoute(url, method,data, config) {
   axiosInstance.interceptors.request.use(
     (config) => {
       return config;
