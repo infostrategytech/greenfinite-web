@@ -14,6 +14,7 @@ import {
 import { useSelector,useDispatch } from "react-redux";
 import { createOrder } from "../../redux/actions/checkout";
 import Swal from "sweetalert2";
+import { usePaystackPayment } from 'react-paystack';
 
 const useStyles = makeStyles((theme) => ({
   mainHeader: {
@@ -187,6 +188,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 40 + "px",
     border: "none",
     borderRadius: 50,
+    cursor: 'pointer'
   },
   spinner:{
     color: '#fff'
@@ -200,19 +202,36 @@ function CheckOut() {
   const classes = useStyles();
   const dispatch = useDispatch()
   const {cart} = useSelector(state=>state.products)
+  const {orderId}= useSelector(state=>state.checkout)
   const [loading, setLoading] = useState(false)
-  // const [totalQuantity,setTotalQuantity] = useState(0)
   const [totalPrice,setTotalPrice] = useState(0)
   const [totalPayment, setTotalPayment] = useState(0)
 
+  const config = {
+    reference: new Date().getTime(),
+    email: `${'2'}@greenfinite.ng`,
+    amount: totalPayment * 100,
+    // publicKey: `${process.env.NEXT_PUBLIC_PAYSTACK_KEY}`,
+    publicKey: 'pk_test_363651192d1da6d2499e9047b2ae5b2bded3b338'
+  };
+  const initializePayment = usePaystackPayment(config);
+
+  const onSuccess = (reference) => {
+    console.log('SUCCESSFUL',reference)
+   
+  };
+
+
+  const onClose = () => {
+    setLoading(false);
+  };
+
+
   useEffect(() => {
-    // let quantity = 0;
     let price = 0;
     cart.length>0 && cart.forEach(item => {
-      // quantity += item.qty;
       price += (item.qty * item.amount);
     });
-    // setTotalQuantity(quantity);
     setTotalPrice(price);
     price && setTotalPayment(price+2000)
   }, []);
@@ -482,7 +501,7 @@ function CheckOut() {
                 </Grid>
                 <Grid item xs={6} className={classes.priceValueAlign}>
                   <Typography className={classes.priceValue}>
-                   {`₦${totalPrice}`}
+                   {totalPrice?`₦${totalPrice}`: ''}
                   </Typography>
                 </Grid>
               </Grid>
@@ -512,7 +531,7 @@ function CheckOut() {
                   </Grid>
                   <Grid item xs={6} className={classes.priceValueAlign}>
                     <Typography className={classes.totalValue}>
-                      {`₦${totalPayment}`}
+                      {totalPayment ?`₦${totalPayment}`: ''}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -543,6 +562,7 @@ function CheckOut() {
                   // href="shop/2" 
                   className={classes.paymentButton}
                   onClick={placeOrder}
+                  // onClick={() => initializePayment(onSuccess, onClose)}
                   disabled={loading}
                 >
                   {loading?<CircularProgress className={classes.spinner} /> :'Proceed to Payment'}

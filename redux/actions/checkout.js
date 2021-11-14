@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 export const createOrder = (data,cb)=> async dispatch=>{  
     try {
-        const res = await callApi("orders",data,"POST");
+        const res = await callApi("orders","POST",data);
 
         if (res.code === "00") {
           dispatch({

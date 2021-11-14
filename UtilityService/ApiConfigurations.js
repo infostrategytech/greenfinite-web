@@ -81,7 +81,7 @@ export function privateRoute(url, data, method, config) {
     }
   });
 }
-function callApi(url, data, method, config, token) {
+function callApi(url,method,data, config, token) {
   if (token) {
     return privateRoute(url, data, method, config);
   }
