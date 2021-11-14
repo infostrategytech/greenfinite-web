@@ -16,6 +16,7 @@ import Products from "../components/products/Products";
 import ProductSection from "../components/products/ProductSection";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProduct } from "../redux/actions/products";
+import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -135,9 +136,11 @@ export default function Home() {
                   Your favourite alternative to refined sugar <br /> made with
                   no preservatives and additives.{" "}
                 </Typography>
-                <Button variat="contained" className={classes.button}>
-                  Buy Now
-                </Button>
+                <Link href="/shop">
+                  <Button variat="contained" className={classes.button}>
+                    Buy Now
+                  </Button>
+                </Link>
               </Box>
             </Grid>
             <Grid item item xs={12} sm={12} md={5} className={classes.order1}>

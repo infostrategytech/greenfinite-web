@@ -112,13 +112,13 @@ function Header() {
             className={classes.container}
           >
             <Grid item sm={2}>
-              <Typography variant="h4" className={classes.logo}>
+              <Link href="/" className={classes.logo}>
                 <img
                   src="/images/Logo.png"
                   alt=" logo"
                   className={classes.logo}
                 />
-              </Typography>
+              </Link>
             </Grid>
             {isMobile ? (
               <DrawerComponent openDrawer={openDrawer} close={closehandler} />

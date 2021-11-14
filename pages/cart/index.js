@@ -9,6 +9,7 @@ import LocalMallOutlinedIcon from "@material-ui/icons/LocalMallOutlined";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../../redux/actions/cart";
 import CartItem from "../../components/CartItem";
+import router from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -177,7 +178,7 @@ function Cart() {
     });
     setTotalQuantity(totalQuantity);
     setTotalPrice(price);
-  }, [totalPrice]);
+  }, [totalPrice, totalQuantity, cart]);
 
   return (
     <div className={classes.root}>
@@ -228,7 +229,12 @@ function Cart() {
         </Grid>
         {/* ROW 4 */}
         <Grid item className={classes.row4}>
-          <Button variant="outlined" color="primary" className={classes.btn2}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.btn2}
+            onClick={() => router.push("/shop")}
+          >
             Buy More
           </Button>
           <Button variant="contained" color="primary" className={classes.btn}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   Box,
@@ -8,16 +8,24 @@ import {
   Typography,
   Button,
   MenuItem,
+  CircularProgress,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { GET_ID } from "../../redux/actions/Contants";
+import { getAllProduct } from "../../redux/actions/products";
+import router from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   item: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+      textAlign: "center",
+      marginBottom: "2em",
+    },
   },
   logo: {
     maxWidth: "100%",
@@ -29,8 +37,9 @@ const useStyles = makeStyles((theme) => ({
       width: "140px",
     },
     [theme.breakpoints.down("xs")]: {
-      height: "140px",
-      width: "220px",
+      height: "120px",
+      width: "180px",
+      // objectFit: "cover",
     },
   },
   title: {
@@ -48,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     fontFamily: "Poppins",
     fontSize: "24px",
-    fontWeight: "500",
+    fontWeight: "700",
     lineHeight: "28px",
     marginTop: ".2em",
     marginBottom: "1em",
@@ -66,8 +75,14 @@ const useStyles = makeStyles((theme) => ({
     width: "115px",
     height: "40px",
     fontFamily: "Poppins",
-    fontSize: "12px",
+    fontSize: "16px",
     fontWeight: "500",
+    "&:hover": { color: "#3D8754" },
+    [theme.breakpoints.down("md")]: {
+      width: "150px",
+      height: "50px",
+      fontSize: "14px",
+    },
   },
   grams: {
     display: "block",
@@ -92,6 +107,7 @@ const useStyles = makeStyles((theme) => ({
 function Shop() {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const [loading, setLoading] = useState(false);
   const { products } = useSelector((state) => state.products);
   const getId = (id) => {
     dispatch({
@@ -99,6 +115,11 @@ function Shop() {
       payload: id,
     });
   };
+
+  useEffect(() => {
+    setLoading(true);
+    dispatch(getAllProduct(() => setLoading(false)));
+  }, []);
 
   return (
     <Container style={{ marginTop: 10 + "rem" }}>
@@ -128,40 +149,51 @@ function Shop() {
         </p>
       </Box>
 
-      <Grid container justifyContent="center" className={classes.container}>
-        {products &&
-          products.length &&
-          products.map((product) => (
-            <Grid item container xs={12} md={5}>
-              <Grid item className={classes.item}>
-                <Box>
-                  <img
-                    src={product.image_url}
-                    alt=""
-                    className={classes.logo}
-                  />
-                </Box>
-                <Box>
-                  <Typography variant="h4">
-                    <Link href="/shop/new">
-                      <MenuItem
-                        className={classes.title}
-                        onClick={() => getId(product.product_id)}
+      <Grid container className={classes.container}>
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            {products &&
+              products.length &&
+              products.map((product) => (
+                <Grid item container xs={8} md={5}>
+                  <Grid item className={classes.item}>
+                    <Box>
+                      <img
+                        src={product.image_url}
+                        alt=""
+                        className={classes.logo}
+                      />
+                    </Box>
+                    <Box>
+                      <Typography variant="h4">
+                        <Link href={`/shop/${product.product_id}`}>
+                          <MenuItem
+                            className={classes.title}
+                            onClick={() => getId(product.product_id)}
+                          >
+                            {product.name} ({product.net_weight}g)
+                          </MenuItem>
+                        </Link>
+                      </Typography>
+                      <Typography variant="h4" className={classes.content}>
+                        ₦{product.amount}
+                      </Typography>
+                      <Link
+                        href={`/shop/${product.product_id}`}
+                        className={classes.button}
                       >
-                        {product.name} ({product.net_weight}g)
-                      </MenuItem>
-                    </Link>
-                  </Typography>
-                  <Typography variant="h4" className={classes.content}>
-                    N{product.amount}
-                  </Typography>
-                  <Button variat="contained" className={classes.button}>
-                    Buy Now
-                  </Button>
-                </Box>
-              </Grid>
-            </Grid>
-          ))}
+                        <Button variat="contained" className={classes.button}>
+                          Buy Now
+                        </Button>
+                      </Link>
+                    </Box>
+                  </Grid>
+                </Grid>
+              ))}
+          </>
+        )}
       </Grid>
     </Container>
   );
