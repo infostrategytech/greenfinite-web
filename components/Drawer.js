@@ -107,7 +107,7 @@ const DrawerComponent = () => {
               </div>
               <Typography variant="h4" className={classes.logo}>
                 <img
-                  src="./images/Logo.png"
+                  src="/images/Logo.png"
                   alt="Greenfinite logo"
                   className={classes.logo}
                 />

@@ -119,7 +119,6 @@ function ItemDetails() {
   const productID = router.query.itemId;
   useEffect(() => {
     setLoading(true);
-    dispatch(getAllProduct(() => {}));
     if (productID) {
       dispatch(
         getSingleProduct(productID, () => {

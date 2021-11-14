@@ -13,7 +13,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { GET_ID } from "../../redux/actions/Contants";
-import { getAllProduct } from "../../redux/actions/products";
+
 import router from "next/router";
 
 const useStyles = makeStyles((theme) => ({
@@ -115,11 +115,6 @@ function Shop() {
       payload: id,
     });
   };
-
-  useEffect(() => {
-    setLoading(true);
-    dispatch(getAllProduct(() => setLoading(false)));
-  }, []);
 
   return (
     <Container style={{ marginTop: 10 + "rem" }}>
