@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import Link from "next/link";
 import {
   Container,
@@ -190,6 +190,9 @@ const useStyles = makeStyles((theme) => ({
   },
   spinner:{
     color: '#fff'
+  },
+  productImg:{
+    maxWidth: '100%',
   }
 }));
 
@@ -198,6 +201,21 @@ function CheckOut() {
   const dispatch = useDispatch()
   const {cart} = useSelector(state=>state.products)
   const [loading, setLoading] = useState(false)
+  // const [totalQuantity,setTotalQuantity] = useState(0)
+  const [totalPrice,setTotalPrice] = useState(0)
+  const [totalPayment, setTotalPayment] = useState(0)
+
+  useEffect(() => {
+    // let quantity = 0;
+    let price = 0;
+    cart.length>0 && cart.forEach(item => {
+      // quantity += item.qty;
+      price += (item.qty * item.amount);
+    });
+    // setTotalQuantity(quantity);
+    setTotalPrice(price);
+    price && setTotalPayment(price+2000)
+  }, []);
 
   const placeOrder = ()=>{
     let idArray = []
@@ -422,31 +440,38 @@ function CheckOut() {
           <Box className={classes.orderBox}>
             <Typography className={classes.orderHeader}>Your Order</Typography>
 
-            <Box className={classes.orderDetailBox}>
-              <Grid container spacing={2}>
-                <Grid item xs={3}>
-                  <Box>
-                    <img src="../images/checkoutItem.png" alt="product image" />
-                  </Box>
-                </Grid>
-                <Grid item xs={9}>
-                  <Box>
-                    <Typography className={classes.itemNameHeader}>
-                      Item Name{" "}
-                      <span className={classes.itemNameSubHeader}>(250g)</span>
-                    </Typography>
+            {cart && cart.length > 0 &&
+              cart.map(item=>(
+                <Box className={classes.orderDetailBox}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={3}>
+                      <Box>
+                        <img src={item?.image_url} alt="product image" className={classes.productImg}/>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={9}>
+                      <Box>
+                        <Typography className={classes.itemNameHeader}>
+                        {item.name} {" "}
+                          <span className={classes.itemNameSubHeader}>({item.net_weight}g)</span>
+                        </Typography>
 
-                    <Typography className={classes.quantityHeader}>
-                      Quantity: 5
-                    </Typography>
+                        <Typography className={classes.quantityHeader}>
+                          Quantity: {item.qty}
+                        </Typography>
 
-                    <Typography className={classes.unitPrice}>
-                      N10,000 <span className={classes.unitPriceSpan}>x5</span>
-                    </Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Box>
+                        <Typography className={classes.unitPrice}>
+                        ₦{item.amount}<span className={classes.unitPriceSpan}>{`x${item.qty}`}</span>
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+              ))
+            }
+            {
+              cart.length === 0 && <Typography variant="body1">No items in cart</Typography>
+            }
 
             <Divider className={classes.divider} />
 
@@ -457,7 +482,7 @@ function CheckOut() {
                 </Grid>
                 <Grid item xs={6} className={classes.priceValueAlign}>
                   <Typography className={classes.priceValue}>
-                    N 50,000
+                   {`₦${totalPrice}`}
                   </Typography>
                 </Grid>
               </Grid>
@@ -466,12 +491,12 @@ function CheckOut() {
                 <Grid item xs={6}>
                   <Typography className={classes.priceKey}>
                     Shipping{" "}
-                    <span className={classes.priceKeySpan}>(Flate rate)</span>
+                    <span className={classes.priceKeySpan}>(Flat rate)</span>
                   </Typography>
                 </Grid>
                 <Grid item xs={6} className={classes.priceValueAlign}>
                   <Typography className={classes.priceValue}>
-                    N 2,000
+                    ₦2,000
                   </Typography>
                 </Grid>
               </Grid>
@@ -487,7 +512,7 @@ function CheckOut() {
                   </Grid>
                   <Grid item xs={6} className={classes.priceValueAlign}>
                     <Typography className={classes.totalValue}>
-                      N 52,000.00
+                      {`₦${totalPayment}`}
                     </Typography>
                   </Grid>
                 </Grid>
