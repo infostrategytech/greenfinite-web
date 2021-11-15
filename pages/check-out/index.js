@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Link from "next/link";
 import {
   Container,
@@ -9,7 +9,14 @@ import {
   Divider,
   Checkbox,
   makeStyles,
+  CircularProgress,
 } from "@material-ui/core";
+import { useSelector,useDispatch } from "react-redux";
+import { createOrder, updateOrder } from "../../redux/actions/checkout";
+import Swal from "sweetalert2";
+import { usePaystackPayment } from 'react-paystack';
+import { useRouter } from 'next/router';
+import { CLEAR_CART } from "../../redux/actions/Contants";
 
 const useStyles = makeStyles((theme) => ({
   mainHeader: {
@@ -183,11 +190,153 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 40 + "px",
     border: "none",
     borderRadius: 50,
+    cursor: 'pointer'
   },
+  spinner:{
+    color: '#fff'
+  },
+  productImg:{
+    maxWidth: '100%',
+  }
 }));
 
 function CheckOut() {
   const classes = useStyles();
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const {cart} = useSelector(state=>state.products)
+  const {orderId}= useSelector(state=>state.checkout)
+  const [loading, setLoading] = useState(false)
+  const [totalPrice,setTotalPrice] = useState(0)
+  const [totalPayment, setTotalPayment] = useState(0)
+  const [email, setEmail] = useState('')
+  const [id, setId] = useState('')
+  const [isUpdate,setIsUpdate]= useState(false)
+  const [orderData,setOrderData] = useState({})
+  const [error,setError] = useState(false)
+
+  let paystackEmail= Math.floor(Math.random()*12903678)
+
+  const config = {
+    reference: new Date().getTime(),
+    email: `${paystackEmail}@greenfinite.ng`,
+    amount: totalPayment * 100,
+    publicKey: `${process.env.NEXT_PUBLIC_PAYSTACK_KEY}`,
+  };
+
+  useEffect(()=>{
+    setId(orderId)
+  },[orderId])
+
+  useEffect(()=>{
+    if(id){
+      dispatch(updateOrder(orderData,id,()=>{
+        setLoading(false)
+        setOrderData({})
+        setId('')
+        dispatch({
+          type: CLEAR_CART
+        })
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Order Placed Succesfully'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push('/')
+          }
+        })
+      }))
+    }
+  },[isUpdate])
+
+  const updatePayment = (data)=>{
+    setLoading(true)
+    setOrderData(data)
+    setIsUpdate(!isUpdate)
+  }
+  const onSuccess = (reference) => {
+    if (reference.status === 'success') {
+      let data = {}
+      data.payment_status = 'fulfilled'
+      data.payment_reference = reference.reference
+      updatePayment(data)
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Your payment could not be completed'
+      })
+    }
+  };
+
+
+  const onClose = () => {
+    setLoading(false);
+  };
+
+
+  useEffect(() => {
+    let price = 0;
+    cart.length>0 && cart.forEach(item => {
+      price += (item.qty * item.amount);
+    });
+    setTotalPrice(price);
+    price && setTotalPayment(price+2000)
+  }, []);
+
+  const placeOrder = ()=>{
+    if(!email){
+      setError(true)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Please provide your email'
+      })
+      return
+    }
+    setError(false)
+    let itemArray = []
+    if(cart.length>0){
+      cart.map(item=>{
+        let details ={
+          product_id : item.product_id,
+          quantity: item.qty
+        }
+        itemArray.push(details)
+      })
+    }
+    if(itemArray.length>0){
+      setLoading(true)
+      let data = {
+        products: itemArray,
+        recipient_email : email
+      }
+      dispatch(createOrder(data,successful=>{
+        if(successful){
+          setLoading(false)
+          initializePayment(onSuccess, onClose)
+        }else{
+          setLoading(false)
+        }
+      }))
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No products in order'
+      })
+    }
+  }
+
+  const handleEmail = e=>{
+    email && setError(false)
+    !email && setError(true)
+    setEmail(e.target.value)
+  }
+
+  const initializePayment = usePaystackPayment(config);
+
   return (
     <Container style={{ marginTop: 10 + "rem", marginBottom: 20 + "rem" }}>
       <Grid container spacing={10}>
@@ -374,10 +523,14 @@ function CheckOut() {
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
+                    required
                     label="Email Address"
                     margin="normal"
                     name="emailAddress"
                     variant="outlined"
+                    // onChange={e=>setEmail(e.target.value)}
+                    onChange={handleEmail}
+                    error={error}
                   />
                 </Grid>
               </Grid>
@@ -389,31 +542,38 @@ function CheckOut() {
           <Box className={classes.orderBox}>
             <Typography className={classes.orderHeader}>Your Order</Typography>
 
-            <Box className={classes.orderDetailBox}>
-              <Grid container spacing={2}>
-                <Grid item xs={3}>
-                  <Box>
-                    <img src="../images/checkoutItem.png" alt="product image" />
-                  </Box>
-                </Grid>
-                <Grid item xs={9}>
-                  <Box>
-                    <Typography className={classes.itemNameHeader}>
-                      Item Name{" "}
-                      <span className={classes.itemNameSubHeader}>(250g)</span>
-                    </Typography>
+            {cart && cart.length > 0 &&
+              cart.map(item=>(
+                <Box className={classes.orderDetailBox} key={item.name}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={3}>
+                      <Box>
+                        <img src={item?.image_url} alt="product image" className={classes.productImg}/>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={9}>
+                      <Box>
+                        <Typography className={classes.itemNameHeader}>
+                        {item.name} {" "}
+                          <span className={classes.itemNameSubHeader}>({item.net_weight}g)</span>
+                        </Typography>
 
-                    <Typography className={classes.quantityHeader}>
-                      Quantity: 5
-                    </Typography>
+                        <Typography className={classes.quantityHeader}>
+                          Quantity: {item.qty}
+                        </Typography>
 
-                    <Typography className={classes.unitPrice}>
-                      N10,000 <span className={classes.unitPriceSpan}>x5</span>
-                    </Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Box>
+                        <Typography className={classes.unitPrice}>
+                        ₦{item.amount}<span className={classes.unitPriceSpan}>{`x${item.qty}`}</span>
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+              ))
+            }
+            {
+              cart.length === 0 && <Typography variant="body1">No items in cart</Typography>
+            }
 
             <Divider className={classes.divider} />
 
@@ -424,7 +584,7 @@ function CheckOut() {
                 </Grid>
                 <Grid item xs={6} className={classes.priceValueAlign}>
                   <Typography className={classes.priceValue}>
-                    N 50,000
+                   {totalPrice?`₦${totalPrice}`: ''}
                   </Typography>
                 </Grid>
               </Grid>
@@ -433,12 +593,12 @@ function CheckOut() {
                 <Grid item xs={6}>
                   <Typography className={classes.priceKey}>
                     Shipping{" "}
-                    <span className={classes.priceKeySpan}>(Flate rate)</span>
+                    <span className={classes.priceKeySpan}>(Flat rate)</span>
                   </Typography>
                 </Grid>
                 <Grid item xs={6} className={classes.priceValueAlign}>
                   <Typography className={classes.priceValue}>
-                    N 2,000
+                    ₦2,000
                   </Typography>
                 </Grid>
               </Grid>
@@ -454,7 +614,7 @@ function CheckOut() {
                   </Grid>
                   <Grid item xs={6} className={classes.priceValueAlign}>
                     <Typography className={classes.totalValue}>
-                      N 52,000.00
+                      {totalPayment ?`₦${totalPayment}`: ''}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -480,11 +640,18 @@ function CheckOut() {
             </Box>
 
             <Box>
-              <Link href="shop/2" underline="none">
-                <button href="shop/2" className={classes.paymentButton}>
-                  Proceed to Payment
+              {/* <Link href="shop/2" underline="none"> */}
+                <button 
+                  // href="shop/2" 
+                  className={classes.paymentButton}
+                  onClick={placeOrder}
+                  // onClick={() => initializePayment(onSuccess, onClose)}
+                  disabled={loading}
+                >
+                  {loading?<CircularProgress className={classes.spinner} /> :'Proceed to Payment'}
+                 
                 </button>
-              </Link>
+              {/* </Link> */}
             </Box>
           </Box>
         </Grid>

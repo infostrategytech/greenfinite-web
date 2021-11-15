@@ -9,7 +9,7 @@ import LocalMallOutlinedIcon from "@material-ui/icons/LocalMallOutlined";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../../redux/actions/cart";
 import CartItem from "../../components/CartItem";
-import router from "next/router";
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -162,7 +162,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Cart() {
   const dispatch = useDispatch();
-
+  const router = useRouter()
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const { cart } = useSelector((state) => state.products);
@@ -237,7 +237,8 @@ function Cart() {
           >
             Buy More
           </Button>
-          <Button variant="contained" color="primary" className={classes.btn}>
+          {/* <Button variant="contained" color="primary" className={classes.btn}> */}
+          <Button variant="contained" color="primary" className={classes.btn} onClick={()=>router.push('/check-out')}>
             Checkout
           </Button>
         </Grid>

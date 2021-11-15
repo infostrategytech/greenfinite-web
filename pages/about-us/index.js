@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: 100,
     },
     datesImg:{
+        [theme.breakpoints.down('sm')]: {
+           width: '100%'
+        },
         height: 400,
         width: 300,
         marginTop: 16
@@ -206,7 +209,7 @@ function AboutUs() {
                                 Customer Centric
                             </Typography>
                             <Typography variant="body1" >
-                            Honesty and uprightness in our dealings with customers, suppliers and employees.
+                                Strive to give each customer a positive experience.                            
                             </Typography>
                         </Grid>
                         <Grid item xs={12} md={3} className={classes.value}>
