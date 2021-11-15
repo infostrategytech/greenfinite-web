@@ -163,7 +163,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Cart() {
   const dispatch = useDispatch();
-
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const { cart } = useSelector((state) => state.products);
@@ -243,6 +242,7 @@ function Cart() {
                 variant="contained"
                 color="primary"
                 className={classes.btn}
+                onClick={() => router.push("/check-out")}
               >
                 Checkout
               </Button>
