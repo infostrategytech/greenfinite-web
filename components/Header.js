@@ -119,7 +119,9 @@ function Header() {
               </Link>
             </Grid>
             {isMobile ? (
-              <DrawerComponent openDrawer={openDrawer} close={closehandler} />
+              <>
+                <DrawerComponent openDrawer={openDrawer} close={closehandler} />
+              </>
             ) : (
               <Grid item sm={7}>
                 <div className={classes.navlinks}>
@@ -179,10 +181,10 @@ function Header() {
                     >
                       <Link
                         className={`${classes.links} ${classes.account}`}
-                        href="#"
+                        href="/about-us"
                         // style={{ textDecoration: "none" }}
                       >
-                        <ListItem>Account</ListItem>
+                        <ListItem>About us</ListItem>
                       </Link>
                     </Typography>
                     {/* <Typography
@@ -201,7 +203,7 @@ function Header() {
                       </IconButton>
                       Account
                     </Typography> */}
-                    <Typography
+                    {/* <Typography
                       variant="body1"
                       className={`${classes.links} ${classes.account}`}
                       variant="body1"
@@ -212,11 +214,11 @@ function Header() {
                       >
                         <ListItem>Account</ListItem>
                       </Link>
-                    </Typography>
+                    </Typography> */}
                     <Typography
                       variant="body1"
                       className={classes.links}
-                      // onClick={() => router.push("/cart")}
+                      onClick={() => router.push("/cart")}
                       variant="body1"
                       className={classes.links}
                     >
@@ -225,13 +227,7 @@ function Header() {
                           <ShoppingCart />
                         </Badge>
                       </IconButton>{" "}
-                      <Link
-                        className={classes.links}
-                        href="/cart"
-                        style={{ textDecoration: "none" }}
-                      >
-                        <ListItem style={{ display: "inline" }}>Cart</ListItem>
-                      </Link>
+                      <ListItem style={{ display: "inline" }}>Cart</ListItem>
                     </Typography>
                   </>
                 </div>
