@@ -235,18 +235,21 @@ function CheckOut() {
     if(id){
       dispatch(updateOrder(orderData,id,()=>{
         setLoading(false)
+        setOrderData({})
+        setId('')
+        dispatch({
+          type: CLEAR_CART
+        })
         Swal.fire({
           icon: 'success',
           title: 'Success',
           text: 'Order Placed Succesfully'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push('/')
+          }
         })
       }))
-      setOrderData({})
-      setId('')
-      dispatch({
-        type: CLEAR_CART
-      })
-      router.push('/')
     }
   },[isUpdate])
 
