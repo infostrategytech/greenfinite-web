@@ -237,9 +237,13 @@ function Cart() {
           >
             Buy More
           </Button>
-          <Button variant="contained" color="primary" className={classes.btn}>
-            Checkout
-          </Button>
+          {cart.length > 0 ? (
+            <Button variant="contained" color="primary" className={classes.btn}>
+              Checkout
+            </Button>
+          ) : (
+            ""
+          )}
         </Grid>
       </Grid>
     </div>
