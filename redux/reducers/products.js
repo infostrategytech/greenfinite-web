@@ -5,6 +5,7 @@ import {
   REMOVE_FROM_CART,
   ADJUST_QTY,
   GET_ID,
+  CLEAR_CART,
 } from "../actions/Contants";
 
 const initState = {
@@ -68,6 +69,11 @@ export const productsReducer = (state = initState, action) => {
         ...state,
         id: action.payload,
       };
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart: []
+      }
     default:
       return state;
   }

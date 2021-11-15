@@ -18,13 +18,20 @@ export function publicRoute(url, method,data, config) {
   return new Promise((resolve, reject) => {
     if (method === "POST") {
       return axiosInstance
-        .post(url, data, config)
+        // .post(url, data, config)
+        .post(url, data)
         .then((res) => resolve(res.data))
         .catch((err) => reject(handleApiError(err)));
     }
     if (method === "GET") {
       return axiosInstance
         .get(url, config)
+        .then((res) => resolve(res.data))
+        .catch((err) => reject(handleApiError(err)));
+    }
+    if (method === "PATCH") {
+      return axiosInstance
+        .patch(url, data, config)
         .then((res) => resolve(res.data))
         .catch((err) => reject(handleApiError(err)));
     }

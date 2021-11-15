@@ -12,9 +12,11 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import { useSelector,useDispatch } from "react-redux";
-import { createOrder } from "../../redux/actions/checkout";
+import { createOrder, updateOrder } from "../../redux/actions/checkout";
 import Swal from "sweetalert2";
 import { usePaystackPayment } from 'react-paystack';
+import { useRouter } from 'next/router';
+import { CLEAR_CART } from "../../redux/actions/Contants";
 
 const useStyles = makeStyles((theme) => ({
   mainHeader: {
@@ -201,24 +203,63 @@ const useStyles = makeStyles((theme) => ({
 function CheckOut() {
   const classes = useStyles();
   const dispatch = useDispatch()
+  const router = useRouter()
   const {cart} = useSelector(state=>state.products)
   const {orderId}= useSelector(state=>state.checkout)
   const [loading, setLoading] = useState(false)
   const [totalPrice,setTotalPrice] = useState(0)
   const [totalPayment, setTotalPayment] = useState(0)
+  const [email, setEmail] = useState('')
+  const [id, setId] = useState('')
+  const [isUpdate,setIsUpdate]= useState(false)
+  const [orderData,setOrderData] = useState({})
+  const [error,setError] = useState(false)
+
+
+  let paystackEmail= Math.floor(Math.random()*12903678)
 
   const config = {
     reference: new Date().getTime(),
-    email: `${'2'}@greenfinite.ng`,
+    email: `${paystackEmail}@greenfinite.ng`,
     amount: totalPayment * 100,
-    // publicKey: `${process.env.NEXT_PUBLIC_PAYSTACK_KEY}`,
-    publicKey: 'pk_test_363651192d1da6d2499e9047b2ae5b2bded3b338'
+    publicKey: `${process.env.NEXT_PUBLIC_PAYSTACK_KEY}`,
   };
+
   const initializePayment = usePaystackPayment(config);
 
+  useEffect(()=>{
+    setId(orderId)
+  },[orderId])
+
+  useEffect(()=>{
+    if(id){
+      dispatch(updateOrder(orderData,id,()=>{
+        setLoading(false)
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Order Placed Succesfully'
+        })
+      }))
+      setOrderData({})
+      setId('')
+      dispatch({
+        type: CLEAR_CART
+      })
+      router.push('/')
+    }
+  },[isUpdate])
+
+  const updatePayment = (data)=>{
+    setLoading(true)
+    setOrderData(data)
+    setIsUpdate(!isUpdate)
+  }
   const onSuccess = (reference) => {
-    console.log('SUCCESSFUL',reference)
-   
+    let data = {}
+    data.payment_status = 'fulfilled'
+    data.payment_reference = reference.reference
+    updatePayment(data)
   };
 
 
@@ -237,18 +278,39 @@ function CheckOut() {
   }, []);
 
   const placeOrder = ()=>{
-    let idArray = []
-    if(cart.length>0){
-      cart.map(item=>idArray.push(item.product_id))
+    if(!email){
+      setError(true)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Please provide your email'
+      })
+      return
     }
-    if(idArray.length>0){
+    setError(false)
+    let itemArray = []
+    if(cart.length>0){
+      cart.map(item=>{
+        let details ={
+          product_id : item.product_id,
+          quantity: item.qty
+        }
+        itemArray.push(details)
+      })
+    }
+    if(itemArray.length>0){
       setLoading(true)
       let data = {
-        products: idArray,
-        info: ""
+        products: itemArray,
+        recipient_email : email
       }
-      dispatch(createOrder(data,()=>{
-        setLoading(false)
+      dispatch(createOrder(data,successful=>{
+        if(successful){
+          setLoading(false)
+          initializePayment(onSuccess, onClose)
+        }else{
+          setLoading(false)
+        }
       }))
     }else{
       Swal.fire({
@@ -257,6 +319,12 @@ function CheckOut() {
         text: 'No products in order'
       })
     }
+  }
+
+  const handleEmail = e=>{
+    email && setError(false)
+    !email && setError(true)
+    setEmail(e.target.value)
   }
   return (
     <Container style={{ marginTop: 10 + "rem", marginBottom: 20 + "rem" }}>
@@ -444,10 +512,14 @@ function CheckOut() {
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
+                    required
                     label="Email Address"
                     margin="normal"
                     name="emailAddress"
                     variant="outlined"
+                    // onChange={e=>setEmail(e.target.value)}
+                    onChange={handleEmail}
+                    error={error}
                   />
                 </Grid>
               </Grid>
@@ -461,7 +533,7 @@ function CheckOut() {
 
             {cart && cart.length > 0 &&
               cart.map(item=>(
-                <Box className={classes.orderDetailBox}>
+                <Box className={classes.orderDetailBox} key={item.name}>
                   <Grid container spacing={2}>
                     <Grid item xs={3}>
                       <Box>
