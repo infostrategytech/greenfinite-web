@@ -142,7 +142,7 @@ const useStyles = makeStyles((theme) => ({
   },
   font: {
     fontFamily: "Poppins",
-    fontSize: "14px",
+    fontSize: "15px",
   },
 }));
 
