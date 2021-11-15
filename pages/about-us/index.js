@@ -31,6 +31,14 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: 100,
     },
   },
+  boxes: {
+    width: "90%",
+    margin: "0 auto",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      margin: "0",
+    },
+  },
   headerText: {
     fontWeight: 700,
     fontSize: 40,
@@ -134,6 +142,7 @@ const useStyles = makeStyles((theme) => ({
   },
   font: {
     fontFamily: "Poppins",
+    fontSize: "14px",
   },
 }));
 
@@ -142,164 +151,166 @@ function AboutUs() {
   return (
     <div className={classes.root}>
       <Grid container direction="column" className={classes.parentContainer}>
-        <Grid item className={classes.item1}>
-          <Typography
-            variant="h3"
-            component="h1"
-            className={classes.headerText}
-          >
-            About Us
-          </Typography>
-          <Typography variant="body1" component="p" className={classes.font}>
-            Your Favourite Sweetner, Alternative to Refined Sugar
-          </Typography>
-        </Grid>
-        {/* ROW 2 */}
-        <Grid item container className={classes.item2}>
-          <Grid item xs={12} md={5}>
-            <Box className={classes.box}>
-              <Typography variant="h4" className={classes.subhead}>
-                Our Vision
-              </Typography>
-              <Typography variant="body1" className={classes.font}>
-                To be the go-to brand for trusted natural alternatives.
-              </Typography>
-            </Box>
-            <Box className={classes.box}>
-              <Typography variant="h4" className={classes.subhead}>
-                Our Mission
-              </Typography>
-              <Typography variant="body1" className={classes.font}>
-                Our infinite motive is to support the health and wellbeing of
-                homes by providing the best natural sweetners and also enable
-                financial growth and wealth creation by partnering with
-                distributors worldwide.
-              </Typography>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} md={5} className={classes.imgContainer}>
-            <img
-              src="./images/bag-of-dates.png"
-              alt="bag of dates"
-              className={classes.datesImg}
-            />
-          </Grid>
-        </Grid>
-        {/* ROW 3 */}
-        <Grid item container direction="column" className={classes.item3}>
-          <Grid item>
-            <Typography variant="h4" className={classes.subhead}>
-              Our Core Values
+        <Box className={classes.boxes}>
+          <Grid item className={classes.item1}>
+            <Typography
+              variant="h3"
+              component="h1"
+              className={classes.headerText}
+            >
+              About Us
+            </Typography>
+            <Typography variant="body1" component="p" className={classes.font}>
+              Your Favourite Sweetner, Alternative to Refined Sugar
             </Typography>
           </Grid>
+          {/* ROW 2 */}
+          <Grid item container className={classes.item2}>
+            <Grid item xs={12} md={6}>
+              <Box className={classes.box}>
+                <Typography variant="h4" className={classes.subhead}>
+                  Our Vision
+                </Typography>
+                <Typography variant="body1" className={classes.font}>
+                  To be the go-to brand for trusted natural alternatives.
+                </Typography>
+              </Box>
+              <Box className={classes.box}>
+                <Typography variant="h4" className={classes.subhead}>
+                  Our Mission
+                </Typography>
+                <Typography variant="body1" className={classes.font}>
+                  Our infinite motive is to support the health and wellbeing of
+                  homes by providing the best natural sweetners and also enable
+                  financial growth and wealth creation by partnering with
+                  distributors worldwide.
+                </Typography>
+              </Box>
+            </Grid>
 
-          <Grid item container>
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography
-                variant="h4"
-                component="h4"
-                className={classes.headerTextSmall}
-              >
-                Quality
-              </Typography>
-              <Typography variant="body1" className={classes.font}>
-                Adhere to raw material selection criteria and ensure all
-                production processes are strictly monitored and carried out
-                hygienically.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography
-                variant="h4"
-                component="h4"
-                className={classes.headerTextSmall}
-              >
-                Customer Centric
-              </Typography>
-              <Typography variant="body1" className={classes.font}>
-                Strive to give each customer a positive experience.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography
-                variant="h4"
-                component="h4"
-                className={classes.headerTextSmall}
-              >
-                Hygiene
-              </Typography>
-              <Typography variant="body1" className={classes.font}>
-                Ensure that every of our production process and staff meet the
-                highest standards of hygiene.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography
-                variant="h4"
-                component="h4"
-                className={classes.headerTextSmall}
-              >
-                Integrity
-              </Typography>
-              <Typography variant="body1" className={classes.font}>
-                Honesty and uprightness in our dealings with customers,
-                suppliers and employees.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography
-                variant="h4"
-                component="h4"
-                className={classes.headerTextSmall}
-              >
-                Education
-              </Typography>
-              <Typography variant="body1" className={classes.font}>
-                Constantly educate the public on the impact of food choices on
-                their health and encourage healthier alternatives.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography
-                variant="h4"
-                component="h4"
-                className={classes.headerTextSmall}
-              >
-                Corporate Values
-              </Typography>
-              <Typography variant="body1" className={classes.font}>
-                Teamwork, empathy, solidarity, honesty, openness,
-                selfresponsibility and social responsibility.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography
-                variant="h4"
-                component="h4"
-                className={classes.headerTextSmall}
-              >
-                Excellence
-              </Typography>
-              <Typography variant="body1" className={classes.font}>
-                We are committed to delivering the best healthy alternatives and
-                compromise-free products that we give to our own children
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography
-                variant="h4"
-                component="h4"
-                className={classes.headerTextSmall}
-              >
-                Creativity
-              </Typography>
-              <Typography variant="body1" className={classes.font}>
-                Innovate, develop and adapt to change drivers.
-              </Typography>
+            <Grid item xs={12} md={6} className={classes.imgContainer}>
+              <img
+                src="./images/bag-of-dates.png"
+                alt="bag of dates"
+                className={classes.datesImg}
+              />
             </Grid>
           </Grid>
-        </Grid>
+          {/* ROW 3 */}
+          <Grid item container direction="column" className={classes.item3}>
+            <Grid item>
+              <Typography variant="h4" className={classes.subhead}>
+                Our Core Values
+              </Typography>
+            </Grid>
+
+            <Grid item container>
+              <Grid item xs={12} md={3} className={classes.value}>
+                <Typography
+                  variant="h4"
+                  component="h4"
+                  className={classes.headerTextSmall}
+                >
+                  Quality
+                </Typography>
+                <Typography variant="body1" className={classes.font}>
+                  Adhere to raw material selection criteria and ensure all
+                  production processes are strictly monitored and carried out
+                  hygienically.
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={3} className={classes.value}>
+                <Typography
+                  variant="h4"
+                  component="h4"
+                  className={classes.headerTextSmall}
+                >
+                  Customer Centric
+                </Typography>
+                <Typography variant="body1" className={classes.font}>
+                  Strive to give each customer a positive experience.
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={3} className={classes.value}>
+                <Typography
+                  variant="h4"
+                  component="h4"
+                  className={classes.headerTextSmall}
+                >
+                  Hygiene
+                </Typography>
+                <Typography variant="body1" className={classes.font}>
+                  Ensure that every of our production process and staff meet the
+                  highest standards of hygiene.
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={3} className={classes.value}>
+                <Typography
+                  variant="h4"
+                  component="h4"
+                  className={classes.headerTextSmall}
+                >
+                  Integrity
+                </Typography>
+                <Typography variant="body1" className={classes.font}>
+                  Honesty and uprightness in our dealings with customers,
+                  suppliers and employees.
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={3} className={classes.value}>
+                <Typography
+                  variant="h4"
+                  component="h4"
+                  className={classes.headerTextSmall}
+                >
+                  Education
+                </Typography>
+                <Typography variant="body1" className={classes.font}>
+                  Constantly educate the public on the impact of food choices on
+                  their health and encourage healthier alternatives.
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={3} className={classes.value}>
+                <Typography
+                  variant="h4"
+                  component="h4"
+                  className={classes.headerTextSmall}
+                >
+                  Corporate Values
+                </Typography>
+                <Typography variant="body1" className={classes.font}>
+                  Teamwork, empathy, solidarity, honesty, openness,
+                  selfresponsibility and social responsibility.
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={3} className={classes.value}>
+                <Typography
+                  variant="h4"
+                  component="h4"
+                  className={classes.headerTextSmall}
+                >
+                  Excellence
+                </Typography>
+                <Typography variant="body1" className={classes.font}>
+                  We are committed to delivering the best healthy alternatives
+                  and compromise-free products that we give to our own children
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={3} className={classes.value}>
+                <Typography
+                  variant="h4"
+                  component="h4"
+                  className={classes.headerTextSmall}
+                >
+                  Creativity
+                </Typography>
+                <Typography variant="body1" className={classes.font}>
+                  Innovate, develop and adapt to change drivers.
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Box>
         {/* ROW 4 */}
         <Grid item container direction="column" className={classes.item4}>
           <Grid item>
