@@ -63,8 +63,7 @@ const useStyles = makeStyles((theme) => ({
         },
         display: 'flex',
         justifyContent: 'center',
-        padding: 16,
-   
+        // padding: 16,
     },
     sectionTwo:{
         [theme.breakpoints.up('md')]: {
@@ -95,6 +94,11 @@ const useStyles = makeStyles((theme) => ({
     },
     subhead:{
         fontSize: 30
+    },
+    bottomItem:{
+        [theme.breakpoints.down('sm')]: {
+            paddingTop: 32
+        }, 
     }
 
 }));
@@ -153,7 +157,7 @@ function ContactUs() {
                     direction="column" 
                     className={classes.sectionTwo}
                 >
-                    <Grid item>
+                    <Grid item className={classes.bottomItem}>
                         <Typography variant="h4" className={classes.headerText}>
                             Contact Us
                         </Typography>

@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: 100,
     },
     datesImg:{
+        [theme.breakpoints.down('sm')]: {
+           width: '100%'
+        },
         height: 400,
         width: 300,
         marginTop: 16
