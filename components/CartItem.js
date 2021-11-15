@@ -11,6 +11,7 @@ import {
   adjustQuantity,
   removeFromCart,
 } from "../redux/actions/cart";
+import { formatMoney } from "../UtilityService/Helpers";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -161,8 +162,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const CartItem = ({ item }) => {
-  console.log(item);
-  //   console.log(item);
   const dispatch = useDispatch();
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -244,12 +243,13 @@ const CartItem = ({ item }) => {
       </Grid>
       <Grid item xs={2} className={classes.quantityCell}>
         <Typography variant="caption" className={classes.money}>
-          ₦{item.amount}
+          {/* ₦ */}
+          {formatMoney(item.amount)}
         </Typography>
       </Grid>
       <Grid item xs={2} className={classes.lastCell}>
         <Typography variant="caption" className={classes.money}>
-          ₦{item.amount * item.qty}
+          {formatMoney(item.amount * item.qty)}
         </Typography>
       </Grid>
     </Grid>

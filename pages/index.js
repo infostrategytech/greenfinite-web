@@ -116,11 +116,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Home() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    dispatch(getAllProduct(() => setLoading(false)));
-  }, []);
+  // const [loading, setLoading] = useState(false);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   dispatch(getAllProduct(() => setLoading(false)));
+  // }, []);
   const classes = useStyles();
   return (
     <>
@@ -153,7 +153,7 @@ export default function Home() {
           </Grid>
         </Box>
         <Box className={classes.products}>
-          {loading ? <CircularProgress /> : <Products />}
+          <Products />
         </Box>
         <Box>
           <ProductBenefits />

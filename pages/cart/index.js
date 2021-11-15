@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../../redux/actions/cart";
 import CartItem from "../../components/CartItem";
 import router from "next/router";
-
+import { formatMoney } from "../../UtilityService/Helpers";
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 100,
@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   parentContainer: {
+    overflowX: "auto",
     [theme.breakpoints.up("md")]: {
       padding: 100,
       paddingBottom: 300,
@@ -166,7 +167,7 @@ function Cart() {
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const { cart } = useSelector((state) => state.products);
-  // console.log(cart);
+
   const classes = useStyles();
   useEffect(() => {
     let quantity = 0;
@@ -174,7 +175,6 @@ function Cart() {
     cart.forEach((item) => {
       quantity += item.qty;
       price += item.qty * item.amount;
-      console.log(price);
     });
     setTotalQuantity(totalQuantity);
     setTotalPrice(price);
@@ -187,7 +187,7 @@ function Cart() {
         <Grid item className={classes.row1}>
           <Typography variant="h4" className={classes.bold}>
             <LocalMallOutlinedIcon className={classes.bagIcon} />
-            <span>Cart ({cart.length} item)</span>
+            <span>Cart ({cart.length} item(s))</span>
           </Typography>
         </Grid>
         {/* ROW 2 */}
@@ -224,7 +224,7 @@ function Cart() {
             Total
           </Typography>
           <Typography variant="body2" className={classes.total}>
-            ₦{totalPrice}
+            {/* ₦{totalPrice.toFixed(2)} */} {formatMoney(totalPrice)}
           </Typography>
         </Grid>
         {/* ROW 4 */}

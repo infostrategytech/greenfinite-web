@@ -116,28 +116,6 @@ const Products = () => {
   return (
     <Card elevation={0} className={classes.cards}>
       <Grid container className={classes.wrapper}>
-        {/* <Grid xs={12} md={6} item className={classes.fruitContainer}>
-          <Box>
-            <img
-              src="./images/fruit.png"
-              alt="powdered fruits"
-              className={classes.logo1}
-            />
-          </Box>
-          <Box>
-            <Typography variant="h3" className={classes.title1}>
-              Date Powder
-            </Typography>
-            <Typography variant="body1" className={classes.content1}>
-              flesh of Dates Fruit which have been dried and ground into fine
-              powder.
-              <small className={classes.grams}>200g and 500g </small>
-            </Typography>
-            <Button variat="contained" className={classes.button1}>
-              Buy Now
-            </Button>
-          </Box>
-        </Grid> */}
         {loading ? (
           <div className={classes.progress}>
             {" "}
