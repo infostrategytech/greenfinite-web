@@ -181,72 +181,78 @@ function Cart() {
   }, [totalPrice, totalQuantity, cart]);
 
   return (
-    <div className={classes.root}>
-      <Grid container direction="column" className={classes.parentContainer}>
-        {/* ROW 1 */}
-        <Grid item className={classes.row1}>
-          <Typography variant="h4" className={classes.bold}>
-            <LocalMallOutlinedIcon className={classes.bagIcon} />
-            <span>Cart ({cart.length} item(s))</span>
-          </Typography>
-        </Grid>
-        {/* ROW 2 */}
-        <Grid item container>
-          <Grid item xs={6}>
-            <Typography variant="body2" className={classes.heading}>
-              Product
+    <>
+      <div className={classes.root}>
+        <Grid container direction="column" className={classes.parentContainer}>
+          {/* ROW 1 */}
+          <Grid item className={classes.row1}>
+            <Typography variant="h4" className={classes.bold}>
+              <LocalMallOutlinedIcon className={classes.bagIcon} />
+              <span>Cart ({cart.length} item(s))</span>
             </Typography>
           </Grid>
-          <Grid item xs={2}>
-            <Typography variant="body2" className={classes.heading}>
-              Quantity
-            </Typography>
+          {/* ROW 2 */}
+          <Grid item container>
+            <Grid item xs={6}>
+              <Typography variant="body2" className={classes.heading}>
+                Product
+              </Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Typography variant="body2" className={classes.heading}>
+                Quantity
+              </Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Typography variant="body2" className={classes.heading}>
+                Unit Price
+              </Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Typography variant="body2" className={classes.heading}>
+                Subtotal
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item xs={2}>
-            <Typography variant="body2" className={classes.heading}>
-              Unit Price
-            </Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Typography variant="body2" className={classes.heading}>
-              Subtotal
-            </Typography>
-          </Grid>
-        </Grid>
-        {cart && cart.length > 0 ? (
-          cart.map((item) => <CartItem item={item} />)
-        ) : (
-          <Typography variant="h6">Cart is empty</Typography>
-        )}
-        {/* ROW 3 */}
-        <Grid item className={classes.row3}>
-          <Typography variant="body1" className={classes.totalText}>
-            Total
-          </Typography>
-          <Typography variant="body2" className={classes.total}>
-            {/* ₦{totalPrice.toFixed(2)} */} {formatMoney(totalPrice)}
-          </Typography>
-        </Grid>
-        {/* ROW 4 */}
-        <Grid item className={classes.row4}>
-          <Button
-            variant="outlined"
-            color="primary"
-            className={classes.btn2}
-            onClick={() => router.push("/shop")}
-          >
-            Buy More
-          </Button>
-          {cart.length > 0 ? (
-            <Button variant="contained" color="primary" className={classes.btn}>
-              Checkout
-            </Button>
+          {cart && cart.length > 0 ? (
+            cart.map((item) => <CartItem item={item} />)
           ) : (
-            ""
+            <Typography variant="h6">Cart is empty</Typography>
           )}
+          {/* ROW 3 */}
+          <Grid item className={classes.row3}>
+            <Typography variant="body1" className={classes.totalText}>
+              Total
+            </Typography>
+            <Typography variant="body2" className={classes.total}>
+              {/* ₦{totalPrice.toFixed(2)} */} {formatMoney(totalPrice)}
+            </Typography>
+          </Grid>
+          {/* ROW 4 */}
+          <Grid item className={classes.row4}>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.btn2}
+              onClick={() => router.push("/shop")}
+            >
+              Buy More
+            </Button>
+            {cart.length > 0 ? (
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.btn}
+              >
+                Checkout
+              </Button>
+            ) : (
+              ""
+            )}
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
+    </>
   );
 }
 
