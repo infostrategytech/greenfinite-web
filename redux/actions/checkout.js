@@ -21,7 +21,6 @@ export const createOrder = (data,cb)=> async dispatch=>{
             cb(false)
         }
     } catch (error) {
-        console.log('ERROR: ', error)
         Swal.fire({
         icon: "error",
         title: "Error occured",
