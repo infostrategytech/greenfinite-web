@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "40px",
     fontWeight: "700",
     lineHeight: "60px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "30px",
+    },
   },
   content: {
     fontFamily: "Poppins",
@@ -45,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: ".8em",
     marginBottom: "1.5em",
     textAlign: "center",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "16px",
+      marginTop: ".2em",
+      marginBottom: "1em",
+    },
   },
   button: {
     fontFamily: "Poppins",
@@ -57,6 +65,11 @@ const useStyles = makeStyles((theme) => ({
     height: "65px",
     fontSize: "18px",
     fontWeight: "500",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "15px",
+      width: "200px",
+      height: "45px",
+    },
   },
   item: {
     display: "flex",

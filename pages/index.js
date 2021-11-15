@@ -5,13 +5,18 @@ import {
   Typography,
   makeStyles,
   Card,
+  CircularProgress,
 } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import Distributor from "../components/Distributor";
 import Footer from "../components/Footer";
 import HowToUse from "../components/HowToUse";
 import ProductBenefits from "../components/products/ProductBenefits";
 import Products from "../components/products/Products";
 import ProductSection from "../components/products/ProductSection";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllProduct } from "../redux/actions/products";
+import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -110,6 +115,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Home() {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    dispatch(getAllProduct(() => setLoading(false)));
+  }, []);
   const classes = useStyles();
   return (
     <>
@@ -125,14 +136,16 @@ export default function Home() {
                   Your favourite alternative to refined sugar <br /> made with
                   no preservatives and additives.{" "}
                 </Typography>
-                <Button variat="contained" className={classes.button}>
-                  Buy Now
-                </Button>
+                <Link href="/shop">
+                  <Button variat="contained" className={classes.button}>
+                    Buy Now
+                  </Button>
+                </Link>
               </Box>
             </Grid>
             <Grid item item xs={12} sm={12} md={5} className={classes.order1}>
               <img
-                src="./images/bowl.png"
+                src="/images/bowl.png"
                 alt="Powdered nuts"
                 className={classes.logo}
               />
@@ -140,7 +153,7 @@ export default function Home() {
           </Grid>
         </Box>
         <Box className={classes.products}>
-          <Products />
+          {loading ? <CircularProgress /> : <Products />}
         </Box>
         <Box>
           <ProductBenefits />

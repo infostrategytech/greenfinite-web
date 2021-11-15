@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "40px",
     fontWeight: "700",
     lineHeight: "60px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "30px",
+    },
   },
   content: {
     fontFamily: "Poppins",
@@ -43,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "40px",
     marginTop: ".8em",
     marginBottom: "1.5em",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "16px",
+    },
   },
   video: {
     borderRadius: "5px",
@@ -73,8 +79,8 @@ function HowToUse() {
                 className={classes.video}
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/TbDQGq83ttc"
-                title="iRecharge Vendor Testimonials"
+                src="https://www.youtube.com/embed/o7Im1p9Oj2s"
+                title=""
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen

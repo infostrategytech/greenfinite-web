@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   AppBar,
@@ -10,12 +10,15 @@ import {
   Grid,
   IconButton,
   Badge,
+  MenuItem,
+  ListItem,
 } from "@material-ui/core";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import { ShoppingCart } from "@material-ui/icons/";
 import router from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import DrawerComponent from "./Drawer";
+import { useSelector } from "react-redux";
 // import classes from "./styles/Home.module.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -78,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Header() {
+  const [cartCount, setCartCount] = useState(0);
+  const { cart } = useSelector((state) => state.products);
+  // console.log(cart);
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const classes = useStyles();
   const theme = useTheme();
@@ -85,6 +91,15 @@ function Header() {
   const closehandler = () => {
     setOpenDrawer(false);
   };
+  const cartLength = cart.length;
+  // useEffect(() => {
+  //   let cartCount = 0;
+  //   cart.forEach((item) => {
+  //     console.log("header", item);
+  //     cartCount += item.qty;
+  //     setCartCount(cartCount);
+  //   });
+  // }, [cart, cartCount]);
 
   return (
     <>
@@ -97,13 +112,13 @@ function Header() {
             className={classes.container}
           >
             <Grid item sm={2}>
-              <Typography variant="h4" className={classes.logo}>
+              <Link href="/" className={classes.logo}>
                 <img
-                  src="./images/Logo.png"
-                  alt="Greenfinite logo"
+                  src="/images/Logo.png"
+                  alt=" logo"
                   className={classes.logo}
                 />
-              </Typography>
+              </Link>
             </Grid>
             {isMobile ? (
               <DrawerComponent openDrawer={openDrawer} close={closehandler} />
@@ -114,32 +129,65 @@ function Header() {
                     <Typography
                       variant="body1"
                       className={classes.links}
-                      onClick={() => router.push("/")}
+                      variant="body1"
                     >
-                      Home
+                      <Link
+                        href="/"
+                        // style={{ textDecoration: "none" }}
+                      >
+                        <ListItem>Home</ListItem>
+                      </Link>
                     </Typography>
                     <Typography
                       variant="body1"
                       className={classes.links}
-                      onClick={() => router.push("/shop")}
+                      variant="body1"
                     >
-                      Shop
+                      <Link
+                        href="/shop"
+                        // style={{ textDecoration: "none" }}
+                      >
+                        <ListItem> Shop</ListItem>
+                      </Link>
                     </Typography>
                     <Typography
-                      onClick={() => router.push("/distributors")}
                       variant="body1"
                       className={classes.links}
+                      variant="body1"
                     >
-                      Distributors
+                      <Link
+                        href="/distributors"
+                        // style={{ textDecoration: "none" }}
+                      >
+                        <ListItem>Distributors</ListItem>
+                      </Link>
                     </Typography>
                     <Typography
-                      onClick={() => router.push("/about-us")}
                       variant="body1"
                       className={classes.links}
+                      variant="body1"
                     >
-                      About us
+                      <Link
+                        href="/contact-us"
+                        // style={{ textDecoration: "none" }}
+                      >
+                        <ListItem>Contact us</ListItem>
+                      </Link>
                     </Typography>
                     <Typography
+                      variant="body1"
+                      className={classes.links}
+                      variant="body1"
+                    >
+                      <Link
+                        className={`${classes.links} ${classes.account}`}
+                        href="#"
+                        // style={{ textDecoration: "none" }}
+                      >
+                        <ListItem>Account</ListItem>
+                      </Link>
+                    </Typography>
+                    {/* <Typography
                       onClick={() => router.push("/contact-us")}
                       variant="body1"
                       className={classes.links}
@@ -154,14 +202,38 @@ function Header() {
                         <PersonOutlineIcon />
                       </IconButton>
                       Account
+                    </Typography> */}
+                    <Typography
+                      variant="body1"
+                      className={`${classes.links} ${classes.account}`}
+                      variant="body1"
+                    >
+                      <Link
+                        href="#"
+                        // style={{ textDecoration: "none" }}
+                      >
+                        <ListItem>Account</ListItem>
+                      </Link>
                     </Typography>
-                    <Typography variant="body1" className={classes.links}>
+                    <Typography
+                      variant="body1"
+                      className={classes.links}
+                      // onClick={() => router.push("/cart")}
+                      variant="body1"
+                      className={classes.links}
+                    >
                       <IconButton>
-                        <Badge badgeContent={3} color="secondary">
+                        <Badge badgeContent={`${cartLength}`} color="primary">
                           <ShoppingCart />
                         </Badge>
                       </IconButton>{" "}
-                      Cart
+                      <Link
+                        className={classes.links}
+                        href="/cart"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <ListItem style={{ display: "inline" }}>Cart</ListItem>
+                      </Link>
                     </Typography>
                   </>
                 </div>
