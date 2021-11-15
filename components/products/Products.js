@@ -114,11 +114,8 @@ const Products = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    if (!products) {
-      dispatch(getAllProduct(() => setLoading(false)));
-    } else {
-      setLoading(false);
-    }
+
+    dispatch(getAllProduct(() => setLoading(false)));
   }, []);
   const addCart = (id) => {
     dispatch(addToCart(id));
