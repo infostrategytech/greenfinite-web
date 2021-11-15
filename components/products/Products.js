@@ -11,6 +11,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct } from "../../redux/actions/products";
 import router from "next/router";
+import Link from "next/link";
+import { addToCart } from "../../redux/actions/cart";
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -112,8 +114,15 @@ const Products = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    dispatch(getAllProduct(() => setLoading(false)));
+    if (!products) {
+      dispatch(getAllProduct(() => setLoading(false)));
+    } else {
+      setLoading(false);
+    }
   }, []);
+  const addCart = (id) => {
+    dispatch(addToCart(id));
+  };
   return (
     <Card elevation={0} className={classes.cards}>
       <Grid container className={classes.wrapper}>
@@ -129,11 +138,13 @@ const Products = () => {
               products.map((product) => (
                 <Grid item xs={12} md={6} className={classes.fruitContainer}>
                   <Box>
-                    <img
-                      src={product.image_url}
-                      alt="powdered fruits"
-                      className={classes.logo1}
-                    />
+                    <Link href={`/shop/${product.product_id}`}>
+                      <img
+                        src={product.image_url}
+                        alt="powdered fruits"
+                        className={classes.logo1}
+                      />
+                    </Link>
                   </Box>
                   <Box>
                     <Typography variant="h3" className={classes.title1}>
@@ -146,9 +157,8 @@ const Products = () => {
                       </small>
                     </Typography>
                     <Button
-                      variat="contained"
+                      onClick={() => addCart(product.product_id)}
                       className={classes.button1}
-                      onClick={() => router.push("/shop")}
                     >
                       Buy Now
                     </Button>

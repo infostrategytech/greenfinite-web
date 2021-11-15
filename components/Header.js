@@ -223,7 +223,7 @@ function Header() {
                       className={classes.links}
                     >
                       <IconButton>
-                        <Badge badgeContent={`${cartLength}`} color="primary">
+                        <Badge badgeContent={cartLength} color="primary">
                           <ShoppingCart />
                         </Badge>
                       </IconButton>{" "}
