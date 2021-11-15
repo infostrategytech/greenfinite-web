@@ -190,11 +190,13 @@ function Shop() {
                 <Grid item container xs={8} md={5}>
                   <Grid item className={classes.item}>
                     <Box>
-                      <img
-                        src={product.image_url}
-                        alt=""
-                        className={classes.logo}
-                      />
+                      <Link href={`/shop/${product.product_id}`}>
+                        <img
+                          src={product.image_url}
+                          alt="date product"
+                          className={classes.logo}
+                        />
+                      </Link>
                     </Box>
                     <Box>
                       <Typography variant="h4">
