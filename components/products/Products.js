@@ -115,7 +115,11 @@ const Products = () => {
   useEffect(() => {
     setLoading(true);
 
-    dispatch(getAllProduct(() => setLoading(false)));
+    if (products.length > 0) {
+      setLoading(false);
+    } else {
+      dispatch(getAllProduct(() => setLoading(false)));
+    }
   }, []);
   const addCart = (id) => {
     dispatch(addToCart(id));
