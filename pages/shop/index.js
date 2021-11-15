@@ -15,6 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { GET_ID } from "../../redux/actions/Contants";
 
 import router from "next/router";
+import { addToCart } from "../../redux/actions/cart";
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -77,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontSize: "16px",
     fontWeight: "500",
+    margin: ".5em 0",
     "&:hover": { color: "#3D8754" },
     [theme.breakpoints.down("md")]: {
       width: "150px",
@@ -103,17 +105,50 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: "10px",
     },
   },
+  add: {
+    fontFamily: "Poppins",
+    fontSize: "18px",
+    fontWeight: "500",
+    // lineHeight: "22px",
+
+    [theme.breakpoints.down("md")]: {
+      fontSize: "20px",
+      lineHeight: "24px",
+    },
+  },
+  view: {
+    fontFamily: "Poppins",
+    fontSize: "18px",
+    fontWeight: "500",
+    main: "#3D8754",
+    color: "#3D8754",
+    textDecoration: "underline",
+    cursor: "pointer",
+
+    [theme.breakpoints.down("md")]: {
+      fontSize: "20px",
+      lineHeight: "24px",
+    },
+  },
 }));
 function Shop() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const { products } = useSelector((state) => state.products);
+  const [isInCart, setIsInCart] = useState(false);
   const getId = (id) => {
     dispatch({
       type: GET_ID,
       payload: id,
     });
+  };
+  const addCart = (id) => {
+    dispatch(addToCart(id));
+    setIsInCart(true);
+    setTimeout(() => {
+      setIsInCart(false);
+    }, 2000);
   };
 
   return (
@@ -155,11 +190,13 @@ function Shop() {
                 <Grid item container xs={8} md={5}>
                   <Grid item className={classes.item}>
                     <Box>
-                      <img
-                        src={product.image_url}
-                        alt=""
-                        className={classes.logo}
-                      />
+                      <Link href={`/shop/${product.product_id}`}>
+                        <img
+                          src={product.image_url}
+                          alt="date product"
+                          className={classes.logo}
+                        />
+                      </Link>
                     </Box>
                     <Box>
                       <Typography variant="h4">
@@ -175,14 +212,37 @@ function Shop() {
                       <Typography variant="h4" className={classes.content}>
                         ₦{product.amount}
                       </Typography>
-                      <Link
+                      {/* <Link
                         href={`/shop/${product.product_id}`}
                         className={classes.button}
                       >
                         <Button variat="contained" className={classes.button}>
                           Buy Now
                         </Button>
-                      </Link>
+                      </Link> */}
+
+                      <Typography
+                        component="p"
+                        style={{
+                          fontSize: 18 + "px",
+                          fontFamily: "Avenir",
+                          fontStyle: "normal",
+                          fontWeight: "normal",
+                          lineHeight: 30 + "px",
+                          letterSpacing: 0.01 + "em",
+                        }}
+                      >
+                        {product && product.description}
+                      </Typography>
+
+                      {/* <Link href="#"> */}
+                      <Button
+                        onClick={() => addCart(product.product_id)}
+                        className={classes.button}
+                      >
+                        Buy Now
+                      </Button>
+                      {/* </Link> */}
                     </Box>
                   </Grid>
                 </Grid>

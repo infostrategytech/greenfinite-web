@@ -107,6 +107,31 @@ const useStyles = makeStyles((theme) => ({
       lineHeight: "24px",
     },
   },
+  add: {
+    fontFamily: "Poppins",
+    fontSize: "18px",
+    fontWeight: "500",
+    // lineHeight: "22px",
+
+    [theme.breakpoints.down("md")]: {
+      fontSize: "20px",
+      lineHeight: "24px",
+    },
+  },
+  view: {
+    fontFamily: "Poppins",
+    fontSize: "18px",
+    fontWeight: "500",
+    main: "#3D8754",
+    color: "#3D8754",
+    textDecoration: "underline",
+    cursor: "pointer",
+
+    [theme.breakpoints.down("md")]: {
+      fontSize: "20px",
+      lineHeight: "24px",
+    },
+  },
 }));
 function ItemDetails() {
   const [cartCount, setCartCount] = useState(0);
@@ -115,6 +140,7 @@ function ItemDetails() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { product, cart } = useSelector((state) => state.products);
+  const [isInCart, setIsInCart] = useState(false);
 
   const productID = router.query.itemId;
   useEffect(() => {
@@ -144,6 +170,10 @@ function ItemDetails() {
   }, [cart, cartCount]);
   const addCart = (id) => {
     dispatch(addToCart(id));
+    setIsInCart(true);
+    setTimeout(() => {
+      setIsInCart(false);
+    }, 2000);
   };
 
   return (
@@ -159,7 +189,7 @@ function ItemDetails() {
               {loading && <CircularProgress />}
               <Box>
                 <img
-                  src="/images/dates.png"
+                  src={product.image_url}
                   alt="product "
                   className={classes.logo}
                 />
@@ -188,14 +218,27 @@ function ItemDetails() {
               <Box className={classes.content}>
                 ₦{product && product.amount}
               </Box>
-              <Link href="/cart">
-                <Button
-                  onClick={() => addCart(product.product_id)}
-                  className={classes.button}
-                >
-                  Add to cart
-                </Button>
-              </Link>
+              {/* <Link href="#"> */}
+              <Button
+                onClick={() => addCart(product.product_id)}
+                className={classes.button}
+              >
+                Add to cart
+              </Button>
+              {/* </Link> */}
+              {isInCart && (
+                <Typography className={classes.add}>
+                  {" "}
+                  Item added to Cart
+                </Typography>
+              )}
+              <Typography component="p">
+                <Link href="/cart">
+                  <Typography className={`${classes.view}`}>
+                    View Cart
+                  </Typography>
+                </Link>
+              </Typography>
             </Grid>
           </Grid>
         </>

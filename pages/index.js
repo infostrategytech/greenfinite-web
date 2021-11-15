@@ -14,8 +14,7 @@ import HowToUse from "../components/HowToUse";
 import ProductBenefits from "../components/products/ProductBenefits";
 import Products from "../components/products/Products";
 import ProductSection from "../components/products/ProductSection";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllProduct } from "../redux/actions/products";
+import Image from "next/image";
 import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
     position: "relative",
+    width: "100%",
     [theme.breakpoints.down("md")]: {
       // marginBottom: "8em",
       padding: "0 2em",
@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     padding: "0 3em",
+    width: "100%",
     [theme.breakpoints.down("md")]: {
       padding: 0,
     },
@@ -63,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       fontSize: "36px",
       lineHeight: "50px",
+      textAlign: "justify",
     },
   },
   content: {
@@ -74,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1.5em",
     [theme.breakpoints.down("md")]: {
       fontSize: "16px",
+      textAlign: "justify",
     },
   },
   button: {
@@ -115,12 +118,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Home() {
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    dispatch(getAllProduct(() => setLoading(false)));
-  }, []);
   const classes = useStyles();
   return (
     <>
@@ -133,8 +130,8 @@ export default function Home() {
                   Healthy sweateners <br /> made from Date fruits
                 </Typography>
                 <Typography variant="body1" className={classes.content}>
-                  Your favourite alternative to refined sugar <br /> made with
-                  no preservatives and additives.{" "}
+                  Your favourite alternative to refined sugar made with no
+                  preservatives and additives.{" "}
                 </Typography>
                 <Link href="/shop">
                   <Button variat="contained" className={classes.button}>
@@ -144,16 +141,18 @@ export default function Home() {
               </Box>
             </Grid>
             <Grid item item xs={12} sm={12} md={5} className={classes.order1}>
-              <img
+              <Image
                 src="/images/bowl.png"
                 alt="Powdered nuts"
                 className={classes.logo}
+                width="600px"
+                height="500px"
               />
             </Grid>
           </Grid>
         </Box>
         <Box className={classes.products}>
-          {loading ? <CircularProgress /> : <Products />}
+          <Products />
         </Box>
         <Box>
           <ProductBenefits />

@@ -11,6 +11,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct } from "../../redux/actions/products";
 import router from "next/router";
+import Link from "next/link";
+import { addToCart } from "../../redux/actions/cart";
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -69,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       fontSize: "14px",
       lineHeight: "18px",
+      textAlign: "justify",
     },
   },
 
@@ -111,33 +114,19 @@ const Products = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    dispatch(getAllProduct(() => setLoading(false)));
+
+    if (products.length > 0) {
+      setLoading(false);
+    } else {
+      dispatch(getAllProduct(() => setLoading(false)));
+    }
   }, []);
+  const addCart = (id) => {
+    dispatch(addToCart(id));
+  };
   return (
     <Card elevation={0} className={classes.cards}>
       <Grid container className={classes.wrapper}>
-        {/* <Grid xs={12} md={6} item className={classes.fruitContainer}>
-          <Box>
-            <img
-              src="./images/fruit.png"
-              alt="powdered fruits"
-              className={classes.logo1}
-            />
-          </Box>
-          <Box>
-            <Typography variant="h3" className={classes.title1}>
-              Date Powder
-            </Typography>
-            <Typography variant="body1" className={classes.content1}>
-              flesh of Dates Fruit which have been dried and ground into fine
-              powder.
-              <small className={classes.grams}>200g and 500g </small>
-            </Typography>
-            <Button variat="contained" className={classes.button1}>
-              Buy Now
-            </Button>
-          </Box>
-        </Grid> */}
         {loading ? (
           <div className={classes.progress}>
             {" "}
@@ -150,11 +139,13 @@ const Products = () => {
               products.map((product) => (
                 <Grid item xs={12} md={6} className={classes.fruitContainer}>
                   <Box>
-                    <img
-                      src={product.image_url}
-                      alt="powdered fruits"
-                      className={classes.logo1}
-                    />
+                    <Link href={`/shop/${product.product_id}`}>
+                      <img
+                        src={product.image_url}
+                        alt="powdered fruits"
+                        className={classes.logo1}
+                      />
+                    </Link>
                   </Box>
                   <Box>
                     <Typography variant="h3" className={classes.title1}>
@@ -167,9 +158,8 @@ const Products = () => {
                       </small>
                     </Typography>
                     <Button
-                      variat="contained"
+                      onClick={() => addCart(product.product_id)}
                       className={classes.button1}
-                      onClick={() => router.push("/shop")}
                     >
                       Buy Now
                     </Button>

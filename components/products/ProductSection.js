@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       fontSize: "15px",
       lineHeight: "20px",
+      textAlign: "justify",
     },
   },
   title: {
@@ -72,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "15px",
       lineHeight: "20px",
       fontWeight: "300",
+      textAlign: "justify",
     },
   },
   fruitContainer: {

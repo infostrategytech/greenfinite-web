@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       fontSize: "14px",
       lineHeight: "30px",
+      textAlign: "justify",
     },
   },
 }));
