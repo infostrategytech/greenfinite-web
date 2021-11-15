@@ -1,7 +1,16 @@
-import React from "react";
-import { Card, Typography, Grid, Button, Box } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import {
+  Card,
+  Typography,
+  Grid,
+  Button,
+  Box,
+  CircularProgress,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllProduct } from "../../redux/actions/products";
+import router from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -74,6 +83,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontSize: "12px",
     fontWeight: "500",
+    "&:hover": { color: "#3D8754" },
   },
   grams: {
     display: "block",
@@ -84,12 +94,25 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "14px",
     },
   },
+  progress: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    textAlign: "center",
+  },
 }));
 
 const Products = () => {
   const { products } = useSelector((state) => state.products);
-  console.log(products);
+
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    dispatch(getAllProduct(() => setLoading(false)));
+  }, []);
   return (
     <Card elevation={0} className={classes.cards}>
       <Grid container className={classes.wrapper}>
@@ -115,33 +138,46 @@ const Products = () => {
             </Button>
           </Box>
         </Grid> */}
-        {products &&
-          products.length &&
-          products.map((product) => (
-            <Grid item xs={12} md={6} className={classes.fruitContainer}>
-              <Box>
-                <img
-                  src={product.image_url}
-                  alt="powdered fruits"
-                  className={classes.logo1}
-                />
-              </Box>
-              <Box>
-                <Typography variant="h3" className={classes.title1}>
-                  {product.name}
-                </Typography>
-                <Typography variant="body1" className={classes.content1}>
-                  {product.description}
-                  <small className={classes.grams}>
-                    {product.net_weight}g{" "}
-                  </small>
-                </Typography>
-                <Button variat="contained" className={classes.button1}>
-                  Buy Now
-                </Button>
-              </Box>
-            </Grid>
-          ))}
+        {loading ? (
+          <div className={classes.progress}>
+            {" "}
+            <CircularProgress />
+          </div>
+        ) : (
+          <>
+            {products &&
+              products.length &&
+              products.map((product) => (
+                <Grid item xs={12} md={6} className={classes.fruitContainer}>
+                  <Box>
+                    <img
+                      src={product.image_url}
+                      alt="powdered fruits"
+                      className={classes.logo1}
+                    />
+                  </Box>
+                  <Box>
+                    <Typography variant="h3" className={classes.title1}>
+                      {product.name}
+                    </Typography>
+                    <Typography variant="body1" className={classes.content1}>
+                      {product.description}
+                      <small className={classes.grams}>
+                        {product.net_weight}g{" "}
+                      </small>
+                    </Typography>
+                    <Button
+                      variat="contained"
+                      className={classes.button1}
+                      onClick={() => router.push("/shop")}
+                    >
+                      Buy Now
+                    </Button>
+                  </Box>
+                </Grid>
+              ))}
+          </>
+        )}
       </Grid>
     </Card>
   );

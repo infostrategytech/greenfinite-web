@@ -13,7 +13,7 @@ import router from "next/router";
 import { ShoppingCart, PersonOutline } from "@material-ui/icons/";
 import { makeStyles } from "@material-ui/core/styles";
 import { Menu, Close } from "@material-ui/icons";
-
+import { useSelector } from "react-redux";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     backgroundColor: "#FFF1DA",
@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 const DrawerComponent = () => {
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const classes = useStyles();
+  const { cart } = useSelector((state) => state.products);
 
   return (
     <>
@@ -106,7 +107,7 @@ const DrawerComponent = () => {
               </div>
               <Typography variant="h4" className={classes.logo}>
                 <img
-                  src="./images/Logo.png"
+                  src="/images/Logo.png"
                   alt="Greenfinite logo"
                   className={classes.logo}
                 />
@@ -198,11 +199,11 @@ const DrawerComponent = () => {
             onClick={() => setOpenDrawer(false)}
             className={classes.listItems}
           >
-            <ListItemText>
+            <ListItemText onClick={() => router.push("/cart")}>
               <Typography className={classes.links}>
                 {" "}
                 <IconButton className={` ${classes.account}`}>
-                  <Badge badgeContent={3} color="secondary">
+                  <Badge badgeContent={cart.length} color="primary">
                     <ShoppingCart />
                   </Badge>
                 </IconButton>{" "}

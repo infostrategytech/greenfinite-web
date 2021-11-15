@@ -174,10 +174,11 @@ function Cart() {
     cart.forEach((item) => {
       quantity += item.qty;
       price += item.qty * item.amount;
+      console.log(price);
     });
     setTotalQuantity(totalQuantity);
     setTotalPrice(price);
-  }, [totalPrice]);
+  }, [totalPrice, totalQuantity, cart]);
 
   return (
     <div className={classes.root}>
@@ -228,7 +229,12 @@ function Cart() {
         </Grid>
         {/* ROW 4 */}
         <Grid item className={classes.row4}>
-          <Button variant="outlined" color="primary" className={classes.btn2}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.btn2}
+            onClick={() => router.push("/shop")}
+          >
             Buy More
           </Button>
           {/* <Button variant="contained" color="primary" className={classes.btn}> */}

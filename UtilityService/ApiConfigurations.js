@@ -3,12 +3,12 @@ import { handleApiError } from "./ApiErrors";
 import { string, object, oneOf, bool } from "prop-types";
 
 // const base_url = process.env.NEXT_PUBLIC_BASE_URL;
-const base_url = "http://greenfinite-app.herokuapp.com/api/v1/";
+const base_url = "https://greenfinite-app.herokuapp.com/api/v1/";
 const axiosInstance = axios.create({
   baseURL: base_url,
 });
 
-export function publicRoute(url, method,data, config) {
+export function publicRoute(url, method, data, config) {
   axiosInstance.interceptors.request.use(
     (config) => {
       return config;
@@ -88,7 +88,7 @@ export function privateRoute(url, data, method, config) {
     }
   });
 }
-function callApi(url,method,data, config, token) {
+function callApi(url, method, data, config, token) {
   if (token) {
     return privateRoute(url, data, method, config);
   }

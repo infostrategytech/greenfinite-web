@@ -6,7 +6,11 @@ import RemoveRoundedIcon from "@material-ui/icons/RemoveRounded";
 import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { adjustQuantity, removeFromCart } from "../redux/actions/cart";
+import {
+  addToCart,
+  adjustQuantity,
+  removeFromCart,
+} from "../redux/actions/cart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -157,10 +161,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const CartItem = ({ item }) => {
+  console.log(item);
   //   console.log(item);
   const dispatch = useDispatch();
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [disabled, setDisabled] = useState(false);
   const { cart } = useSelector((state) => state.products);
   const [input, setInput] = useState(item?.qty);
   const classes = useStyles();
@@ -173,19 +179,27 @@ const CartItem = ({ item }) => {
     });
     setTotalQuantity(totalQuantity);
     setTotalPrice(price);
-  }, [totalQuantity, totalPrice]);
+  }, [totalQuantity, totalPrice, item.qty, disabled]);
   const removeItems = (id) => {
     dispatch(removeFromCart(id));
   };
 
-  const onAddHandler = (e) => {
-    // setInput((prevState) => prevState + 1);
-    dispatch(adjustQuantity(item.product_id, input));
-    // console.log(item.product_id);
+  const onAddHandler = () => {
+    dispatch(addToCart(item.product_id));
+    setDisabled(false);
   };
   const onReduceHandler = () => {
-    setInput((prevState) => prevState - 1);
+    // setInput((prevState) => prevState - 1);
+
+    if (item.qty <= 1) {
+      setDisabled(true);
+      dispatch(removeFromCart(item.product_id));
+    } else {
+      setDisabled(false);
+      dispatch(adjustQuantity(item.product_id));
+    }
   };
+
   return (
     <Grid item container>
       <Grid item container xs={6} className={classes.cell}>
@@ -214,11 +228,15 @@ const CartItem = ({ item }) => {
         </Grid>
       </Grid>
       <Grid item xs={2} className={classes.quantityCell}>
-        <IconButton className={classes.iconBtn} onClick={onReduceHandler}>
+        <IconButton
+          className={classes.iconBtn}
+          onClick={onReduceHandler}
+          disabled={disabled}
+        >
           <RemoveRoundedIcon />
         </IconButton>
         <Typography variant="h5" className={classes.quantityValue}>
-          {input}
+          {item.qty}
         </Typography>
         <IconButton className={classes.iconBtn} onClick={onAddHandler}>
           <AddIcon />
@@ -231,7 +249,7 @@ const CartItem = ({ item }) => {
       </Grid>
       <Grid item xs={2} className={classes.lastCell}>
         <Typography variant="caption" className={classes.money}>
-          ₦{totalPrice}
+          ₦{item.amount * item.qty}
         </Typography>
       </Grid>
     </Grid>

@@ -46,24 +46,41 @@ export const productsReducer = (state = initState, action) => {
             )
           : [...state.cart, { ...item, qty: 1 }],
       };
+    case ADJUST_QTY:
+      //   const item = state.products.find(
+      //     (prod) => prod.product_id === action.payload
+      //   );
+
+      //   const isInCart = state.cart.find((item) =>
+      //     item.product_id === action.payload ? true : false
+      //   );
+
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.product_id === action.payload
+            ? { ...item, qty: item.qty - 1 }
+            : item
+        ),
+      };
     case REMOVE_FROM_CART:
       return {
         ...state,
         cart: state.cart.filter((item) => item.product_id !== action.payload),
       };
-    case ADJUST_QTY:
-      return {
-        ...state,
-        cart: state.cart.map((item) => {
-          console.log(item);
-          item.product_id === action.payload.itemId
-            ? { ...item, qty: action.payload.qty }
-            : item;
-        }),
-        // cart: state.cart.map((item) => {
-        //   console.log(item);
-        // }),
-      };
+    // case ADJUST_QTY:
+    //   return {
+    //     ...state,
+    //     cart: state.cart.map((item) => {
+    //       console.log(item);
+    //       item.product_id === action.payload.itemId
+    //         ? { ...item, qty: action.payload.qty }
+    //         : item;
+    //     }),
+    // cart: state.cart.map((item) => {
+    //   console.log(item);
+    // }),
+    //   };
     case GET_ID:
       return {
         ...state,
