@@ -215,7 +215,6 @@ function CheckOut() {
   const [orderData,setOrderData] = useState({})
   const [error,setError] = useState(false)
 
-
   let paystackEmail= Math.floor(Math.random()*12903678)
 
   const config = {
@@ -224,8 +223,6 @@ function CheckOut() {
     amount: totalPayment * 100,
     publicKey: `${process.env.NEXT_PUBLIC_PAYSTACK_KEY}`,
   };
-
-  const initializePayment = usePaystackPayment(config);
 
   useEffect(()=>{
     setId(orderId)
@@ -259,10 +256,18 @@ function CheckOut() {
     setIsUpdate(!isUpdate)
   }
   const onSuccess = (reference) => {
-    let data = {}
-    data.payment_status = 'fulfilled'
-    data.payment_reference = reference.reference
-    updatePayment(data)
+    if (reference.status === 'success') {
+      let data = {}
+      data.payment_status = 'fulfilled'
+      data.payment_reference = reference.reference
+      updatePayment(data)
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Your payment could not be completed'
+      })
+    }
   };
 
 
@@ -329,6 +334,9 @@ function CheckOut() {
     !email && setError(true)
     setEmail(e.target.value)
   }
+
+  const initializePayment = usePaystackPayment(config);
+
   return (
     <Container style={{ marginTop: 10 + "rem", marginBottom: 20 + "rem" }}>
       <Grid container spacing={10}>
