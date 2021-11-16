@@ -76,6 +76,19 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "justify",
     },
   },
+  subtitle2: {
+    fontFamily: "Poppins",
+    fontSize: "18px",
+    fontWeight: "bold",
+    lineHeight: "27px",
+    marginTop: "30px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "15px",
+      lineHeight: "20px",
+      fontWeight: "300",
+      textAlign: "justify",
+    },
+  },
   fruitContainer: {
     display: "flex",
     alignItems: "center",
@@ -141,6 +154,14 @@ const ProductSection = () => {
                   Dates Powder.
                   <small className={classes.grams}>200g and 500g </small>
                 </Typography>
+
+                <Typography variant="h4" className={classes.subtitle2}>
+                  Uses
+                </Typography>
+
+                <Typography variant="body1" className={classes.content1}>
+                  Can be used for baking, cooking. seasoning, mixed in smoothies, yogurts, cereals, pap, soups, grills, baby food etc They are incredibly versatile and can fit into just any recipe.Suitable for babies from 6 months.
+                </Typography>
               </Grid>
               <Grid item md>
                 <img
@@ -176,6 +197,14 @@ const ProductSection = () => {
                   ourselves as being the manufacturers of the finest and purest
                   Dates Powder.
                   <small className={classes.grams}>200g and 5000g</small>
+                </Typography>
+
+                <Typography variant="h4" className={classes.subtitle2}>
+                  Uses
+                </Typography>
+
+                <Typography variant="body1" className={classes.content1}>
+                  Can be used for baking, cooking. seasoning, mixed in smoothies, yogurts, cereals, pap, soups, grills, baby food etc They are incredibly versatile and can fit into just any recipe.Suitable for babies from 6 months.
                 </Typography>
               </Grid>
             </Grid>
