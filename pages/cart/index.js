@@ -175,9 +175,9 @@ function Cart() {
       quantity += item.qty;
       price += item.qty * item.amount;
     });
-    setTotalQuantity(totalQuantity);
+    setTotalQuantity(quantity);
     setTotalPrice(price);
-  }, [totalPrice, totalQuantity, cart]);
+  }, [cart]);
 
   return (
     <>
@@ -187,7 +187,7 @@ function Cart() {
           <Grid item className={classes.row1}>
             <Typography variant="h4" className={classes.bold}>
               <LocalMallOutlinedIcon className={classes.bagIcon} />
-              <span>Cart ({cart.length} item(s))</span>
+              <span>Cart {cart.length} item(s)</span>
             </Typography>
           </Grid>
           {/* ROW 2 */}
