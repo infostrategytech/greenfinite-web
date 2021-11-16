@@ -8,6 +8,8 @@ import {
   Box,
 } from "@material-ui/core";
 import { mergeClasses } from "@material-ui/styles";
+import Head from 'next/head';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -150,6 +152,15 @@ function AboutUs() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
+      <Head>
+        <title>
+          Greenfinite - About Us
+        </title>
+        <meta
+        name="description"
+        content=""
+        />
+        </Head>
       <Grid container direction="column" className={classes.parentContainer}>
         <Box className={classes.boxes}>
           <Grid item className={classes.item1}>

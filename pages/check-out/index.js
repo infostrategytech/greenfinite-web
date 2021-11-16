@@ -17,6 +17,7 @@ import Swal from "sweetalert2";
 import { usePaystackPayment } from 'react-paystack';
 import { useRouter } from 'next/router';
 import { CLEAR_CART } from "../../redux/actions/Contants";
+import Head from 'next/head';
 
 const useStyles = makeStyles((theme) => ({
   mainHeader: {
@@ -339,6 +340,15 @@ function CheckOut() {
 
   return (
     <Container style={{ marginTop: 10 + "rem", marginBottom: 20 + "rem" }}>
+      <Head>
+          <title>
+              Greenfinite - Checkout
+          </title>
+          <meta
+          name="description"
+          content=""
+          />
+      </Head>
       <Grid container spacing={10}>
         <Grid item xs={12} md={6}>
           <Box>
