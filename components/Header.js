@@ -101,8 +101,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Header() {
-  const [cartCount, setCartCount] = useState(0);
+  // const [cartCount, setCartCount] = useState(0);
   const [openDropDown, setOpenDropDown] = useState(false);
+  const [count, setCartCount] = useState(0);
   const { cart } = useSelector((state) => state.products);
   const [openDrawer, setOpenDrawer] = useState(false);
   const classes = useStyles();
@@ -123,13 +124,13 @@ function Header() {
     setOpenDrawer(false);
   };
   const cartLength = cart.length;
-  // useEffect(() => {
-  //   let cartCount = 0;
-  //   cart.forEach((item) => {
-  //     cartCount += item.qty;
-  //     setCartCount(cartCount);
-  //   });
-  // }, [cart, cartCount]);
+  useEffect(() => {
+    let cartCount = 0;
+    cart.forEach((item) => {
+      cartCount += item.qty;
+    });
+    setCartCount(cartCount);
+  }, [cart]);
 
   const toggle = () => {
     setOpenDropDown(true);
@@ -295,7 +296,7 @@ function Header() {
                       className={classes.links}
                     >
                       <IconButton>
-                        <Badge badgeContent={cartLength} color="primary">
+                        <Badge badgeContent={count} color="primary">
                           <ShoppingCart />
                         </Badge>
                       </IconButton>{' '}

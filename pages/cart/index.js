@@ -11,6 +11,8 @@ import { removeFromCart } from "../../redux/actions/cart";
 import CartItem from "../../components/CartItem";
 import router from "next/router";
 import { formatMoney } from "../../UtilityService/Helpers";
+import Head from 'next/head';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 100,
@@ -175,19 +177,28 @@ function Cart() {
       quantity += item.qty;
       price += item.qty * item.amount;
     });
-    setTotalQuantity(totalQuantity);
+    setTotalQuantity(quantity);
     setTotalPrice(price);
-  }, [totalPrice, totalQuantity, cart]);
+  }, [cart]);
 
   return (
     <>
+    <Head>
+      <title>
+          Greenfinite - Cart
+      </title>
+      <meta
+      name="description"
+      content=""
+      />
+      </Head>
       <div className={classes.root}>
         <Grid container direction="column" className={classes.parentContainer}>
           {/* ROW 1 */}
           <Grid item className={classes.row1}>
             <Typography variant="h4" className={classes.bold}>
               <LocalMallOutlinedIcon className={classes.bagIcon} />
-              <span>Cart ({cart.length} item(s))</span>
+              <span>Cart {cart.length} item(s)</span>
             </Typography>
           </Grid>
           {/* ROW 2 */}

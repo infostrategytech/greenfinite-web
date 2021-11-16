@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     margin: "20px 0",
   },
+  dev:{
+    marginLeft: 4
+  }
 }));
 const Footer = () => {
   const classes = useStyles();
@@ -72,7 +75,7 @@ const Footer = () => {
               info@greenfinite.ng{" "}
             </Typography>
             <Typography variant="h4" className={classes.footerList}>
-              25D, Drive 3, Prince and Princess Estate, Abuja fct
+              25D, Drive 3, Prince and Princess Estate, Abuja F.C.T
             </Typography>
             <Typography variant="h4" className={classes.icon}>
               <span className={classes.icons}>
@@ -132,12 +135,12 @@ const Footer = () => {
             <div className={classes.bottomLine}></div>
             <Grid item>
               <Typography variant="h5" className={classes.footerList}>
-                &copy; 2021 Greenfinite All rights reserved
+                &copy; 2021 Greenfinite All rights reserved.
               </Typography>
             </Grid>
             <Grid item>
               <Typography variant="h5" className={classes.footerList}>
-                Poweredby Infostrategy
+                <span className={classes.dev}>Powered by Infostrategy</span>
               </Typography>
             </Grid>
           </Grid>

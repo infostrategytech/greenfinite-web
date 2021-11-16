@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Drawer,
   List,
@@ -93,17 +93,17 @@ const useStyles = makeStyles((theme) => ({
 const DrawerComponent = () => {
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const [Dropdw, setDropdw] = React.useState(false);
-  const classes = useStyles();
   const { cart } = useSelector((state) => state.products);
 
-  const [openHome, setOpenHome] = React.useState(false);
+  const [openHome, setOpenHome] = useState(false);
 
   const handleClickHome = () => {
     setOpenHome(!openHome);
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  
 
   const distributorsItem = [
     {
@@ -115,6 +115,18 @@ const DrawerComponent = () => {
       path: '/',
     },
   ];
+
+  const [cartCount, setCartCount] = useState(0);
+  const classes = useStyles();
+  // const { cart } = useSelector((state) => state.products);
+  useEffect(() => {
+    let cartCount = 0;
+    cart.forEach((item) => {
+      cartCount += item.qty;
+    });
+    setCartCount(cartCount);
+  }, [cart, cartCount]);
+
 
   return (
     <>
@@ -255,7 +267,7 @@ const DrawerComponent = () => {
               <Typography className={classes.links}>
                 {' '}
                 <IconButton className={` ${classes.account}`}>
-                  <Badge badgeContent={cart.length} color="primary">
+                  <Badge badgeContent={cartCount} color="primary">
                     <ShoppingCart />
                   </Badge>
                 </IconButton>{' '}
