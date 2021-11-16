@@ -8,8 +8,7 @@ import {
   Box,
 } from "@material-ui/core";
 import { mergeClasses } from "@material-ui/styles";
-import Head from 'next/head';
-
+import Head from "next/head";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   item1: {
-    textAlign: "center",
+    // textAlign: "center",
     marginBottom: 100,
     [theme.breakpoints.up("md")]: {
       paddingLeft: 100,
@@ -120,6 +119,17 @@ const useStyles = makeStyles((theme) => ({
     },
     marginTop: 50,
   },
+  item6: {
+    marginTop: "75px",
+    marginBottom: 100,
+    [theme.breakpoints.up("md")]: {
+      paddingLeft: 100,
+      paddingRight: 100,
+    },
+    [theme.breakpoints.down("md")]: {
+      marginBottom: 50,
+    },
+  },
   imgContainer: {
     [theme.breakpoints.up("md")]: {
       display: "flex",
@@ -146,6 +156,13 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontSize: "15px",
   },
+  coreValues: {
+    backgroundColor: "#EFF8F2",
+    paddingBottom: "75px",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+    },
+  },
 }));
 
 function AboutUs() {
@@ -153,14 +170,9 @@ function AboutUs() {
   return (
     <div className={classes.root}>
       <Head>
-        <title>
-          Greenfinite - About Us
-        </title>
-        <meta
-        name="description"
-        content=""
-        />
-        </Head>
+        <title>Greenfinite - About Us</title>
+        <meta name="description" content="" />
+      </Head>
       <Grid container direction="column" className={classes.parentContainer}>
         <Box className={classes.boxes}>
           <Grid item className={classes.item1}>
@@ -172,7 +184,10 @@ function AboutUs() {
               About Us
             </Typography>
             <Typography variant="body1" component="p" className={classes.font}>
-              Your Favourite Sweetner, Alternative to Refined Sugar
+              We are an organic food processing company into the production of
+              healthy sweeteners made from Dates fruits. We process Dates Fruits
+              into powder and syrup forms as a suitable natural replacement for
+              refined sugar or other sweeteners in any recipe.
             </Typography>
           </Grid>
           {/* ROW 2 */}
@@ -201,13 +216,16 @@ function AboutUs() {
 
             <Grid item xs={12} md={6} className={classes.imgContainer}>
               <img
-                src="./images/bag-of-dates.png"
+                src="./images/about-us-img.png"
                 alt="bag of dates"
                 className={classes.datesImg}
               />
             </Grid>
           </Grid>
           {/* ROW 3 */}
+        </Box>
+
+        <Box className={classes.coreValues}>
           <Grid item container direction="column" className={classes.item3}>
             <Grid item>
               <Typography variant="h4" className={classes.subhead}>
@@ -322,6 +340,60 @@ function AboutUs() {
             </Grid>
           </Grid>
         </Box>
+
+        <Grid item className={classes.item6}>
+          <Typography
+            variant="h3"
+            component="h1"
+            className={classes.headerText}
+          >
+            About dates fruits
+          </Typography>
+          <Typography variant="body1" component="p" className={classes.font}>
+            Dates are fruits of the dates palm tree, they are naturally sweet
+            and referred to as nature’s candy. Apart from the delicious flavour,
+            they are a massive powerhouse of vitamins, minerals, amino acids and
+            healthy fibre. The fruits from the Dates Palm tree also have strong
+            antioxidant, antiviral, anti-infective and anticancer properties.
+          </Typography>
+        </Grid>
+        {/* ROW 2 */}
+        <Grid item container className={classes.item2}>
+          <Grid item xs={12} md={6}>
+            <Box className={classes.box}>
+              <Typography variant="h4" className={classes.subhead}>
+                Benefits of our Product
+              </Typography>
+              
+              <Box>
+                <ul>
+                  <li>Blood Pressure regulation</li>
+                  <li>Great for heart</li>
+                  <li>Relieves constipation</li>
+                  <li>Great for eye health</li>
+                  <li>Great for babies and children</li>
+                  <li>Rich in antioxidants and electrolytes</li>
+                  <li>Prevents cancer and ease long term labour in pregnant women</li>
+                  <li>Diabetes control</li>
+                  <li>Increases sexual stamina</li>
+                  <li>Treatment of hangover</li>
+                  <li>Great for pregnant women and foetus development</li>
+                  <li>Reduces inflammation</li>
+                  <li>Contains anti-ageing properties</li>
+                </ul>
+              </Box>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} md={6} className={classes.imgContainer}>
+            <img
+              src="./images/bag-of-dates-2.png"
+              alt="bag of dates"
+              className={classes.datesImg}
+            />
+          </Grid>
+        </Grid>
+
         {/* ROW 4 */}
         <Grid item container direction="column" className={classes.item4}>
           <Grid item>

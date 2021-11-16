@@ -125,9 +125,17 @@ function Distributors() {
                         <TextField 
                             type="text"
                             variant="outlined"
-                            label="Location"
+                            label="State"
                             className={classes.formfield}
                             size="small"
+                        />
+                        <TextField 
+                            type="text"
+                            variant="outlined"
+                            label="Address"
+                            multiline
+                            rows={2}
+                            className={classes.formfield}
                         />
                         <TextField 
                             type="text"
