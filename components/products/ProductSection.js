@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       fontSize: "15px",
       lineHeight: "20px",
-      fontWeight: "300",
+      // fontWeight: "300",
       textAlign: "justify",
     },
   },

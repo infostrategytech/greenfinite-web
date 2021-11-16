@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   cards: {
     background:
       "linear-gradient(0deg, rgba(255,255,255,0.6), rgba(255,255,255,0.6))",
-    padding: "2em 4em",
+    padding: "0 4em",
     boxShadow: "0px -1px 29px 8px rgba(210,210,210,0.15)",
     [theme.breakpoints.down("md")]: {
       padding: "1em",
@@ -38,17 +38,17 @@ const useStyles = makeStyles((theme) => ({
   },
   logo1: {
     maxWidth: "100%",
-    height: "240px",
-    width: "240px",
+    // height: "240px",
+    // width: "240px",
     // objectFit: "cover",
-    [theme.breakpoints.down("md")]: {
-      height: "140px",
-      width: "140px",
-    },
-    [theme.breakpoints.down("xs")]: {
-      height: "140px",
-      width: "220px",
-    },
+    // [theme.breakpoints.down("md")]: {
+    //   height: "140px",
+    //   width: "140px",
+    // },
+    // [theme.breakpoints.down("xs")]: {
+    //   height: "140px",
+    //   width: "220px",
+    // },
   },
   title1: {
     fontFamily: "Poppins",

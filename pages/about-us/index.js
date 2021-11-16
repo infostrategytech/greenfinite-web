@@ -9,18 +9,20 @@ import {
 } from "@material-ui/core";
 import { mergeClasses } from "@material-ui/styles";
 import Head from "next/head";
+import Image from "next/image";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 100,
   },
   datesImg: {
+    maxWidth: "100%",
+    // width: "500px",
+    // height: "100px ",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
+      height: "200px",
     },
-    height: 400,
-    width: 300,
-    marginTop: 16,
   },
   parentContainer: {
     [theme.breakpoints.up("md")]: {
@@ -216,9 +218,11 @@ function AboutUs() {
 
             <Grid item xs={12} md={6} className={classes.imgContainer}>
               <img
-                src="./images/about-us-img.png"
+                src="/images/about-us-img.png"
                 alt="bag of dates"
                 className={classes.datesImg}
+                // width="400px"
+                // height="300px"
               />
             </Grid>
           </Grid>
@@ -364,7 +368,7 @@ function AboutUs() {
               <Typography variant="h4" className={classes.subhead}>
                 Benefits of our Product
               </Typography>
-              
+
               <Box>
                 <ul>
                   <li>Blood Pressure regulation</li>
@@ -373,7 +377,9 @@ function AboutUs() {
                   <li>Great for eye health</li>
                   <li>Great for babies and children</li>
                   <li>Rich in antioxidants and electrolytes</li>
-                  <li>Prevents cancer and ease long term labour in pregnant women</li>
+                  <li>
+                    Prevents cancer and ease long term labour in pregnant women
+                  </li>
                   <li>Diabetes control</li>
                   <li>Increases sexual stamina</li>
                   <li>Treatment of hangover</li>
