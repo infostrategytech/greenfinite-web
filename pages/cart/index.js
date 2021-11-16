@@ -11,6 +11,8 @@ import { removeFromCart } from "../../redux/actions/cart";
 import CartItem from "../../components/CartItem";
 import router from "next/router";
 import { formatMoney } from "../../UtilityService/Helpers";
+import Head from 'next/head';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 100,
@@ -181,6 +183,15 @@ function Cart() {
 
   return (
     <>
+    <Head>
+      <title>
+          Greenfinite - Cart
+      </title>
+      <meta
+      name="description"
+      content=""
+      />
+      </Head>
       <div className={classes.root}>
         <Grid container direction="column" className={classes.parentContainer}>
           {/* ROW 1 */}

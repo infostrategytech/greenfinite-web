@@ -1,5 +1,6 @@
 import { Grid, Typography, makeStyles, TextField, Button } from '@material-ui/core'
 import React from 'react'
+import Head from 'next/head';
 
 const useStyles = makeStyles((theme) => ({
     root:{
@@ -61,6 +62,15 @@ function Distributors() {
     const classes = useStyles()
     return (
         <div className={classes.root}>
+            <Head>
+                <title>
+                    Greenfinite - Distributors
+                </title>
+                <meta
+                name="description"
+                content=""
+                />
+            </Head>
             <Grid container className={classes.parentContainer}> 
                 <Grid item container  xs={12} md={6} direction="column">
                     <Grid item>
