@@ -13,7 +13,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { GET_ID } from "../../redux/actions/Contants";
-
+import Head from 'next/head';
 import router from "next/router";
 import { addToCart } from "../../redux/actions/cart";
 
@@ -153,6 +153,15 @@ function Shop() {
 
   return (
     <Container style={{ marginTop: 10 + "rem" }}>
+      <Head>
+          <title>
+              Greenfinite - Shop
+          </title>
+          <meta
+          name="description"
+          content=""
+          />
+      </Head>
       {/* <Grid style={{ textAlign: 'center' }}></Grid> */}
       <Box style={{ textAlign: "center" }}>
         <h1

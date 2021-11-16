@@ -3,6 +3,7 @@ import { Grid, Typography, makeStyles, TextField, Button } from '@material-ui/co
 import LocalPhoneOutlinedIcon from '@material-ui/icons/LocalPhoneOutlined';
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import RoomOutlinedIcon from '@material-ui/icons/RoomOutlined';
+import Head from 'next/head';
 
 const useStyles = makeStyles((theme) => ({
     root:{
@@ -107,6 +108,15 @@ function ContactUs() {
     const classes = useStyles()
     return (
         <div className={classes.root}>
+            <Head>
+                <title>
+                    Greenfinite - Contact Us
+                </title>
+                <meta
+                name="description"
+                content=""
+                />
+            </Head>
             <Grid container className={classes.parentContainer}>
                 <Grid item xs={12} md={6} className={classes.sectionOne}>
                     <form className={classes.form}>

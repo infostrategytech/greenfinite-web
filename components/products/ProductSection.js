@@ -182,7 +182,7 @@ const ProductSection = () => {
             >
               <Grid item md className={classes.order2}>
                 <img
-                  src="./images/productgroup.png"
+                  src="./images/date-syrup.png"
                   alt="Powdered nuts"
                   className={classes.logo1}
                 />
