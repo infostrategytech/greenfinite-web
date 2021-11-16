@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Drawer,
   List,
@@ -76,9 +76,16 @@ const useStyles = makeStyles((theme) => ({
 
 const DrawerComponent = () => {
   const [openDrawer, setOpenDrawer] = React.useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const classes = useStyles();
   const { cart } = useSelector((state) => state.products);
-
+  useEffect(() => {
+    let cartCount = 0;
+    cart.forEach((item) => {
+      cartCount += item.qty;
+    });
+    setCartCount(cartCount);
+  }, [cart, cartCount]);
   return (
     <>
       <Drawer
@@ -203,7 +210,7 @@ const DrawerComponent = () => {
               <Typography className={classes.links}>
                 {" "}
                 <IconButton className={` ${classes.account}`}>
-                  <Badge badgeContent={cart.length} color="primary">
+                  <Badge badgeContent={cartCount} color="primary">
                     <ShoppingCart />
                   </Badge>
                 </IconButton>{" "}

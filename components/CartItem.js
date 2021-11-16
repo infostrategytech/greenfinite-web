@@ -167,9 +167,10 @@ const CartItem = ({ item }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const { cart } = useSelector((state) => state.products);
-  const [input, setInput] = useState(item?.qty);
+
   const classes = useStyles();
   useEffect(() => {
+    setDisabled(false);
     let quantity = 0;
     let price = 0;
     cart.forEach((item) => {
@@ -178,7 +179,7 @@ const CartItem = ({ item }) => {
     });
     setTotalQuantity(totalQuantity);
     setTotalPrice(price);
-  }, [totalQuantity, totalPrice, item.qty, disabled]);
+  }, [disabled]);
   const removeItems = (id) => {
     dispatch(removeFromCart(id));
   };
