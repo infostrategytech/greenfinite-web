@@ -33,12 +33,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <React.Fragment>
       <Head>
-        {/* <title>iRecharge</title>
-        <meta name="description" content="With iRecharge, you can pay bills easily, power your home, subscribe for cable tv, data & airtime recharge" /> */}
+        <title>Greenfinite</title>
+        <meta name="description" content="Producing healthy sweeteners from date fruits" />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        <link rel="icon" type="image/png" href="/images/favicon.png" />
 
         {/* <script
           src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
