@@ -228,7 +228,7 @@ function Header() {
                         >
                           <MenuItem
                             onClick={() => {
-                              handleClose;
+                              handleClose();
                               router.push('/distributors');
                             }}
                           >
