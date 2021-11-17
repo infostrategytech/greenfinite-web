@@ -28,8 +28,9 @@ const useStyles = makeStyles((theme) => ({
     width: "450px",
     height: "400px",
     [theme.breakpoints.down("md")]: {
-      width: "80px",
-      height: "80px",
+      width: "350px",
+      height: "300px",
+      textAlign: "center"
     },
   },
   content1: {
