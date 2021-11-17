@@ -22,21 +22,29 @@ import { addToCart } from "../../redux/actions/cart";
 
 const useStyles = makeStyles((theme) => ({
   card:{
-    padding:'1em'
+    padding:'1em 3em',
+    border:'1px solid #d3d3d3',
+    [theme.breakpoints.down('md')]:{
+      padding:'1em',
+      textAlign:'center'
+    }
   },
   item: {
     display: "flex",
     wordBreak:'break-all',
     overflowWrap:'break-word',
     width:'100%',
-    padding:'1em 1em',
-  
+
+ 
     // boxShadow: "0px -1px 29px 8px rgba(210,210,210,0.15)",
     // alignItems: "center",
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
       textAlign: "center",
       marginBottom: "2em",
+      justifyContent:"center",
+      alignItems:'center',
+      maxWidth:'100%'
     },
   },
   logo: {
@@ -64,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       fontSize: "18px",
       lineHeight: "20px",
+      textAlign:'center'
     },
   },
 
@@ -199,7 +208,7 @@ function Shop() {
             {products &&
               products.length &&
               products.map((product) => (
-                <Grid item container xs={12} md={3} spacing={2} style={{marginBottom:'1em'}}>
+                <Grid item container xs={12} md={3} spacing={2} style={{marginBottom:'1em', }}>
                   <Grid item className={classes.item}>
                     <Card className={classes.card} elevation={0}>
                     <Box>
