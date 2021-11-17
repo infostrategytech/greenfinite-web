@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
 // import { useStore } from '../redux/store';
 import { createWrapper } from 'next-redux-wrapper';
+import Router from 'next/router';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from '../redux/store';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -13,6 +14,9 @@ import AppLayout from '../components/Layout';
 import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import { store } from '../redux/store';
+import Spinner from '../components/Spinner';
+import Backdrop from '@material-ui/core/Backdrop';
+import NProgress from 'nprogress';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -22,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function MyApp({ Component, pageProps }) {
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const [progress, setProgress] = useState(10);
+
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -29,6 +37,20 @@ function MyApp({ Component, pageProps }) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
+
+  Router.events.on('routeChangeStart', (url) => {
+    NProgress.start();
+    setOpen(true);
+  });
+
+  Router.events.on('routeChangeComplete', (url) => {
+    NProgress.done();
+    setOpen(false);
+  });
+
+  const HandleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <React.Fragment>
@@ -58,6 +80,15 @@ function MyApp({ Component, pageProps }) {
           <CssBaseline />
           <PersistGate loading={null} persistor={persistor}>
             <AppLayout>
+              {open && (
+                <Backdrop
+                  className={classes.backdrop}
+                  open={open}
+                  onClick={HandleClose}
+                >
+                  <Spinner />
+                </Backdrop>
+              )}
               <Component {...pageProps} />
             </AppLayout>
           </PersistGate>
