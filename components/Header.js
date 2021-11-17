@@ -244,18 +244,6 @@ function Header() {
                       variant="body1"
                     >
                       <Link
-                        href="/contact-us"
-                        // style={{ textDecoration: "none" }}
-                      >
-                        <ListItem>Contact us</ListItem>
-                      </Link>
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      className={classes.links}
-                      variant="body1"
-                    >
-                      <Link
                         className={`${classes.links} ${classes.account}`}
                         href="/about-us"
                         // style={{ textDecoration: "none" }}
@@ -263,6 +251,20 @@ function Header() {
                         <ListItem>About us</ListItem>
                       </Link>
                     </Typography>
+
+                    <Typography
+                      variant="body1"
+                      className={classes.links}
+                      variant="body1"
+                    >
+                      <Link
+                        href="/contact-us"
+                        // style={{ textDecoration: "none" }}
+                      >
+                        <ListItem>Contact us</ListItem>
+                      </Link>
+                    </Typography>
+
                     {/* <Typography
                       onClick={() => router.push("/contact-us")}
                       variant="body1"
