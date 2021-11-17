@@ -19,6 +19,7 @@ import { GET_ID } from "../../redux/actions/Contants";
 
 import router from "next/router";
 import { addToCart } from "../../redux/actions/cart";
+import { getAllProduct } from "../../redux/actions/products";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -168,6 +169,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  progress: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    textAlign: "center",
+  },
 }));
 function Shop() {
   const dispatch = useDispatch();
@@ -188,6 +196,14 @@ function Shop() {
       setIsInCart(false);
     }, 2000);
   };
+  useEffect(() => {
+    setLoading(true);
+    if (products.length === 0) {
+      dispatch(getAllProduct(() => setLoading(false)));
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   return (
     <Container style={{ marginTop: 10 + "rem" }}>
@@ -219,7 +235,10 @@ function Shop() {
 
       <Grid container className={classes.container}>
         {loading ? (
-          <CircularProgress />
+          <div className={classes.progress}>
+            {" "}
+            <CircularProgress />
+          </div>
         ) : (
           <>
             {products &&
