@@ -191,7 +191,7 @@ const DrawerComponent = () => {
           </ListItem>
 
           <ListItem
-            onClick={() => {handleClickHome();setOpenDrawer(false)}}
+            onClick={() => handleClickHome()}
             className={classes.listItems}
           >
             <ListItemText>
@@ -205,7 +205,7 @@ const DrawerComponent = () => {
           <Collapse in={openHome} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               {distributorsItem.map((item, index) => (
-                <ListItem key={index} button className={classes.nested}>
+                <ListItem key={index} button className={classes.nested} onClick={() => setOpenDrawer(false)}>
                   <Link href={item.path}>
                     <ListItemText
                       primary={item.text}
