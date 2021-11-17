@@ -20,6 +20,11 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 0,
     },
   },
+  subContainer: {
+    [theme.breakpoints.down('sm')]: {
+      padding: 10,
+    },
+  },
   headers: {
     fontFamily: 'Poppins',
     fontStyle: 'normal',
@@ -133,100 +138,102 @@ const StateDistributors = () => {
             Select a state distributor nearest to your location
           </Typography>
         </Grid>
-        <Grid
-          item
-          container
-          alignItems="flex-start"
-          direction="column"
-          style={{ marginTop: '1.5rem' }}
-        >
-          <Grid item>
-            <span className={classes.logo}>A</span>
-            <span className={classes.logoHd}>Abuja Distributors</span>
+        <Grid item className={classes.subContainer}>
+          <Grid
+            item
+            container
+            alignItems="flex-start"
+            direction="column"
+            style={{ marginTop: '1.5rem' }}
+          >
+            <Grid item>
+              <span className={classes.logo}>A</span>
+              <span className={classes.logoHd}>Abuja Distributors</span>
+            </Grid>
+            <Grid item style={{ marginTop: '1.5rem' }}>
+              <ul>
+                {AbujaOffices.map((name) => (
+                  <li key={name}> {name} </li>
+                ))}
+              </ul>
+            </Grid>
           </Grid>
-          <Grid item style={{ marginTop: '1.5rem' }}>
-            <ul>
-              {AbujaOffices.map((name) => (
-                <li key={name}> {name} </li>
-              ))}
-            </ul>
-          </Grid>
-        </Grid>
 
-        <Grid
-          item
-          container
-          alignItems="flex-start"
-          direction="column"
-          style={{ marginTop: '1.5rem' }}
-        >
-          <Grid item>
-            <span className={classes.logo}>K</span>
-            <span className={classes.logoHd}>Kano Distributors</span>
+          <Grid
+            item
+            container
+            alignItems="flex-start"
+            direction="column"
+            style={{ marginTop: '1.5rem' }}
+          >
+            <Grid item>
+              <span className={classes.logo}>K</span>
+              <span className={classes.logoHd}>Kano Distributors</span>
+            </Grid>
+            <Grid item style={{ marginTop: '1.5rem' }}>
+              <ul>
+                {KanoOffices.map((name) => (
+                  <li key={name}> {name} </li>
+                ))}
+              </ul>
+            </Grid>
           </Grid>
-          <Grid item style={{ marginTop: '1.5rem' }}>
-            <ul>
-              {KanoOffices.map((name) => (
-                <li key={name}> {name} </li>
-              ))}
-            </ul>
+          <Grid
+            item
+            container
+            alignItems="flex-start"
+            direction="column"
+            style={{ marginTop: '1.5rem' }}
+          >
+            <Grid item>
+              <span className={classes.logo}>K</span>
+              <span className={classes.logoHd}>Kwara Distributors</span>
+            </Grid>
+            <Grid item style={{ marginTop: '1.5rem' }}>
+              <ul>
+                {KwaraOffices.map((name) => (
+                  <li key={name}> {name} </li>
+                ))}
+              </ul>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid
-          item
-          container
-          alignItems="flex-start"
-          direction="column"
-          style={{ marginTop: '1.5rem' }}
-        >
-          <Grid item>
-            <span className={classes.logo}>K</span>
-            <span className={classes.logoHd}>Kwara Distributors</span>
+          <Grid
+            item
+            container
+            alignItems="flex-start"
+            direction="column"
+            style={{ marginTop: '1.5rem' }}
+          >
+            <Grid item>
+              <span className={classes.logo}>L</span>
+              <span className={classes.logoHd}>Lagos Distributors</span>
+            </Grid>
+            <Grid item style={{ marginTop: '1.5rem' }}>
+              <ul>
+                {LagosOffices.map((name) => (
+                  <li key={name}> {name} </li>
+                ))}
+              </ul>
+            </Grid>
           </Grid>
-          <Grid item style={{ marginTop: '1.5rem' }}>
-            <ul>
-              {KwaraOffices.map((name) => (
-                <li key={name}> {name} </li>
-              ))}
-            </ul>
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          container
-          alignItems="flex-start"
-          direction="column"
-          style={{ marginTop: '1.5rem' }}
-        >
-          <Grid item>
-            <span className={classes.logo}>L</span>
-            <span className={classes.logoHd}>Lagos Distributors</span>
-          </Grid>
-          <Grid item style={{ marginTop: '1.5rem' }}>
-            <ul>
-              {LagosOffices.map((name) => (
-                <li key={name}> {name} </li>
-              ))}
-            </ul>
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          container
-          alignItems="flex-start"
-          direction="column"
-          style={{ marginTop: '1.5rem' }}
-        >
-          <Grid item>
-            <span className={classes.logo}>O</span>
-            <span className={classes.logoHd}>Oyo Distributors</span>
-          </Grid>
-          <Grid item style={{ marginTop: '1.5rem' }}>
-            <ul>
-              {OyoOffices.map((name) => (
-                <li key={name}> {name} </li>
-              ))}
-            </ul>
+          <Grid
+            item
+            container
+            alignItems="flex-start"
+            direction="column"
+            style={{ marginTop: '1.5rem' }}
+          >
+            <Grid item>
+              <span className={classes.logo}>O</span>
+              <span className={classes.logoHd}>Oyo Distributors</span>
+            </Grid>
+            <Grid item style={{ marginTop: '1.5rem' }}>
+              <ul>
+                {OyoOffices.map((name) => (
+                  <li key={name}> {name} </li>
+                ))}
+              </ul>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

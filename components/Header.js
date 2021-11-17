@@ -222,7 +222,10 @@ function Header() {
                           >
                             Become A Distributor
                           </MenuItem>
-                          <MenuItem onClick={handleClose}>
+                          <MenuItem  onClick={() => {
+                              handleClose();
+                              router.push('/state-distributors');
+                            }}>
                             Buy From State Distributors
                           </MenuItem>
                         </Menu>
