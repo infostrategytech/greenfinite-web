@@ -9,23 +9,48 @@ import {
   Button,
   MenuItem,
   CircularProgress,
+  Card,
+  CardMedia,
+  CardContent,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { GET_ID } from "../../redux/actions/Contants";
-import Head from 'next/head';
+
 import router from "next/router";
 import { addToCart } from "../../redux/actions/cart";
+import { getAllProduct } from "../../redux/actions/products";
 
 const useStyles = makeStyles((theme) => ({
-  item: {
+  card: {
+    padding: "1em 0",
+    width: "95%",
+    border: "1px solid #d3d3d3",
     display: "flex",
     justifyContent: "center",
+    borderRadius: "20px",
     alignItems: "center",
+    flexDirection: "column",
+    [theme.breakpoints.down("md")]: {
+      padding: "1em",
+      textAlign: "center",
+    },
+  },
+  item: {
+    display: "flex",
+    wordBreak: "break-all",
+    overflowWrap: "break-word",
+    width: "100%",
+
+    // boxShadow: "0px -1px 29px 8px rgba(210,210,210,0.15)",
+    // alignItems: "center",
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
       textAlign: "center",
       marginBottom: "2em",
+      justifyContent: "center",
+      alignItems: "center",
+      maxWidth: "100%",
     },
   },
   logo: {
@@ -33,37 +58,39 @@ const useStyles = makeStyles((theme) => ({
     // height: "240px",
     // width: "280px",
     // objectFit: "cover",
-    [theme.breakpoints.down("md")]: {
-      height: "140px",
-      width: "140px",
-    },
-    [theme.breakpoints.down("xs")]: {
-      height: "120px",
-      width: "180px",
-      // objectFit: "cover",
-    },
+    // [theme.breakpoints.down("md")]: {
+    //   height: "140px",
+    //   width: "140px",
+    // },
+    // [theme.breakpoints.down("xs")]: {
+    //   height: "120px",
+    //   width: "180px",
+    //   // objectFit: "cover",
+    // },
   },
   title: {
     fontFamily: "Poppins",
-    fontSize: "30px",
+    fontSize: "18px",
     fontWeight: "600",
     lineHeight: "36px",
     cursor: "pointer",
+    textAlign: "center",
+    overflowWrap: "break-word",
     [theme.breakpoints.down("md")]: {
-      fontSize: "24px",
+      fontSize: "18px",
       lineHeight: "20px",
     },
   },
 
   content: {
     fontFamily: "Poppins",
-    fontSize: "24px",
-    fontWeight: "700",
-    lineHeight: "28px",
+    fontSize: "18px",
+    fontWeight: "400",
+
     marginTop: ".2em",
     marginBottom: "1em",
     [theme.breakpoints.down("md")]: {
-      fontSize: "20px",
+      fontSize: "16px",
       lineHeight: "18px",
     },
   },
@@ -73,8 +100,8 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     padding: "10px 20px",
     textTransform: "capitalize",
-    width: "115px",
-    height: "40px",
+    width: "160px",
+    height: "50px",
     fontFamily: "Poppins",
     fontSize: "16px",
     fontWeight: "500",
@@ -90,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     fontFamily: "Poppins",
     fontWeight: "500",
-    fontSize: "18px",
+    fontSize: "14px",
     [theme.breakpoints.down("md")]: {
       fontSize: "14px",
     },
@@ -98,7 +125,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     margin: "2em 0 5em 0",
     display: "flex",
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
     "& .MuiListItem-root ": {
       padding: 0,
@@ -130,6 +157,26 @@ const useStyles = makeStyles((theme) => ({
       lineHeight: "24px",
     },
   },
+  cardContent: {
+    display: "flex",
+    textAlign: "left",
+    justifyContent: "flex-start",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    width: "100%",
+  },
+  [theme.breakpoints.down("md")]: {
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  progress: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    textAlign: "center",
+  },
 }));
 function Shop() {
   const dispatch = useDispatch();
@@ -150,18 +197,17 @@ function Shop() {
       setIsInCart(false);
     }, 2000);
   };
+  useEffect(() => {
+    setLoading(true);
+    if (products.length === 0) {
+      dispatch(getAllProduct(() => setLoading(false)));
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   return (
     <Container style={{ marginTop: 10 + "rem" }}>
-      <Head>
-          <title>
-              Greenfinite - Shop
-          </title>
-          <meta
-          name="description"
-          content=""
-          />
-      </Head>
       {/* <Grid style={{ textAlign: 'center' }}></Grid> */}
       <Box style={{ textAlign: "center" }}>
         <h1
@@ -190,38 +236,59 @@ function Shop() {
 
       <Grid container className={classes.container}>
         {loading ? (
-          <CircularProgress />
+          <div className={classes.progress}>
+            {" "}
+            <CircularProgress />
+          </div>
         ) : (
           <>
             {products &&
               products.length &&
               products.map((product) => (
-                <Grid item container xs={8} md={5}>
+                <Grid
+                  item
+                  container
+                  xs={12}
+                  md={3}
+                  spacing={2}
+                  style={{ marginBottom: "1em" }}
+                >
                   <Grid item className={classes.item}>
-                    <Box>
-                      <Link href={`/shop/${product.product_id}`}>
-                        <img
-                          src={product.image_url}
-                          alt="date product"
-                          className={classes.logo}
-                        />
-                      </Link>
-                    </Box>
-                    <Box>
-                      <Typography variant="h4">
+                    <Card className={classes.card} elevation={0}>
+                      <Box>
                         <Link href={`/shop/${product.product_id}`}>
-                          <MenuItem
-                            className={classes.title}
-                            onClick={() => getId(product.product_id)}
-                          >
-                            {product.name} ({product.net_weight}g)
-                          </MenuItem>
+                          <img
+                            src={product.image_url}
+                            alt="product"
+                            className={classes.logo}
+                          />
                         </Link>
-                      </Typography>
-                      <Typography variant="h4" className={classes.content}>
-                        ₦{product.amount}
-                      </Typography>
-                      {/* <Link
+                      </Box>
+                      {/* <CardMedia
+                      component="img"
+                      height="194"
+                      image={product.image_url}
+                      alt="product"
+                    /> */}
+                      {/* <Box> */}
+                      <CardContent className={classes.cardContent}>
+                        <Typography variant="h4">
+                          <Link href={`/shop/${product.product_id}`}>
+                            <MenuItem
+                              className={classes.title}
+                              onClick={() => getId(product.product_id)}
+                            >
+                              {product.name}{" "}
+                            </MenuItem>
+                          </Link>{" "}
+                          <small className={classes.grams}>
+                            ({product.net_weight})
+                          </small>
+                        </Typography>
+                        <Typography variant="h4" className={classes.content}>
+                          ₦{product.amount}
+                        </Typography>
+                        {/* <Link
                         href={`/shop/${product.product_id}`}
                         className={classes.button}
                       >
@@ -230,29 +297,31 @@ function Shop() {
                         </Button>
                       </Link> */}
 
-                      <Typography
-                        component="p"
-                        style={{
-                          fontSize: 18 + "px",
-                          fontFamily: "Avenir",
-                          fontStyle: "normal",
-                          fontWeight: "normal",
-                          lineHeight: 30 + "px",
-                          letterSpacing: 0.01 + "em",
-                        }}
-                      >
-                        {product && product.description}
-                      </Typography>
+                        <Typography
+                          component="p"
+                          style={{
+                            fontSize: 18 + "px",
+                            fontFamily: "Avenir",
+                            fontStyle: "normal",
+                            fontWeight: "normal",
+                            lineHeight: 30 + "px",
+                            letterSpacing: 0.01 + "em",
+                          }}
+                        >
+                          {product && product.description}
+                        </Typography>
 
-                      {/* <Link href="#"> */}
-                      <Button
-                        onClick={() => addCart(product.product_id)}
-                        className={classes.button}
-                      >
-                        Buy Now
-                      </Button>
+                        {/* <Link href="#"> */}
+                        <Button
+                          onClick={() => addCart(product.product_id)}
+                          className={classes.button}
+                        >
+                          Buy Now
+                        </Button>
+                      </CardContent>
                       {/* </Link> */}
-                    </Box>
+                      {/* </Box> */}
+                    </Card>
                   </Grid>
                 </Grid>
               ))}
