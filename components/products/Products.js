@@ -154,7 +154,7 @@ const Products = () => {
                     <Typography variant="body1" className={classes.content1}>
                       {product.description}
                       <small className={classes.grams}>
-                        {product.net_weight}g{" "}
+                        {product.net_weight}{" "}
                       </small>
                     </Typography>
                     <Button

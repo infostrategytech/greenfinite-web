@@ -144,6 +144,19 @@ function Header() {
                       variant="body1"
                     >
                       <Link
+                        className={`${classes.links} ${classes.account}`}
+                        href="/about-us"
+                        // style={{ textDecoration: "none" }}
+                      >
+                        <ListItem>About us</ListItem>
+                      </Link>
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={classes.links}
+                      variant="body1"
+                    >
+                      <Link
                         href="/shop"
                         // style={{ textDecoration: "none" }}
                       >
@@ -163,19 +176,7 @@ function Header() {
                       </Link>
                     </Typography>
 
-                    <Typography
-                      variant="body1"
-                      className={classes.links}
-                      variant="body1"
-                    >
-                      <Link
-                        className={`${classes.links} ${classes.account}`}
-                        href="/about-us"
-                        // style={{ textDecoration: "none" }}
-                      >
-                        <ListItem>About us</ListItem>
-                      </Link>
-                    </Typography>
+                   
 
                     <Typography
                       variant="body1"

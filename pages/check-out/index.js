@@ -565,7 +565,7 @@ function CheckOut() {
                       <Box>
                         <Typography className={classes.itemNameHeader}>
                         {item.name} {" "}
-                          <span className={classes.itemNameSubHeader}>({item.net_weight}g)</span>
+                          <span className={classes.itemNameSubHeader}>({item.net_weight})</span>
                         </Typography>
 
                         <Typography className={classes.quantityHeader}>

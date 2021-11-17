@@ -9,19 +9,29 @@ import {
   Button,
   MenuItem,
   CircularProgress,
+  Card,
+  CardMedia,
+  CardContent
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { GET_ID } from "../../redux/actions/Contants";
-import Head from 'next/head';
+
 import router from "next/router";
 import { addToCart } from "../../redux/actions/cart";
 
 const useStyles = makeStyles((theme) => ({
+  card:{
+    padding:'1em'
+  },
   item: {
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    wordBreak:'break-all',
+    overflowWrap:'break-word',
+    width:'100%',
+    padding:'1em 3em',
+    // boxShadow: "0px -1px 29px 8px rgba(210,210,210,0.15)",
+    // alignItems: "center",
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
       textAlign: "center",
@@ -33,37 +43,38 @@ const useStyles = makeStyles((theme) => ({
     // height: "240px",
     // width: "280px",
     // objectFit: "cover",
-    [theme.breakpoints.down("md")]: {
-      height: "140px",
-      width: "140px",
-    },
-    [theme.breakpoints.down("xs")]: {
-      height: "120px",
-      width: "180px",
-      // objectFit: "cover",
-    },
+    // [theme.breakpoints.down("md")]: {
+    //   height: "140px",
+    //   width: "140px",
+    // },
+    // [theme.breakpoints.down("xs")]: {
+    //   height: "120px",
+    //   width: "180px",
+    //   // objectFit: "cover",
+    // },
   },
   title: {
     fontFamily: "Poppins",
-    fontSize: "30px",
+    fontSize: "20px",
     fontWeight: "600",
     lineHeight: "36px",
     cursor: "pointer",
+    overflowWrap:'break-word',
     [theme.breakpoints.down("md")]: {
-      fontSize: "24px",
+      fontSize: "18px",
       lineHeight: "20px",
     },
   },
 
   content: {
     fontFamily: "Poppins",
-    fontSize: "24px",
-    fontWeight: "700",
-    lineHeight: "28px",
+    fontSize: "18px",
+    fontWeight: "400",
+
     marginTop: ".2em",
     marginBottom: "1em",
     [theme.breakpoints.down("md")]: {
-      fontSize: "20px",
+      fontSize: "16px",
       lineHeight: "18px",
     },
   },
@@ -90,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     fontFamily: "Poppins",
     fontWeight: "500",
-    fontSize: "18px",
+    fontSize: "14px",
     [theme.breakpoints.down("md")]: {
       fontSize: "14px",
     },
@@ -98,7 +109,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     margin: "2em 0 5em 0",
     display: "flex",
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
     "& .MuiListItem-root ": {
       padding: 0,
@@ -153,15 +164,6 @@ function Shop() {
 
   return (
     <Container style={{ marginTop: 10 + "rem" }}>
-      <Head>
-          <title>
-              Greenfinite - Shop
-          </title>
-          <meta
-          name="description"
-          content=""
-          />
-      </Head>
       {/* <Grid style={{ textAlign: 'center' }}></Grid> */}
       <Box style={{ textAlign: "center" }}>
         <h1
@@ -196,27 +198,36 @@ function Shop() {
             {products &&
               products.length &&
               products.map((product) => (
-                <Grid item container xs={8} md={5}>
+                <Grid item container xs={12} md={3} spacing={2} style={{marginBottom:'1em'}}>
                   <Grid item className={classes.item}>
+                    <Card className={classes.card} elevation={0}>
                     <Box>
                       <Link href={`/shop/${product.product_id}`}>
-                        <img
-                          src={product.image_url}
-                          alt="date product"
-                          className={classes.logo}
-                        />
+                      <img
+                        src={product.image_url}
+                        alt="product"
+                        className={classes.logo}
+                      />
                       </Link>
                     </Box>
-                    <Box>
-                      <Typography variant="h4">
+                    {/* <CardMedia
+                      component="img"
+                      height="194"
+                      image={product.image_url}
+                      alt="product"
+                    /> */}
+                    {/* <Box> */}
+                     <CardContent>
+                     <Typography variant="h4">
                         <Link href={`/shop/${product.product_id}`}>
                           <MenuItem
                             className={classes.title}
                             onClick={() => getId(product.product_id)}
                           >
-                            {product.name} ({product.net_weight}g)
+                            {product.name} {" "}
                           </MenuItem>
                         </Link>
+                          {" "}<small className={classes.grams}>({product.net_weight})</small>
                       </Typography>
                       <Typography variant="h4" className={classes.content}>
                         ₦{product.amount}
@@ -251,8 +262,10 @@ function Shop() {
                       >
                         Buy Now
                       </Button>
+                     </CardContent>
                       {/* </Link> */}
-                    </Box>
+                    {/* </Box> */}
+                    </Card>
                   </Grid>
                 </Grid>
               ))}

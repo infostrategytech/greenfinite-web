@@ -216,7 +216,7 @@ const CartItem = ({ item }) => {
             component="h6"
             className={classes.productName}
           >
-            {item.name} ({item.net_weight}g)
+            {item.name} ({item.net_weight})
           </Typography>
           <IconButton
             aria-label="delete"
