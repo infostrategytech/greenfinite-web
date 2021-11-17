@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #d3d3d3",
     display: "flex",
     justifyContent: "center",
+    borderRadius: "20px",
     alignItems: "center",
     flexDirection: "column",
     [theme.breakpoints.down("md")]: {
