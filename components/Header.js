@@ -79,7 +79,6 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down('md')]: {
       fontSize: '14px',
-      
     },
   },
   account: {
@@ -181,6 +180,19 @@ function Header() {
                       variant="body1"
                     >
                       <Link
+                        className={`${classes.links} ${classes.account}`}
+                        href="/about-us"
+                        // style={{ textDecoration: "none" }}
+                      >
+                        <ListItem>About us</ListItem>
+                      </Link>
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={classes.links}
+                      variant="body1"
+                    >
+                      <Link
                         href="/shop"
                         // style={{ textDecoration: "none" }}
                       >
@@ -216,13 +228,18 @@ function Header() {
                         >
                           <MenuItem
                             onClick={() => {
-                              handleClose;
+                              handleClose();
                               router.push('/distributors');
                             }}
                           >
                             Become A Distributor
                           </MenuItem>
-                          <MenuItem onClick={handleClose}>
+                          <MenuItem
+                            onClick={() => {
+                              handleClose();
+                              router.push('/state-distributors');
+                            }}
+                          >
                             Buy From State Distributors
                           </MenuItem>
                         </Menu>
@@ -233,20 +250,6 @@ function Header() {
                       >
                         <ListItem>Distributors</ListItem>
                       </Link>   */}
-                    </Typography>
-
-                    <Typography
-                      variant="body1"
-                      className={classes.links}
-                      variant="body1"
-                    >
-                      <Link
-                        className={`${classes.links} ${classes.account}`}
-                        href="/about-us"
-                        // style={{ textDecoration: "none" }}
-                      >
-                        <ListItem>About us</ListItem>
-                      </Link>
                     </Typography>
 
                     <Typography
@@ -316,4 +319,3 @@ function Header() {
 }
 
 export default Header;
-

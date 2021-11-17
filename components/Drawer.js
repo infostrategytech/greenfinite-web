@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Drawer,
   List,
@@ -103,7 +103,6 @@ const DrawerComponent = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  
 
   const distributorsItem = [
     {
@@ -112,7 +111,7 @@ const DrawerComponent = () => {
     },
     {
       text: 'Buy From State Distributors',
-      path: '/',
+      path: '/state-distributors',
     },
   ];
 
@@ -126,7 +125,6 @@ const DrawerComponent = () => {
     });
     setCartCount(cartCount);
   }, [cart, cartCount]);
-
 
   return (
     <>
@@ -178,6 +176,19 @@ const DrawerComponent = () => {
           </ListItem>
           <ListItem
             onClick={() => {
+              router.push('/about-us');
+              setOpenDrawer(false);
+            }}
+            className={classes.listItems}
+          >
+            <ListItemText>
+              <Typography variant="body1" className={classes.links}>
+                About us
+              </Typography>{' '}
+            </ListItemText>
+          </ListItem>
+          <ListItem
+            onClick={() => {
               router.push('/shop');
               setOpenDrawer(false);
             }}
@@ -205,7 +216,12 @@ const DrawerComponent = () => {
           <Collapse in={openHome} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               {distributorsItem.map((item, index) => (
-                <ListItem key={index} button className={classes.nested} onClick={() => setOpenDrawer(false)}>
+                <ListItem
+                  key={index}
+                  button
+                  className={classes.nested}
+                  onClick={() => {setOpenDrawer(false);handleClickHome()}}
+                >
                   <Link href={item.path}>
                     <ListItemText
                       primary={item.text}
@@ -217,19 +233,7 @@ const DrawerComponent = () => {
             </List>
           </Collapse>
 
-          <ListItem
-            onClick={() => {
-              router.push('/about-us');
-              setOpenDrawer(false);
-            }}
-            className={classes.listItems}
-          >
-            <ListItemText>
-              <Typography variant="body1" className={classes.links}>
-                About us
-              </Typography>{' '}
-            </ListItemText>
-          </ListItem>
+         
           <ListItem
             onClick={() => {
               router.push('/contact-us');
