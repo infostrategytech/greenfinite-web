@@ -201,7 +201,7 @@ function Shop() {
               products.map((product) => (
                 <Grid item container xs={12} md={3} spacing={2} style={{marginBottom:'1em'}}>
                   <Grid item className={classes.item}>
-                    <Card className={classes.card} elevation={}>
+                    <Card className={classes.card} elevation={0}>
                     <Box>
                       <Link href={`/shop/${product.product_id}`}>
                       <img
