@@ -176,6 +176,19 @@ const DrawerComponent = () => {
           </ListItem>
           <ListItem
             onClick={() => {
+              router.push('/about-us');
+              setOpenDrawer(false);
+            }}
+            className={classes.listItems}
+          >
+            <ListItemText>
+              <Typography variant="body1" className={classes.links}>
+                About us
+              </Typography>{' '}
+            </ListItemText>
+          </ListItem>
+          <ListItem
+            onClick={() => {
               router.push('/shop');
               setOpenDrawer(false);
             }}
@@ -207,7 +220,7 @@ const DrawerComponent = () => {
                   key={index}
                   button
                   className={classes.nested}
-                  onClick={() => setOpenDrawer(false)}
+                  onClick={() => {setOpenDrawer(false);handleClickHome()}}
                 >
                   <Link href={item.path}>
                     <ListItemText
@@ -220,19 +233,7 @@ const DrawerComponent = () => {
             </List>
           </Collapse>
 
-          <ListItem
-            onClick={() => {
-              router.push('/about-us');
-              setOpenDrawer(false);
-            }}
-            className={classes.listItems}
-          >
-            <ListItemText>
-              <Typography variant="body1" className={classes.links}>
-                About us
-              </Typography>{' '}
-            </ListItemText>
-          </ListItem>
+         
           <ListItem
             onClick={() => {
               router.push('/contact-us');
