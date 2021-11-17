@@ -191,7 +191,7 @@ const DrawerComponent = () => {
           </ListItem>
 
           <ListItem
-            onClick={() => handleClickHome()}
+            onClick={() => {handleClickHome();setOpenDrawer(false)}}
             className={classes.listItems}
           >
             <ListItemText>
