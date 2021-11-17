@@ -22,8 +22,13 @@ import { addToCart } from "../../redux/actions/cart";
 
 const useStyles = makeStyles((theme) => ({
   card:{
-    padding:'1em 3em',
+    padding:'1em 0',
+    width:'95%',
     border:'1px solid #d3d3d3',
+    display:'flex',
+    justifyContent:"center",
+    alignItems:'center',
+    flexDirection:'column',
     [theme.breakpoints.down('md')]:{
       padding:'1em',
       textAlign:'center'
@@ -34,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
     wordBreak:'break-all',
     overflowWrap:'break-word',
     width:'100%',
-
  
     // boxShadow: "0px -1px 29px 8px rgba(210,210,210,0.15)",
     // alignItems: "center",
@@ -64,15 +68,15 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontFamily: "Poppins",
-    fontSize: "20px",
+    fontSize: "18px",
     fontWeight: "600",
     lineHeight: "36px",
     cursor: "pointer",
+    textAlign:'center',
     overflowWrap:'break-word',
     [theme.breakpoints.down("md")]: {
       fontSize: "18px",
       lineHeight: "20px",
-      textAlign:'center'
     },
   },
 
