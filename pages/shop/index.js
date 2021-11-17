@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
     wordBreak:'break-all',
     overflowWrap:'break-word',
     width:'100%',
-    padding:'1em 3em',
+    padding:'1em 1em',
+  
     // boxShadow: "0px -1px 29px 8px rgba(210,210,210,0.15)",
     // alignItems: "center",
     [theme.breakpoints.down("md")]: {
@@ -200,7 +201,7 @@ function Shop() {
               products.map((product) => (
                 <Grid item container xs={12} md={3} spacing={2} style={{marginBottom:'1em'}}>
                   <Grid item className={classes.item}>
-                    <Card className={classes.card} elevation={0}>
+                    <Card className={classes.card} elevation={}>
                     <Box>
                       <Link href={`/shop/${product.product_id}`}>
                       <img
