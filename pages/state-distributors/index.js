@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '6rem',
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0,
+      paddingTop: 0,
     },
   },
   subContainer: {
