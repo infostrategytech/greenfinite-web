@@ -76,6 +76,19 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "justify",
     },
   },
+  subtitle2: {
+    fontFamily: "Poppins",
+    fontSize: "18px",
+    fontWeight: "bold",
+    lineHeight: "27px",
+    marginTop: "30px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "15px",
+      lineHeight: "20px",
+      // fontWeight: "300",
+      textAlign: "justify",
+    },
+  },
   fruitContainer: {
     display: "flex",
     alignItems: "center",
@@ -135,11 +148,30 @@ const ProductSection = () => {
                   Date Powder
                 </Typography>
                 <Typography variant="body1" className={classes.content1}>
-                  Our Dates powder is made from the flesh of Dates Fruit which
+                  {/* Our Dates powder is made from the flesh of Dates Fruit which
                   have been dried and ground into fine powder. We pride
                   ourselves as being the manufacturers of the finest and purest
                   Dates Powder.
-                  <small className={classes.grams}>200g and 500g </small>
+                  <small className={classes.grams}>200g and 500g </small> */}
+                  Our Dates powder is made from the flesh of Dates Fruit which
+                  have been dried and ground into fine powder. We pride
+                  ourselves as being the manufacturers of the finest and purest
+                  Dates Powder. Our Dates powder is the nutrient-dense, perfect
+                  alternative to refined sugar, loaded with antioxidants,
+                  vitamins and minerals. Considered very healthy for babies,
+                  toddlers, young children and adults. They are available in
+                  200g and 500g packages.
+                </Typography>
+
+                <Typography variant="h4" className={classes.subtitle2}>
+                  Uses
+                </Typography>
+
+                <Typography variant="body1" className={classes.content1}>
+                  Can be used for baking, cooking. seasoning, mixed in
+                  smoothies, yogurts, cereals, pap, soups, grills, baby food etc
+                  They are incredibly versatile and can fit into just any
+                  recipe.Suitable for babies from 6 months.
                 </Typography>
               </Grid>
               <Grid item md>
@@ -171,11 +203,43 @@ const ProductSection = () => {
                   Date Syrup
                 </Typography>
                 <Typography variant="body1" className={classes.content1}>
-                  Our Dates powder is made from the flesh of Dates Fruit which
-                  have been dried and ground into fine powder. We pride
-                  ourselves as being the manufacturers of the finest and purest
-                  Dates Powder.
-                  <small className={classes.grams}>200g and 5000g</small>
+                  Our Dates Syrup is made from the flesh of the Dates Palm Fruit
+                  and treated water. We have various varieties:
+                </Typography>
+
+                <Typography variant="h4" className={classes.subtitle2}>
+                  Dates syrup original
+                </Typography>
+
+                <Typography variant="body1" className={classes.content1}>
+                  Ingredents: Dates Fruits and Treated Water.
+                </Typography>
+
+                <Typography variant="h4" className={classes.subtitle2}>
+                  Dates and cocoa syrup
+                </Typography>
+
+                <Typography variant="body1" className={classes.content1}>
+                  Unforgettable rich chocodatey flavour Ingredients: Dates Fruit
+                  and Cocoa Powder
+                </Typography>
+
+                <Typography variant="h4" className={classes.subtitle2}>
+                  Dates and cinnamon syrup
+                </Typography>
+
+                <Typography variant="body1" className={classes.content1}>
+                  Enjoy the authentic taste of Dates with an infusion of
+                  Cinnamon Ingredients; Dates Fruits and Cinnamon Powder
+                </Typography>
+
+                <Typography variant="h4" className={classes.subtitle2}>
+                  Uses
+                </Typography>
+
+                <Typography variant="body1" className={classes.content1}>
+                  Drizzle on teas, pancakes, cocktails, desserts, icecream,
+                  porridges, yogurt, salads, baby food etc
                 </Typography>
               </Grid>
             </Grid>

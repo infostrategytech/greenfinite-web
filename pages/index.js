@@ -147,6 +147,9 @@ export default function Home() {
                 className={classes.logo}
                 width="600px"
                 height="500px"
+                placeholder="blur"
+                priority={true}
+                // blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
               />
             </Grid>
           </Grid>
