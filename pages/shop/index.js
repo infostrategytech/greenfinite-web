@@ -11,7 +11,7 @@ import {
   CircularProgress,
   Card,
   CardMedia,
-  CardContent
+  CardContent,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,34 +21,34 @@ import router from "next/router";
 import { addToCart } from "../../redux/actions/cart";
 
 const useStyles = makeStyles((theme) => ({
-  card:{
-    padding:'1em 0',
-    width:'95%',
-    border:'1px solid #d3d3d3',
-    display:'flex',
-    justifyContent:"center",
-    alignItems:'center',
-    flexDirection:'column',
-    [theme.breakpoints.down('md')]:{
-      padding:'1em',
-      textAlign:'center'
-    }
+  card: {
+    padding: "1em 0",
+    width: "95%",
+    border: "1px solid #d3d3d3",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    [theme.breakpoints.down("md")]: {
+      padding: "1em",
+      textAlign: "center",
+    },
   },
   item: {
     display: "flex",
-    wordBreak:'break-all',
-    overflowWrap:'break-word',
-    width:'100%',
- 
+    wordBreak: "break-all",
+    overflowWrap: "break-word",
+    width: "100%",
+
     // boxShadow: "0px -1px 29px 8px rgba(210,210,210,0.15)",
     // alignItems: "center",
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
       textAlign: "center",
       marginBottom: "2em",
-      justifyContent:"center",
-      alignItems:'center',
-      maxWidth:'100%'
+      justifyContent: "center",
+      alignItems: "center",
+      maxWidth: "100%",
     },
   },
   logo: {
@@ -72,8 +72,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "600",
     lineHeight: "36px",
     cursor: "pointer",
-    textAlign:'center',
-    overflowWrap:'break-word',
+    textAlign: "center",
+    overflowWrap: "break-word",
     [theme.breakpoints.down("md")]: {
       fontSize: "18px",
       lineHeight: "20px",
@@ -155,6 +155,19 @@ const useStyles = makeStyles((theme) => ({
       lineHeight: "24px",
     },
   },
+  cardContent: {
+    display: "flex",
+    textAlign: "left",
+    justifyContent: "flex-start",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    width: "100%",
+  },
+  [theme.breakpoints.down("md")]: {
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 }));
 function Shop() {
   const dispatch = useDispatch();
@@ -212,41 +225,50 @@ function Shop() {
             {products &&
               products.length &&
               products.map((product) => (
-                <Grid item container xs={12} md={3} spacing={2} style={{marginBottom:'1em', }}>
+                <Grid
+                  item
+                  container
+                  xs={12}
+                  md={3}
+                  spacing={2}
+                  style={{ marginBottom: "1em" }}
+                >
                   <Grid item className={classes.item}>
                     <Card className={classes.card} elevation={0}>
-                    <Box>
-                      <Link href={`/shop/${product.product_id}`}>
-                      <img
-                        src={product.image_url}
-                        alt="product"
-                        className={classes.logo}
-                      />
-                      </Link>
-                    </Box>
-                    {/* <CardMedia
+                      <Box>
+                        <Link href={`/shop/${product.product_id}`}>
+                          <img
+                            src={product.image_url}
+                            alt="product"
+                            className={classes.logo}
+                          />
+                        </Link>
+                      </Box>
+                      {/* <CardMedia
                       component="img"
                       height="194"
                       image={product.image_url}
                       alt="product"
                     /> */}
-                    {/* <Box> */}
-                     <CardContent>
-                     <Typography variant="h4">
-                        <Link href={`/shop/${product.product_id}`}>
-                          <MenuItem
-                            className={classes.title}
-                            onClick={() => getId(product.product_id)}
-                          >
-                            {product.name} {" "}
-                          </MenuItem>
-                        </Link>
-                          {" "}<small className={classes.grams}>({product.net_weight})</small>
-                      </Typography>
-                      <Typography variant="h4" className={classes.content}>
-                        ₦{product.amount}
-                      </Typography>
-                      {/* <Link
+                      {/* <Box> */}
+                      <CardContent className={classes.cardContent}>
+                        <Typography variant="h4">
+                          <Link href={`/shop/${product.product_id}`}>
+                            <MenuItem
+                              className={classes.title}
+                              onClick={() => getId(product.product_id)}
+                            >
+                              {product.name}{" "}
+                            </MenuItem>
+                          </Link>{" "}
+                          <small className={classes.grams}>
+                            ({product.net_weight})
+                          </small>
+                        </Typography>
+                        <Typography variant="h4" className={classes.content}>
+                          ₦{product.amount}
+                        </Typography>
+                        {/* <Link
                         href={`/shop/${product.product_id}`}
                         className={classes.button}
                       >
@@ -255,30 +277,30 @@ function Shop() {
                         </Button>
                       </Link> */}
 
-                      <Typography
-                        component="p"
-                        style={{
-                          fontSize: 18 + "px",
-                          fontFamily: "Avenir",
-                          fontStyle: "normal",
-                          fontWeight: "normal",
-                          lineHeight: 30 + "px",
-                          letterSpacing: 0.01 + "em",
-                        }}
-                      >
-                        {product && product.description}
-                      </Typography>
+                        <Typography
+                          component="p"
+                          style={{
+                            fontSize: 18 + "px",
+                            fontFamily: "Avenir",
+                            fontStyle: "normal",
+                            fontWeight: "normal",
+                            lineHeight: 30 + "px",
+                            letterSpacing: 0.01 + "em",
+                          }}
+                        >
+                          {product && product.description}
+                        </Typography>
 
-                      {/* <Link href="#"> */}
-                      <Button
-                        onClick={() => addCart(product.product_id)}
-                        className={classes.button}
-                      >
-                        Buy Now
-                      </Button>
-                     </CardContent>
+                        {/* <Link href="#"> */}
+                        <Button
+                          onClick={() => addCart(product.product_id)}
+                          className={classes.button}
+                        >
+                          Buy Now
+                        </Button>
+                      </CardContent>
                       {/* </Link> */}
-                    {/* </Box> */}
+                      {/* </Box> */}
                     </Card>
                   </Grid>
                 </Grid>
