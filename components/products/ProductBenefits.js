@@ -64,7 +64,7 @@ function ProductBenefits() {
                 <li className={classes.content1}>
                   Dates are high in magnesium and potassium which play
                   significant roles in blood sugar control. The potassium helps
-                  to reduce cholesterol and keep the risk of stroke in check
+                  to reduce cholesterol and keeps the risk of stroke in check
                 </li>
                 <li className={classes.content1}>
                   They are a good source probiotics, phytonutrients and soluble

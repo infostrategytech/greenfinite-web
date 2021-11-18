@@ -189,8 +189,8 @@ const Products = () => {
               Date Powder
             </Typography>
             <Typography variant="body1" className={classes.content1}>
-              flesh of Dates Fruit which have been dried and ground into fine
-              powder.
+              Our Dates Powder is made from the flesh of Dates Fruit which have
+              been dried and ground into fine powder.
               <small className={classes.grams}>200g and 500g </small>
             </Typography>
 
@@ -204,7 +204,7 @@ const Products = () => {
           <Box>
             <Link href={`/shop`}>
               <img
-                src={`./images/date-syrup.png`}
+                src={`./images/dates-syrup.jpeg`}
                 alt="powdered fruits"
                 className={classes.logo1}
               />
@@ -215,8 +215,8 @@ const Products = () => {
               Date Syrup
             </Typography>
             <Typography variant="body1" className={classes.content1}>
-              flesh of Dates Fruit which have been dried and ground into fine
-              powder.
+              Our Dates Syrup is made from the flesh of the Dates Palm Fruit and
+              treated water.
               <small className={classes.grams}>200g and 500g </small>
             </Typography>
 
