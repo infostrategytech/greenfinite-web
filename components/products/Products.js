@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   cards: {
     background:
       "linear-gradient(0deg, rgba(255,255,255,0.6), rgba(255,255,255,0.6))",
-    padding: "2em 4em",
+    padding: "0 4em",
     boxShadow: "0px -1px 29px 8px rgba(210,210,210,0.15)",
     [theme.breakpoints.down("md")]: {
       padding: "1em",
@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     height: "240px",
     width: "240px",
-    // objectFit: "cover",
+    objectFit: "center",
+
     [theme.breakpoints.down("md")]: {
       height: "140px",
       width: "140px",
@@ -125,49 +126,105 @@ const Products = () => {
     dispatch(addToCart(id));
   };
   return (
+    // <Card elevation={0} className={classes.cards}>
+    //   <Grid container className={classes.wrapper}>
+    //     {loading ? (
+    //       <div className={classes.progress}>
+    //         {" "}
+    //         <CircularProgress />
+    //       </div>
+    //     ) : (
+    //       <>
+    //         {products &&
+    //           products.length &&
+    //           products.map((product) => (
+    //             <Grid item xs={12} md={6} className={classes.fruitContainer}>
+    //               <Box>
+    //                 <Link href={`/shop/${product.product_id}`}>
+    //                   <img
+    //                     src={product.image_url}
+    //                     alt="powdered fruits"
+    //                     className={classes.logo1}
+    //                   />
+    //                 </Link>
+    //               </Box>
+    //               <Box>
+    //                 <Typography variant="h3" className={classes.title1}>
+    //                   {product.name}
+    //                 </Typography>
+    //                 <Typography variant="body1" className={classes.content1}>
+    //                   {product.description}
+    //                   <small className={classes.grams}>
+    //                     {product.net_weight}g{" "}
+    //                   </small>
+    //                 </Typography>
+    //                 <Button
+    //                   onClick={() => addCart(product.product_id)}
+    //                   className={classes.button1}
+    //                 >
+    //                   Buy Now
+    //                 </Button>
+    //               </Box>
+    //             </Grid>
+    //           ))}
+    //       </>
+    //     )}
+    //   </Grid>
+    // </Card>
     <Card elevation={0} className={classes.cards}>
       <Grid container className={classes.wrapper}>
-        {loading ? (
-          <div className={classes.progress}>
-            {" "}
-            <CircularProgress />
-          </div>
-        ) : (
-          <>
-            {products &&
-              products.length &&
-              products.map((product) => (
-                <Grid item xs={12} md={6} className={classes.fruitContainer}>
-                  <Box>
-                    <Link href={`/shop/${product.product_id}`}>
-                      <img
-                        src={product.image_url}
-                        alt="powdered fruits"
-                        className={classes.logo1}
-                      />
-                    </Link>
-                  </Box>
-                  <Box>
-                    <Typography variant="h3" className={classes.title1}>
-                      {product.name}
-                    </Typography>
-                    <Typography variant="body1" className={classes.content1}>
-                      {product.description}
-                      <small className={classes.grams}>
-                        {product.net_weight}g{" "}
-                      </small>
-                    </Typography>
-                    <Button
-                      onClick={() => addCart(product.product_id)}
-                      className={classes.button1}
-                    >
-                      Buy Now
-                    </Button>
-                  </Box>
-                </Grid>
-              ))}
-          </>
-        )}
+        {/* Dates powder */}
+        <Grid item xs={12} md={6} className={classes.fruitContainer}>
+          <Box>
+            <Link href={`/shop`}>
+              <img
+                src={`./images/fruit.png`}
+                alt="powdered fruits"
+                className={classes.logo1}
+              />
+            </Link>
+          </Box>
+          <Box>
+            <Typography variant="h3" className={classes.title1}>
+              Date Powder
+            </Typography>
+            <Typography variant="body1" className={classes.content1}>
+              flesh of Dates Fruit which have been dried and ground into fine
+              powder.
+              <small className={classes.grams}>200g and 500g </small>
+            </Typography>
+
+            <Link href={`/shop`}>
+              <Button className={classes.button1}>Buy Now</Button>
+            </Link>
+          </Box>
+        </Grid>
+        {/* Dates Syrup */}
+        <Grid item xs={12} md={6} className={classes.fruitContainer}>
+          <Box>
+            <Link href={`/shop`}>
+              <img
+                src={`./images/date-syrup.png`}
+                alt="powdered fruits"
+                className={classes.logo1}
+              />
+            </Link>
+          </Box>
+          <Box>
+            <Typography variant="h3" className={classes.title1}>
+              Date Syrup
+            </Typography>
+            <Typography variant="body1" className={classes.content1}>
+              flesh of Dates Fruit which have been dried and ground into fine
+              powder.
+              <small className={classes.grams}>200g and 500g </small>
+            </Typography>
+
+            <Link href={`/shop`}>
+              <Button className={classes.button1}>Buy Now</Button>
+            </Link>
+          </Box>
+        </Grid>
       </Grid>
     </Card>
   );

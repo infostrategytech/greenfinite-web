@@ -136,6 +136,19 @@ const DrawerComponent = () => {
           </ListItem>
           <ListItem
             onClick={() => {
+              router.push("/about-us");
+              setOpenDrawer(false);
+            }}
+            className={classes.listItems}
+          >
+            <ListItemText>
+              <Typography variant="body1" className={classes.links}>
+                About us
+              </Typography>{" "}
+            </ListItemText>
+          </ListItem>
+          <ListItem
+            onClick={() => {
               router.push("/shop");
               setOpenDrawer(false);
             }}
@@ -160,19 +173,7 @@ const DrawerComponent = () => {
               </Typography>{" "}
             </ListItemText>
           </ListItem>
-          <ListItem
-            onClick={() => {
-              router.push("/about-us");
-              setOpenDrawer(false);
-            }}
-            className={classes.listItems}
-          >
-            <ListItemText>
-              <Typography variant="body1" className={classes.links}>
-                About us
-              </Typography>{" "}
-            </ListItemText>
-          </ListItem>
+
           <ListItem
             onClick={() => {
               router.push("/contact-us");

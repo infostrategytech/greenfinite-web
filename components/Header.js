@@ -9,10 +9,17 @@ import {
   useMediaQuery,
   Grid,
   IconButton,
+  Box,
   Badge,
+  Button,
   MenuItem,
+  Menu,
+  List,
+  ListItemText,
+  ListItemIcon,
   ListItem,
 } from "@material-ui/core";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import { ShoppingCart } from "@material-ui/icons/";
 import router from "next/router";
@@ -68,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
     transition: "200ms ease-in-out",
     "&:hover": {
       fontWeight: "600",
+      color: "#000",
     },
     [theme.breakpoints.down("md")]: {
       fontSize: "14px",
@@ -78,15 +86,39 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "25px",
     padding: "6px 15px",
   },
+  tableItem: {
+    fontSize: "14px",
+    color: "#252C32",
+    lineHeight: "24px",
+    fontWeight: "normal",
+    fontStyle: "normal",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "10px",
+      lineHeight: "20px",
+    },
+  },
 }));
 
 function Header() {
+  // const [cartCount, setCartCount] = useState(0);
+  const [openDropDown, setOpenDropDown] = useState(false);
   const [count, setCartCount] = useState(0);
   const { cart } = useSelector((state) => state.products);
-  const [openDrawer, setOpenDrawer] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const closehandler = () => {
     setOpenDrawer(false);
   };
@@ -98,6 +130,10 @@ function Header() {
     });
     setCartCount(cartCount);
   }, [cart]);
+
+  const toggle = () => {
+    setOpenDropDown(true);
+  };
 
   return (
     <>
@@ -144,6 +180,19 @@ function Header() {
                       variant="body1"
                     >
                       <Link
+                        className={`${classes.links} ${classes.account}`}
+                        href="/about-us"
+                        // style={{ textDecoration: "none" }}
+                      >
+                        <ListItem>About us</ListItem>
+                      </Link>
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={classes.links}
+                      variant="body1"
+                    >
+                      <Link
                         href="/shop"
                         // style={{ textDecoration: "none" }}
                       >
@@ -155,13 +204,54 @@ function Header() {
                       className={classes.links}
                       variant="body1"
                     >
-                      <Link
+                      <div>
+                        <Button
+                          id="basic-button"
+                          className={classes.links}
+                          aria-controls="basic-menu"
+                          style={{ textTransform: "none" }}
+                          aria-haspopup="true"
+                          aria-expanded={open ? "true" : undefined}
+                          onClick={handleClick}
+                        >
+                          Distributors
+                        </Button>
+                        <Menu
+                          style={{ marginTop: "2rem" }}
+                          id="basic-menu"
+                          anchorEl={anchorEl}
+                          open={open}
+                          onClose={handleClose}
+                          MenuListProps={{
+                            "aria-labelledby": "basic-button",
+                          }}
+                        >
+                          <MenuItem
+                            onClick={() => {
+                              handleClose();
+                              router.push("/distributors");
+                            }}
+                          >
+                            Become A Distributor
+                          </MenuItem>
+                          <MenuItem
+                            onClick={() => {
+                              handleClose();
+                              router.push("/state-distributors");
+                            }}
+                          >
+                            Buy From State Distributors
+                          </MenuItem>
+                        </Menu>
+                      </div>
+                      {/* <Link
                         href="/distributors"
                         // style={{ textDecoration: "none" }}
                       >
                         <ListItem>Distributors</ListItem>
-                      </Link>
+                      </Link>   */}
                     </Typography>
+
                     <Typography
                       variant="body1"
                       className={classes.links}
@@ -174,19 +264,7 @@ function Header() {
                         <ListItem>Contact us</ListItem>
                       </Link>
                     </Typography>
-                    <Typography
-                      variant="body1"
-                      className={classes.links}
-                      variant="body1"
-                    >
-                      <Link
-                        className={`${classes.links} ${classes.account}`}
-                        href="/about-us"
-                        // style={{ textDecoration: "none" }}
-                      >
-                        <ListItem>About us</ListItem>
-                      </Link>
-                    </Typography>
+
                     {/* <Typography
                       onClick={() => router.push("/contact-us")}
                       variant="body1"

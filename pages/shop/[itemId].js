@@ -34,12 +34,15 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     maxWidth: "100%",
-    width: "300px",
+    width: "250px",
     height: "400px",
-    [theme.breakpoints.only("md")]: {
-      width: "100px",
-      height: "100px",
+    [theme.breakpoints.down("md")]: {
+      width: "200px",
+      height: "200px",
     },
+    // [theme.breakpoints.up("md")]: {
+    //   width: "100%",
+    // },
   },
   title: {
     display: "inline",
@@ -199,7 +202,7 @@ function ItemDetails() {
               <Typography className={classes.title}>
                 <small className={classes.grams}>
                   {product && product.name}{" "}
-                  {product && `(${product.net_weight})`}g
+                  {product && `(${product.net_weight})`}
                 </small>
               </Typography>
               <Typography
