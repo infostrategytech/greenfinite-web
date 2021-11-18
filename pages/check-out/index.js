@@ -198,6 +198,10 @@ const useStyles = makeStyles((theme) => ({
   },
   productImg:{
     maxWidth: '100%',
+  },
+  logoBox:{
+    display: 'flex',
+    alignItems: 'flex-end'
   }
 }));
 
@@ -674,9 +678,55 @@ function CheckOut() {
           </Box>
 
           <Box className={classes.paymentBox}>
-            <Box>
+            {/* <Box>
               <img src="../images/paymentOptions.png" alt="payment options" />
-            </Box>
+            </Box> */}
+            <Grid container>
+              <Grid 
+                item 
+                xs={2} 
+                className={classes.logoBox}
+              >
+                <img 
+                  alt="paystack_payment"
+                  src="./images/paystack.png"
+                  className={classes.productImg}
+                />
+              </Grid>
+              <Grid 
+                item 
+                xs={2} 
+                className={classes.logoBox}
+              >
+                <img 
+                  alt="mastercard_payment"
+                  src="./images/mastercard.png"
+                  className={classes.productImg}
+                />
+              </Grid>
+              <Grid 
+                item 
+                xs={2} 
+                className={classes.logoBox}
+              >
+                <img 
+                  alt="visa_payment"
+                  src="./images/visa.png"
+                  className={classes.productImg}
+                />
+              </Grid>
+              <Grid 
+                item 
+                xs={2} 
+                className={classes.logoBox}
+              >
+                <img 
+                  alt="verve_payment"
+                  src="./images/verve.png"
+                  className={classes.productImg}
+                />
+              </Grid>
+            </Grid>
             <Box className={classes.paymentOptionHeader}>
               PayStack Payment Gateway
             </Box>
