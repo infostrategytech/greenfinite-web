@@ -16,7 +16,7 @@ import { createOrder, updateOrder } from "../../redux/actions/checkout";
 import Swal from "sweetalert2";
 import { usePaystackPayment } from 'react-paystack';
 import { useRouter } from 'next/router';
-import { CLEAR_CART } from "../../redux/actions/Contants";
+import { CLEAR_CART, SET_ADDRESS, SET_ORDER_ID } from "../../redux/actions/Contants";
 import Head from 'next/head';
 
 const useStyles = makeStyles((theme) => ({
@@ -215,6 +215,12 @@ function CheckOut() {
   const [isUpdate,setIsUpdate]= useState(false)
   const [orderData,setOrderData] = useState({})
   const [error,setError] = useState(false)
+  const [address,setAddress] = useState({
+    country:'',
+    state: '',
+    location: '',
+    street: ''
+  })
 
   let paystackEmail= Math.floor(Math.random()*12903678)
 
@@ -236,6 +242,10 @@ function CheckOut() {
         setOrderData({})
         setId('')
         dispatch({
+          type: SET_ADDRESS,
+          payload: address
+        })
+        dispatch({
           type: CLEAR_CART
         })
         Swal.fire({
@@ -244,7 +254,7 @@ function CheckOut() {
           text: 'Order Placed Succesfully'
         }).then((result) => {
           if (result.isConfirmed) {
-            router.push('/')
+            router.push('/check-out/receipt')
           }
         })
       }))
@@ -284,9 +294,23 @@ function CheckOut() {
     });
     setTotalPrice(price);
     price && setTotalPayment(price+2000)
+    
+    return ()=> dispatch({
+      type: SET_ORDER_ID,
+      payload: ''
+    });
+
   }, []);
 
   const placeOrder = ()=>{
+    if(!address.country || !address.state || !address.street){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Please provide all your billing information'
+      })
+      return
+    }
     if(!email){
       setError(true)
       Swal.fire({
@@ -334,6 +358,14 @@ function CheckOut() {
     email && setError(false)
     !email && setError(true)
     setEmail(e.target.value)
+  }
+
+  const handleAddress = e => {
+    const {name,value} = e.target
+    setAddress(prevAddress=>({
+      ...prevAddress,
+      [name]: value
+    }))
   }
 
   const initializePayment = usePaystackPayment(config);
@@ -389,6 +421,8 @@ function CheckOut() {
                       margin="normal"
                       name="country"
                       variant="outlined"
+                      onChange={handleAddress}
+
                     />
                   </Grid>
 
@@ -399,6 +433,7 @@ function CheckOut() {
                       margin="normal"
                       name="state"
                       variant="outlined"
+                      onChange={handleAddress}
                     />
                   </Grid>
                 </Grid>
@@ -409,8 +444,9 @@ function CheckOut() {
                       fullWidth
                       label="Street Address"
                       margin="normal"
-                      name="firstName"
+                      name="street"
                       variant="outlined"
+                      onChange={handleAddress}
                     />
                   </Grid>
                 </Grid>
@@ -423,6 +459,7 @@ function CheckOut() {
                       margin="normal"
                       name="location"
                       variant="outlined"
+                      onChange={handleAddress}
                     />
                   </Grid>
                 </Grid>
@@ -481,6 +518,7 @@ function CheckOut() {
                     margin="normal"
                     name="country"
                     variant="outlined"
+                    onChange={handleAddress}
                   />
                 </Grid>
 
@@ -491,6 +529,7 @@ function CheckOut() {
                     margin="normal"
                     name="state"
                     variant="outlined"
+                    onChange={handleAddress}
                   />
                 </Grid>
               </Grid>
@@ -501,8 +540,9 @@ function CheckOut() {
                     fullWidth
                     label="Street Address"
                     margin="normal"
-                    name="firstName"
+                    name="street"
                     variant="outlined"
+                    onChange={handleAddress}
                   />
                 </Grid>
               </Grid>
@@ -515,6 +555,7 @@ function CheckOut() {
                     margin="normal"
                     name="location"
                     variant="outlined"
+                    onChange={handleAddress}
                   />
                 </Grid>
               </Grid>

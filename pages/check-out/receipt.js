@@ -1,6 +1,7 @@
 import React from 'react'
-import { Grid,Typography,makeStyles,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper} from '@material-ui/core'
+import { Grid,Typography,makeStyles,Table,TableBody,TableCell,TableContainer,TableHead,TableRow} from '@material-ui/core'
 import Head from 'next/head';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root:{
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
     particulars:{
         [theme.breakpoints.up('md')]: {
-           maxWidth: 300
+           maxWidth: 400
         },
     },
     particulars2:{
@@ -80,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Receipt() {
     const classes = useStyles()
+    const {orderDetails,address} = useSelector(state=>state.checkout)
     return (
         <div className={classes.root}>
             <Head>
@@ -118,7 +120,7 @@ function Receipt() {
                             variant="body2"
                             className={classes.date}
                         >
-                            {'1st December 2021'}
+                            {orderDetails.delivery_date}
                         </Typography>
                     </Grid>
                     <Grid item>
@@ -160,7 +162,7 @@ function Receipt() {
                             <Typography
                                 variant="body1"
                             >
-                                {'0047'}
+                                {orderDetails.order_id}
                             </Typography>
                         </Grid>
                     </Grid>
@@ -179,7 +181,7 @@ function Receipt() {
                             </Typography>
                         </Grid>
                         <Grid item>
-                            <Typography>{'November 15, 2021'}</Typography>
+                            <Typography variant="body1">{orderDetails.paid_at}</Typography>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -197,12 +199,16 @@ function Receipt() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                <TableRow  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                    <TableCell>{'Date Powder (200g)'}</TableCell>
-                                    <TableCell align="right">{'3'}</TableCell>
-                                    <TableCell align="right">{'₦10,000'}</TableCell>
-                                    <TableCell align="right">{'₦30,000'}</TableCell>
-                                </TableRow>
+                            {orderDetails.items && orderDetails.items.length > 0 &&
+                                orderDetails.items.map(item=>(
+                                    <TableRow  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                        <TableCell>{item?.product?.name}</TableCell>
+                                        <TableCell align="right">{item?.quantity}</TableCell>
+                                        <TableCell align="right">{`₦${item?.product?.amount}`}</TableCell>
+                                        <TableCell align="right">{`₦${item?.sub_total}`}</TableCell>
+                                    </TableRow>
+                                ))
+                            }
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -246,7 +252,7 @@ function Receipt() {
                                 variant="h6"
                                 className={classes.bold}
                             >
-                                {'₦52000'}
+                                {`₦${orderDetails.total}`}
                             </Typography>
                         </Grid>
                     </Grid> 
@@ -255,9 +261,9 @@ function Receipt() {
                 {/* ADDRESS */}
                 <Grid item>
                     <Typography variant="body1" component="p" className={classes.bold}>Delivery Address</Typography>
-                    <Typography variant="body1" component="p">{'No. 4 Madiana Close'}</Typography>
-                    <Typography variant="body1" component="p">{'Wuse 2'}</Typography>
-                    <Typography variant="body1" component="p">{'Abuja'}</Typography>
+                    <Typography variant="body1" component="p">{address.street}</Typography>
+                    <Typography variant="body1" component="p">{address.state}</Typography>
+                    <Typography variant="body1" component="p">{address.country}</Typography>
 
                 </Grid>
 

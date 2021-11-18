@@ -39,10 +39,10 @@ export const updateOrder = (data,id,cb)=> async dispatch=>{
         const res = await callApi(`orders/${id}`,"POST",data);
 
         if (res.code === "00") {
-        //   dispatch({
-        //     type: SET_ORDER_DETAILS,
-        //     payload: res
-        //   });
+          dispatch({
+            type: SET_ORDER_DETAILS,
+            payload: res.data
+          });
         } else {
             Swal.fire({
                 icon: "error",
