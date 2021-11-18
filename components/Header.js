@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     color: "#000",
     width: "100vw",
+    borderBottom: "1px solid #ededed",
   },
   container: {
     display: "flex",

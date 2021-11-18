@@ -177,6 +177,11 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     textAlign: "center",
   },
+  icon: {
+    maxWidth: "100%",
+    width: "30px",
+    marginRight: "10px",
+  },
 }));
 function Shop() {
   const dispatch = useDispatch();
@@ -218,6 +223,11 @@ function Shop() {
             lineHeight: 54 + "px",
           }}
         >
+          <img
+            src="/images/Vector.png"
+            alt="shop icon"
+            classNam={classes.icon}
+          />
           Shop
         </h1>
         <p
@@ -249,6 +259,7 @@ function Shop() {
                   item
                   container
                   xs={12}
+                  sm={6}
                   md={3}
                   spacing={2}
                   style={{ marginBottom: "1em" }}
