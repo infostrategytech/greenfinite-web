@@ -100,6 +100,7 @@ const useStyles = makeStyles((theme) => ({
   order2: {
     [theme.breakpoints.down("md")]: {
       order: "2",
+      textAlign: "center"
     },
   },
   order1: {
@@ -107,6 +108,12 @@ const useStyles = makeStyles((theme) => ({
       order: "1",
     },
   },
+  imgContainer: {
+    textAlign: "right",
+    [theme.breakpoints.down("md")]: {
+      textAlign: "center"
+    }
+  }
 }));
 const ProductSection = () => {
   const classes = useStyles();
@@ -175,7 +182,7 @@ const ProductSection = () => {
                   recipe. It is suitable for babies from 6 months.
                 </Typography>
               </Grid>
-              <Grid item md>
+              <Grid item md sm={12} className={classes.imgContainer}>
                 <img
                   src="./images/productgroup.png"
                   alt="Powdered nuts"
@@ -192,9 +199,10 @@ const ProductSection = () => {
               spacing={4}
               className={classes.fruitContainer}
             >
-              <Grid item md className={classes.order2}>
+              {/* <Grid item md sm={12} className={classes.order2}> */}
+              <Grid item md sm={12} className={classes.order2}>
                 <img
-                  src="./images/dates-syrup.jpeg"
+                  src="./images/dates-syrup-lg.png"
                   alt="Powdered nuts"
                   className={classes.logo1}
                 />
