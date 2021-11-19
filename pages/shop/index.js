@@ -177,6 +177,14 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     textAlign: "center",
   },
+  icon: {
+    maxWidth: "100%",
+    width: "34px",
+    marginRight: "10px",
+    [theme.breakpoints.down("sm")]: {
+      width: "30px",
+    },
+  },
 }));
 function Shop() {
   const dispatch = useDispatch();
@@ -210,12 +218,18 @@ function Shop() {
     <Container style={{ marginTop: 10 + "rem" }}>
       {/* <Grid style={{ textAlign: 'center' }}></Grid> */}
       <Box style={{ textAlign: "center" }}>
+        <img
+          src="/images/Vector.png"
+          alt="shop icon"
+          className={classes.icon}
+        />
         <h1
           style={{
             fontFamily: "Poppins",
             fontSize: 36,
             fontWeight: 600,
             lineHeight: 54 + "px",
+            display: "inline",
           }}
         >
           Shop
@@ -249,6 +263,7 @@ function Shop() {
                   item
                   container
                   xs={12}
+                  sm={6}
                   md={3}
                   spacing={2}
                   style={{ marginBottom: "1em" }}

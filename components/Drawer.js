@@ -203,7 +203,7 @@ const DrawerComponent = () => {
               </Typography>{" "}
             </ListItemText>
           </ListItem> */}
-          <ListItem
+          {/* <ListItem
             onClick={() => setOpenDrawer(false)}
             className={classes.listItems}
           >
@@ -218,7 +218,7 @@ const DrawerComponent = () => {
                 Cart
               </Typography>
             </ListItemText>
-          </ListItem>
+          </ListItem> */}
         </List>
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>

@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     color: "#000",
     width: "100vw",
+    borderBottom: "1px solid #ededed",
   },
   container: {
     display: "flex",
@@ -156,7 +157,17 @@ function Header() {
             </Grid>
             {isMobile ? (
               <>
-                <DrawerComponent openDrawer={openDrawer} close={closehandler} />
+                <Box>
+                  <IconButton onClick={() => router.push("/cart")}>
+                    <Badge badgeContent={count} color="primary">
+                      <ShoppingCart />
+                    </Badge>
+                  </IconButton>{" "}
+                  <DrawerComponent
+                    openDrawer={openDrawer}
+                    close={closehandler}
+                  />
+                </Box>
               </>
             ) : (
               <Grid item sm={7}>

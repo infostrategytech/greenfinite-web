@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Button, Typography, IconButton, Box } from "@material-ui/core";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-// import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 import RemoveRoundedIcon from "@material-ui/icons/RemoveRounded";
 import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
