@@ -99,7 +99,7 @@ const Distributor = () => {
                 income by partnering with us . <br /> To become a Greenfinite
                 distributor , please Click the Join Us button
               </Typography>
-              <Button onClicl={() => router.push('/distributors')} variat="contained" className={classes.button}>
+              <Button onClick={() => router.push('/distributors')} variat="contained" className={classes.button}>
                 Join Us
               </Button>
             </Box>
