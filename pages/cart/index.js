@@ -21,6 +21,7 @@ import router from "next/router";
 import { formatMoney } from "../../UtilityService/Helpers";
 import Head from "next/head";
 import MobileCartView from "../../components/MobileCartView";
+import { ShoppingCart } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -155,6 +156,7 @@ const useStyles = makeStyles((theme) => ({
   },
   bold: {
     fontWeight: 700,
+    display: "flex",
   },
   heading: {
     [theme.breakpoints.up("md")]: {
@@ -209,8 +211,8 @@ function Cart() {
             {/* ROW 1 */}
             <Grid item className={classes.row1}>
               <Typography variant="h4" className={classes.bold}>
-                <LocalMallOutlinedIcon className={classes.bagIcon} />
-                <span>Cart {cart.length} item(s)</span>
+                <ShoppingCart className={classes.bagIcon} />
+                <span> {cart.length} item(s) in Cart</span>
               </Typography>
             </Grid>
             {/* ROW 2 */}

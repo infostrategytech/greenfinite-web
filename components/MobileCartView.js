@@ -8,12 +8,20 @@ import {
 } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-
-import RemoveRoundedIcon from "@material-ui/icons/RemoveRounded";
-import AddIcon from "@material-ui/icons/Add";
-import { removeFromCart } from "../redux/actions/cart";
-import { AddCircleOutline, RemoveCircleOutline } from "@material-ui/icons";
-
+import LocalMallOutlinedIcon from "@material-ui/icons/LocalMallOutlined";
+import {
+  addToCart,
+  adjustQuantity,
+  removeFromCart,
+} from "../redux/actions/cart";
+import {
+  AddCircleOutline,
+  RemoveCircleOutline,
+  ShoppingCart,
+} from "@material-ui/icons";
+import { useSelector, useDispatch } from "react-redux";
+import { formatMoney } from "../UtilityService/Helpers";
+import router from "next/router";
 const useStyles = makeStyles((theme) => ({
   container: {
     width: "100%",
@@ -21,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   wrapper: {
     display: "flex",
-    marginTop: "8em",
+
     borderRadius: "5px",
     border: "1px solid #d3d3d3",
     justifyContent: "center",
@@ -49,9 +57,8 @@ const useStyles = makeStyles((theme) => ({
   },
   logo1: {
     maxWidth: "100%",
-    height: "240px",
-    width: "240px",
-    objectFit: "center",
+    // height: "240px",
+    // width: "240px",
 
     [theme.breakpoints.down("md")]: {
       height: "140px",
@@ -169,10 +176,19 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  deliveryFee1: {
+    fontSize: "14px",
+    color: "#4e4e4e",
+    fontWeight: "400",
+    display: "block",
+    marginLeft: "5px",
+    marginBottom: "3em",
+  },
   deliveryFee: {
     fontSize: "14px",
     color: "#606060",
     fontWeight: "400",
+    display: "block",
   },
   btn: {
     width: "100%",
@@ -180,20 +196,43 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "50px",
     textTransform: "capitalize",
   },
+  bold: {
+    marginTop: "2em",
+    marginBottom: 5,
+    display: "flex",
+    alignItems: "center",
+  },
+  bagIcon: {
+    fontSize: 30,
+    marginRight: 10,
+    // color: "rgba(0, 0, 0, 0.54)",
+  },
 }));
 const MobileCartView = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [disabled, setDisabled] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const { cart } = useSelector((state) => state.products);
+  useEffect(() => {
+    setDisabled(false);
+    let quantity = 0;
+    let price = 0;
+    cart.forEach((item) => {
+      quantity += item.qty;
+      price += item.qty * item.amount;
+    });
+
+    setTotalPrice(price);
+  }, [cart, disabled]);
   const removeItems = (id) => {
     dispatch(removeFromCart(id));
   };
-  const onAddHandler = () => {
-    dispatch(addToCart(item.product_id));
+  const onAddHandler = (id) => {
+    dispatch(addToCart(id));
     setDisabled(false);
   };
-  const onReduceHandler = () => {
-    // setInput((prevState) => prevState - 1);
-
+  const onReduceHandler = (item) => {
     if (item.qty <= 1) {
       setDisabled(true);
       dispatch(removeFromCart(item.product_id));
@@ -205,53 +244,77 @@ const MobileCartView = () => {
   return (
     <>
       <Box className={classes.container}>
-        <Grid container className={classes.wrapper}>
-          {/* Dates Syrup */}
-          <Grid item xs={12} className={classes.fruitContainer}>
-            <Box>
-              <img
-                src={`/images/fruit.png`}
-                alt="powdered fruits"
-                className={classes.logo1}
-              />
-            </Box>
-            <Box>
-              <Typography variant="h3" className={classes.title1}>
-                Date Syrup
-                <small className={classes.grams}> (200g) </small>
-              </Typography>
-              <Typography variant="h3" className={classes.content1}>
-                N10,000
-              </Typography>
-            </Box>
-          </Grid>
-          <Box className={classes.boxFooter}>
-            <Box>
-              <IconButton
-                aria-label="delete"
-                className={classes.remove}
-                onClick={() => removeItems(item.product_id)}
-              >
-                <DeleteForeverIcon /> Remove
-              </IconButton>
-            </Box>
-            <Box className={classes.quantityCell}>
-              <IconButton
-                className={classes.iconBtn}
-                onClick={onReduceHandler}
-                disabled={disabled}
-              >
-                <RemoveCircleOutline />
-              </IconButton>
-              <Typography variant="h5" className={classes.quantityValue}>
-                5
-              </Typography>
-              <IconButton className={classes.iconBtn} onClick={onAddHandler}>
-                <AddCircleOutline />
-              </IconButton>
-            </Box>
-          </Box>
-        </Grid>
+        <Typography variant="h4" className={classes.bold}>
+          <ShoppingCart className={classes.bagIcon} />
+          <span
+            style={{
+              fontFamily: "Poppins",
+              fontWeight: "600",
+              fontSize: "20px",
+            }}
+          >
+            {cart.length} item(s) in Cart
+          </span>
+        </Typography>
+        <small className={classes.deliveryFee1}>
+          Shipping fee is a flat rate of {formatMoney(2000)}
+        </small>
+        {cart.length > 0 &&
+          cart.map((item) => (
+            <Grid container className={classes.wrapper}>
+              {/* Dates Syrup */}
+              <Grid item xs={12} className={classes.fruitContainer}>
+                <Box>
+                  <img
+                    src={item.image_url}
+                    alt="powdered fruits"
+                    className={classes.logo1}
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="h3" className={classes.title1}>
+                    {item.name}
+                    <small className={classes.grams}>
+                      {" "}
+                      ({item.net_weight}){" "}
+                    </small>
+                  </Typography>
+                  <Typography variant="h3" className={classes.content1}>
+                    {formatMoney(item.amount)}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Box className={classes.boxFooter}>
+                <Box>
+                  <IconButton
+                    aria-label="delete"
+                    className={classes.remove}
+                    onClick={() => removeItems(item.product_id)}
+                  >
+                    <DeleteForeverIcon /> Remove
+                  </IconButton>
+                </Box>
+                <Box className={classes.quantityCell}>
+                  <IconButton
+                    className={classes.iconBtn}
+                    onClick={() => onReduceHandler(item)}
+                    disabled={disabled}
+                  >
+                    <RemoveCircleOutline />
+                  </IconButton>
+                  <Typography variant="h5" className={classes.quantityValue}>
+                    {item.qty}
+                  </Typography>
+                  <IconButton
+                    className={classes.iconBtn}
+                    onClick={() => onAddHandler(item.product_id)}
+                  >
+                    <AddCircleOutline />
+                  </IconButton>
+                </Box>
+              </Box>
+            </Grid>
+          ))}
         <Grid container className={classes.buttomContainer}>
           <Grid item className={classes.buttomItem}>
             <Typography variant="h3" className={classes.title}>
@@ -259,23 +322,27 @@ const MobileCartView = () => {
             </Typography>
             <Box>
               <Typography variant="h3" className={classes.content}>
-                N10,000{" "}
+                {formatMoney(totalPrice)}
               </Typography>
               <small className={classes.deliveryFee}>
-                Delivery fee not included
+                {cart.length > 0 && "(Delivery fee not included)"}
               </small>
             </Box>
           </Grid>
           <Grid item className={classes.buttomItem2}>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.btn}
-              onClick={() => router.push("/check-out")}
-              disableElevation
-            >
-              Checkout
-            </Button>
+            {cart.length === 0 ? (
+              ""
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.btn}
+                onClick={() => router.push("/check-out")}
+                disableElevation
+              >
+                Checkout
+              </Button>
+            )}
             <Button
               //   variant="outlined"
               color="primary"
