@@ -214,6 +214,7 @@ const MobileCartView = () => {
   const toast = useFunctions();
   const classes = useStyles();
   const [disabled, setDisabled] = useState(false);
+  const [count, setCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const { cart } = useSelector((state) => state.products);
   useEffect(() => {
@@ -224,7 +225,7 @@ const MobileCartView = () => {
       quantity += item.qty;
       price += item.qty * item.amount;
     });
-
+    setCount(quantity);
     setTotalPrice(price);
   }, [cart, disabled]);
   const removeItems = (id) => {
@@ -256,7 +257,7 @@ const MobileCartView = () => {
               fontSize: "20px",
             }}
           >
-            {cart.length} item(s) in Cart
+            {count} item(s) in Cart
           </span>
         </Typography>
         <small className={classes.deliveryFee1}>
