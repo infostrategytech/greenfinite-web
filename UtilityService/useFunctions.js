@@ -5,12 +5,12 @@ import { addToCart } from "../redux/actions/cart";
 import { useDispatch } from "react-redux";
 toast.configure();
 
-const useFunctions = (props) => {
+const useFunctions = () => {
   const notify = () => {
     toast.success("Item added in Cart", {
       position: toast.POSITION.TOP_RIGHT,
-      hideProgressBar: true,
-      autoClose: 1700,
+      hideProgressBar: false,
+      autoClose: 2000,
     });
   };
 
