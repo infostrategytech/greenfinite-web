@@ -212,7 +212,7 @@ function Cart() {
             <Grid item className={classes.row1}>
               <Typography variant="h4" className={classes.bold}>
                 <ShoppingCart className={classes.bagIcon} />
-                <span> {cart.length} item(s) in Cart</span>
+                <span> {totalQuantity} item(s) in Cart</span>
               </Typography>
             </Grid>
             {/* ROW 2 */}
