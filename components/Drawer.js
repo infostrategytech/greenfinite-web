@@ -6,14 +6,22 @@ import {
   ListItemText,
   IconButton,
   Typography,
+  MenuItem,
   Badge,
+  Button,
+  ListItemIcon,
   Box,
 } from "@material-ui/core";
+import Link from "next/link";
 import router from "next/router";
 import { ShoppingCart, PersonOutline } from "@material-ui/icons/";
 import { makeStyles } from "@material-ui/core/styles";
 import { Menu, Close } from "@material-ui/icons";
 import { useSelector } from "react-redux";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     backgroundColor: "#FFF1DA",
@@ -64,6 +72,14 @@ const useStyles = makeStyles((theme) => ({
   listItems: {
     padding: "1em 2em",
   },
+  nested: {
+    paddingLeft: theme.spacing(7),
+  },
+  menuText: {
+    "& .MuiTypography-body1": {
+      fontSize: "14px",
+    },
+  },
   lists: {
     display: "flex",
     justifyContent: "center",
@@ -76,9 +92,32 @@ const useStyles = makeStyles((theme) => ({
 
 const DrawerComponent = () => {
   const [openDrawer, setOpenDrawer] = React.useState(false);
+  const [Dropdw, setDropdw] = React.useState(false);
+  const { cart } = useSelector((state) => state.products);
+
+  const [openHome, setOpenHome] = useState(false);
+
+  const handleClickHome = () => {
+    setOpenHome(!openHome);
+  };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const distributorsItem = [
+    {
+      text: "Become A Distributor",
+      path: "/distributors",
+    },
+    {
+      text: "Buy From State Distributors",
+      path: "/state-distributors",
+    },
+  ];
+
   const [cartCount, setCartCount] = useState(0);
   const classes = useStyles();
-  const { cart } = useSelector((state) => state.products);
+  // const { cart } = useSelector((state) => state.products);
   useEffect(() => {
     let cartCount = 0;
     cart.forEach((item) => {
@@ -86,6 +125,7 @@ const DrawerComponent = () => {
     });
     setCartCount(cartCount);
   }, [cart, cartCount]);
+
   return (
     <>
       <Drawer
@@ -121,6 +161,7 @@ const DrawerComponent = () => {
               </Typography>
             </ListItemText>
           </Box>
+
           <ListItem
             onClick={() => {
               setOpenDrawer(false);
@@ -134,6 +175,7 @@ const DrawerComponent = () => {
               </Typography>
             </ListItemText>
           </ListItem>
+
           <ListItem
             onClick={() => {
               router.push("/about-us");
@@ -147,6 +189,7 @@ const DrawerComponent = () => {
               </Typography>{" "}
             </ListItemText>
           </ListItem>
+
           <ListItem
             onClick={() => {
               router.push("/shop");
@@ -160,19 +203,38 @@ const DrawerComponent = () => {
               </Typography>
             </ListItemText>
           </ListItem>
+
           <ListItem
-            onClick={() => {
-              router.push("/distributors");
-              setOpenDrawer(false);
-            }}
+            onClick={() => handleClickHome()}
             className={classes.listItems}
           >
             <ListItemText>
               <Typography variant="body1" className={classes.links}>
                 Distributors
-              </Typography>{" "}
+              </Typography>
             </ListItemText>
+            {openHome ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
+
+          <Collapse in={openHome} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              {distributorsItem.map((item, index) => (
+                <ListItem
+                  key={index}
+                  button
+                  className={classes.nested}
+                  onClick={() => setOpenDrawer(false)}
+                >
+                  <Link href={item.path}>
+                    <ListItemText
+                      primary={item.text}
+                      className={classes.menuText}
+                    />
+                  </Link>
+                </ListItem>
+              ))}
+            </List>
+          </Collapse>
 
           <ListItem
             onClick={() => {
