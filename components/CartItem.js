@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Button, Typography, IconButton, Box } from "@material-ui/core";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-toast.configure();
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+// toast.configure();
 import RemoveRoundedIcon from "@material-ui/icons/RemoveRounded";
 import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,6 +14,7 @@ import {
   removeFromCart,
 } from "../redux/actions/cart";
 import { formatMoney } from "../UtilityService/Helpers";
+import useFunctions from "../UtilityService/useFunctions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -165,6 +166,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
+  const toast = useFunctions();
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [disabled, setDisabled] = useState(false);
@@ -188,7 +190,11 @@ const CartItem = ({ item }) => {
 
   const onAddHandler = () => {
     dispatch(addToCart(item.product_id));
-    setDisabled(false);
+    toast();
+    // toast.success("Item added to cart", {
+    //   position: toast.POSITION.TOP_CENTER,
+    //   autoClose: 2000,
+    // });
   };
   const onReduceHandler = () => {
     // setInput((prevState) => prevState - 1);

@@ -22,6 +22,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { formatMoney } from "../UtilityService/Helpers";
 import router from "next/router";
+import useFunctions from "../UtilityService/useFunctions";
 const useStyles = makeStyles((theme) => ({
   container: {
     width: "100%",
@@ -210,6 +211,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const MobileCartView = () => {
   const dispatch = useDispatch();
+  const toast = useFunctions();
   const classes = useStyles();
   const [disabled, setDisabled] = useState(false);
   const [count, setCount] = useState(0);
@@ -231,7 +233,8 @@ const MobileCartView = () => {
   };
   const onAddHandler = (id) => {
     dispatch(addToCart(id));
-    setDisabled(false);
+    // setDisabled(false);
+    toast();
   };
   const onReduceHandler = (item) => {
     if (item.qty <= 1) {

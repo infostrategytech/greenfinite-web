@@ -20,6 +20,7 @@ import { GET_ID } from "../../redux/actions/Contants";
 import router from "next/router";
 import { addToCart } from "../../redux/actions/cart";
 import { getAllProduct } from "../../redux/actions/products";
+import useFunctions from "../../UtilityService/useFunctions";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -188,6 +189,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Shop() {
   const dispatch = useDispatch();
+  const toast = useFunctions();
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const { products } = useSelector((state) => state.products);
@@ -200,10 +202,7 @@ function Shop() {
   };
   const addCart = (id) => {
     dispatch(addToCart(id));
-    setIsInCart(true);
-    setTimeout(() => {
-      setIsInCart(false);
-    }, 2000);
+    toast();
   };
   useEffect(() => {
     setLoading(true);

@@ -16,6 +16,7 @@ import {
 
 import { getAllProduct, getSingleProduct } from "../../redux/actions/products";
 import { addToCart, adjustQuantity } from "../../redux/actions/cart";
+import useFunctions from "../../UtilityService/useFunctions";
 
 const useStyles = makeStyles((theme) => ({
   quantityValue: {
@@ -140,10 +141,10 @@ function ItemDetails() {
   const [cartCount, setCartCount] = useState(0);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const toast = useFunctions();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { product, cart } = useSelector((state) => state.products);
-  const [isInCart, setIsInCart] = useState(false);
 
   const productID = router.query.itemId;
   useEffect(() => {
@@ -173,10 +174,7 @@ function ItemDetails() {
   }, [cart, cartCount]);
   const addCart = (id) => {
     dispatch(addToCart(id));
-    setIsInCart(true);
-    setTimeout(() => {
-      setIsInCart(false);
-    }, 2000);
+    toast();
   };
 
   return (
@@ -229,12 +227,7 @@ function ItemDetails() {
                 Add to cart
               </Button>
               {/* </Link> */}
-              {isInCart && (
-                <Typography className={classes.add}>
-                  {" "}
-                  Item added to Cart
-                </Typography>
-              )}
+
               <Typography component="p">
                 <Link href="/cart">
                   <Typography className={`${classes.view}`}>
