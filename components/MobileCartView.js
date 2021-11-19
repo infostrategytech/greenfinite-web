@@ -345,7 +345,7 @@ const MobileCartView = () => {
               </Button>
             )}
             <Button
-              //   variant="outlined"
+              variant="outlined"
               color="primary"
               className={classes.btn}
               onClick={() => router.push("/shop")}
