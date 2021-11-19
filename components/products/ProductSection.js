@@ -28,8 +28,9 @@ const useStyles = makeStyles((theme) => ({
     width: "450px",
     height: "400px",
     [theme.breakpoints.down("md")]: {
-      width: "80px",
-      height: "80px",
+      width: "350px",
+      height: "300px",
+      textAlign: "center"
     },
   },
   content1: {
@@ -99,6 +100,7 @@ const useStyles = makeStyles((theme) => ({
   order2: {
     [theme.breakpoints.down("md")]: {
       order: "2",
+      textAlign: "center"
     },
   },
   order1: {
@@ -106,6 +108,12 @@ const useStyles = makeStyles((theme) => ({
       order: "1",
     },
   },
+  imgContainer: {
+    textAlign: "right",
+    [theme.breakpoints.down("md")]: {
+      textAlign: "center"
+    }
+  }
 }));
 const ProductSection = () => {
   const classes = useStyles();
@@ -153,10 +161,10 @@ const ProductSection = () => {
                   ourselves as being the manufacturers of the finest and purest
                   Dates Powder.
                   <small className={classes.grams}>200g and 500g </small> */}
-                  Our Dates powder is made from the flesh of Dates Fruit which
+                  Our Dates Powder is made from the flesh of Dates Fruit which
                   have been dried and ground into fine powder. We pride
                   ourselves as being the manufacturers of the finest and purest
-                  Dates Powder. Our Dates powder is the nutrient-dense, perfect
+                  Dates Powder. Our Dates Powder is the nutrient-dense, perfect
                   alternative to refined sugar, loaded with antioxidants,
                   vitamins and minerals. Considered very healthy for babies,
                   toddlers, young children and adults. They are available in
@@ -168,13 +176,13 @@ const ProductSection = () => {
                 </Typography>
 
                 <Typography variant="body1" className={classes.content1}>
-                  Can be used for baking, cooking. seasoning, mixed in
-                  smoothies, yogurts, cereals, pap, soups, grills, baby food etc
+                  Can be used for baking, cooking, seasoning, mixed in
+                  smoothies, yogurts, cereals, pap, soups, grills, baby food etc.
                   They are incredibly versatile and can fit into just any
-                  recipe.Suitable for babies from 6 months.
+                  recipe. It is suitable for babies from 6 months.
                 </Typography>
               </Grid>
-              <Grid item md>
+              <Grid item md sm={12} className={classes.imgContainer}>
                 <img
                   src="./images/productgroup.png"
                   alt="Powdered nuts"
@@ -191,9 +199,10 @@ const ProductSection = () => {
               spacing={4}
               className={classes.fruitContainer}
             >
-              <Grid item md className={classes.order2}>
+              {/* <Grid item md sm={12} className={classes.order2}> */}
+              <Grid item md sm={12} className={classes.order2}>
                 <img
-                  src="./images/date-syrup.png"
+                  src="./images/dates-syrup-lg.png"
                   alt="Powdered nuts"
                   className={classes.logo1}
                 />
@@ -220,8 +229,8 @@ const ProductSection = () => {
                 </Typography>
 
                 <Typography variant="body1" className={classes.content1}>
-                  Unforgettable rich chocodatey flavour Ingredients: Dates Fruit
-                  and Cocoa Powder
+                  Unforgettable rich chocodatey flavour. <br />Ingredients: Dates Fruit
+                  and Cocoa Powder.
                 </Typography>
 
                 <Typography variant="h4" className={classes.subtitle2}>
@@ -230,7 +239,7 @@ const ProductSection = () => {
 
                 <Typography variant="body1" className={classes.content1}>
                   Enjoy the authentic taste of Dates with an infusion of
-                  Cinnamon Ingredients; Dates Fruits and Cinnamon Powder
+                  Cinnamon. <br />Ingredients: Dates Fruits and Cinnamon Powder.
                 </Typography>
 
                 <Typography variant="h4" className={classes.subtitle2}>
@@ -239,7 +248,7 @@ const ProductSection = () => {
 
                 <Typography variant="body1" className={classes.content1}>
                   Drizzle on teas, pancakes, cocktails, desserts, icecream,
-                  porridges, yogurt, salads, baby food etc
+                  porridges, yogurt, salads, baby food etc.
                 </Typography>
               </Grid>
             </Grid>

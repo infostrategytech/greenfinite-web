@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: 28,
       textAlign: 'center',
-      lineHeight: '0px',
+      
     },
   },
   subTxt: {
@@ -62,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: 16,
       textAlign: 'center',
-      lineHeight: '0px',
     },
   },
   logoHd: {

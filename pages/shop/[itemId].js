@@ -202,7 +202,7 @@ function ItemDetails() {
               <Typography className={classes.title}>
                 <small className={classes.grams}>
                   {product && product.name}{" "}
-                  {product && `(${product.net_weight})`}g
+                  {product && `(${product.net_weight})`}
                 </small>
               </Typography>
               <Typography

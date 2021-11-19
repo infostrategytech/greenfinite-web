@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
   Box,
   Button,
@@ -7,7 +8,7 @@ import {
   makeStyles,
   Card,
 } from "@material-ui/core";
-import router from 'next/router';
+import router from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -99,9 +100,12 @@ const Distributor = () => {
                 income by partnering with us . <br /> To become a Greenfinite
                 distributor , please Click the Join Us button
               </Typography>
-              <Button onClick={() => router.push('/distributors')} variat="contained" className={classes.button}>
-                Join Us
-              </Button>
+
+              {/* <Link href="/distributors"> */}
+                <Button onClick={() => router.push("/distributors")} variat="contained" className={classes.button}>
+                  Join Us
+                </Button>
+              {/* </Link> */}
             </Box>
           </Grid>
         </Grid>

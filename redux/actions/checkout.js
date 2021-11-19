@@ -33,29 +33,32 @@ export const createOrder = (data, cb) => async (dispatch) => {
   // }
 };
 
-export const updateOrder = (data, id, cb) => async (dispatch) => {
-  try {
-    const res = await callApi(`orders/${id}`, 'POST', data);
 
-    if (res.code === '00') {
-      //   dispatch({
-      //     type: SET_ORDER_DETAILS,
-      //     payload: res
-      //   });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error occured',
-        text: res.message,
-      });
+
+export const updateOrder = (data,id,cb)=> async dispatch=>{  
+    try {
+        const res = await callApi(`orders/${id}`,"POST",data);
+
+        if (res.code === "00") {
+          dispatch({
+            type: SET_ORDER_DETAILS,
+            payload: res.data
+          });
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Error occured",
+                text: res.message,
+            });
+        }
+    } catch (error) {
+        Swal.fire({
+        icon: "error",
+        title: "Error occured",
+        text: "Oops! something went wrong",
+        });
+    }finally {
+        cb();
     }
-  } catch (error) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Error occured',
-      text: 'Oops! something went wrong',
-    });
-  } finally {
-    cb();
-  }
+
 };
