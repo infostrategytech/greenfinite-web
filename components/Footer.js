@@ -47,9 +47,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     margin: "20px 0",
   },
-  dev:{
-    marginLeft: 4
-  }
+  dev: {
+    marginLeft: 4,
+  },
 }));
 const Footer = () => {
   const classes = useStyles();
@@ -111,22 +111,31 @@ const Footer = () => {
               >
                 Contact us{" "}
               </Typography>
-              <Typography
+              {/* <Typography
                 onClick={() => router.push()}
                 variant="h4"
                 className={classes.footerList}
               >
                 FAQs{" "}
-              </Typography>
+              </Typography> */}
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
               <Typography variant="h4" className={classes.header}>
                 Products{" "}
               </Typography>
-              <Typography variant="h4" className={classes.footerList}>
+              <Typography
+                onClick={() => router.push("/shop")}
+                variant="h4"
+                className={classes.footerList}
+              >
                 Date Powder
               </Typography>
-              <Typography variant="h4" className={classes.footerList}>
+
+              <Typography
+                onClick={() => router.push("/shop")}
+                variant="h4"
+                className={classes.footerList}
+              >
                 Date Syrup
               </Typography>
             </Grid>
