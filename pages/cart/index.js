@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Button, Typography, IconButton, Box } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  Typography,
+  IconButton,
+  Box,
+  useTheme,
+  useMediaQuery,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 // import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
@@ -11,7 +19,8 @@ import { removeFromCart } from "../../redux/actions/cart";
 import CartItem from "../../components/CartItem";
 import router from "next/router";
 import { formatMoney } from "../../UtilityService/Helpers";
-import Head from 'next/head';
+import Head from "next/head";
+import MobileCartView from "../../components/MobileCartView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -168,7 +177,8 @@ function Cart() {
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const { cart } = useSelector((state) => state.products);
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
   useEffect(() => {
     let quantity = 0;
@@ -183,86 +193,89 @@ function Cart() {
 
   return (
     <>
-    <Head>
-      <title>
-          Greenfinite - Cart
-      </title>
-      <meta
-      name="description"
-      content=""
-      />
+      <Head>
+        <title>Greenfinite - Cart</title>
+        <meta name="description" content="" />
       </Head>
-      <div className={classes.root}>
-        <Grid container direction="column" className={classes.parentContainer}>
-          {/* ROW 1 */}
-          <Grid item className={classes.row1}>
-            <Typography variant="h4" className={classes.bold}>
-              <LocalMallOutlinedIcon className={classes.bagIcon} />
-              <span>Cart {cart.length} item(s)</span>
-            </Typography>
-          </Grid>
-          {/* ROW 2 */}
-          <Grid item container>
-            <Grid item xs={6}>
-              <Typography variant="body2" className={classes.heading}>
-                Product
+      {isMobile ? (
+        <MobileCartView />
+      ) : (
+        <div className={classes.root}>
+          <Grid
+            container
+            direction="column"
+            className={classes.parentContainer}
+          >
+            {/* ROW 1 */}
+            <Grid item className={classes.row1}>
+              <Typography variant="h4" className={classes.bold}>
+                <LocalMallOutlinedIcon className={classes.bagIcon} />
+                <span>Cart {cart.length} item(s)</span>
               </Typography>
             </Grid>
-            <Grid item xs={2}>
-              <Typography variant="body2" className={classes.heading}>
-                Quantity
-              </Typography>
+            {/* ROW 2 */}
+            <Grid item container>
+              <Grid item xs={6}>
+                <Typography variant="body2" className={classes.heading}>
+                  Product
+                </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Typography variant="body2" className={classes.heading}>
+                  Quantity
+                </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Typography variant="body2" className={classes.heading}>
+                  Unit Price
+                </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Typography variant="body2" className={classes.heading}>
+                  Subtotal
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={2}>
-              <Typography variant="body2" className={classes.heading}>
-                Unit Price
-              </Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Typography variant="body2" className={classes.heading}>
-                Subtotal
-              </Typography>
-            </Grid>
-          </Grid>
-          {cart && cart.length > 0 ? (
-            cart.map((item) => <CartItem item={item} />)
-          ) : (
-            <Typography variant="h6">Cart is empty</Typography>
-          )}
-          {/* ROW 3 */}
-          <Grid item className={classes.row3}>
-            <Typography variant="body1" className={classes.totalText}>
-              Total
-            </Typography>
-            <Typography variant="body2" className={classes.total}>
-              {/* ₦{totalPrice.toFixed(2)} */} {formatMoney(totalPrice)}
-            </Typography>
-          </Grid>
-          {/* ROW 4 */}
-          <Grid item className={classes.row4}>
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.btn2}
-              onClick={() => router.push("/shop")}
-            >
-              Buy More
-            </Button>
-            {cart.length > 0 ? (
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.btn}
-                onClick={() => router.push("/check-out")}
-              >
-                Checkout
-              </Button>
+            {cart && cart.length > 0 ? (
+              cart.map((item) => <CartItem item={item} />)
             ) : (
-              ""
+              <Typography variant="h6">Cart is empty</Typography>
             )}
+            {/* ROW 3 */}
+            <Grid item className={classes.row3}>
+              <Typography variant="body1" className={classes.totalText}>
+                Total
+              </Typography>
+              <Typography variant="body2" className={classes.total}>
+                {/* ₦{totalPrice.toFixed(2)} */} {formatMoney(totalPrice)}
+              </Typography>
+            </Grid>
+            {/* ROW 4 */}
+            <Grid item className={classes.row4}>
+              <Button
+                variant="outlined"
+                color="primary"
+                className={classes.btn2}
+                onClick={() => router.push("/shop")}
+              >
+                Buy More
+              </Button>
+              {cart.length > 0 ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.btn}
+                  onClick={() => router.push("/check-out")}
+                >
+                  Checkout
+                </Button>
+              ) : (
+                ""
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </div>
+      )}
     </>
   );
 }
