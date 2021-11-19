@@ -131,7 +131,7 @@ export default function Home() {
                 </Typography>
                 <Typography variant="body1" className={classes.content}>
                   Your favourite alternative to refined sugar made with no
-                  preservatives and additives.{" "}
+                  preservatives or additives.{" "}
                 </Typography>
                 <Link href="/shop">
                   <Button variat="contained" className={classes.button}>

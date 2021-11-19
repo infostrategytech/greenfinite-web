@@ -17,10 +17,11 @@ import { addToCart } from "../../redux/actions/cart";
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     display: "flex",
+    padding:'1em'
   },
   cards: {
     background:
-      "linear-gradient(0deg, rgba(255,255,255,0.6), rgba(255,255,255,0.6))",
+      "linear-gradient(0deg, rgba(255,255,255,0.9), rgba(255,255,255,0.9))",
     padding: "0 4em",
     boxShadow: "0px -1px 29px 8px rgba(210,210,210,0.15)",
     [theme.breakpoints.down("md")]: {
@@ -38,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
   },
   logo1: {
     maxWidth: "100%",
-    height: "240px",
-    width: "240px",
+    // height: "240px",
+    // width: "240px",
     objectFit: "center",
 
     [theme.breakpoints.down("md")]: {
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
   content1: {
     fontFamily: "Poppins",
-    fontSize: "16px",
+    fontSize: "15px",
     fontWeight: "300",
     lineHeight: "22px",
     marginTop: ".2em",
@@ -178,7 +179,7 @@ const Products = () => {
           <Box>
             <Link href={`/shop`}>
               <img
-                src={`./images/fruit.png`}
+                src={`./images/dates-powder.jpeg`}
                 alt="powdered fruits"
                 className={classes.logo1}
               />
@@ -189,8 +190,8 @@ const Products = () => {
               Date Powder
             </Typography>
             <Typography variant="body1" className={classes.content1}>
-              flesh of Dates Fruit which have been dried and ground into fine
-              powder.
+              Our Dates Powder is made from the flesh of Dates Fruit which have
+              been dried and ground into fine powder.
               <small className={classes.grams}>200g and 500g </small>
             </Typography>
 
@@ -204,7 +205,7 @@ const Products = () => {
           <Box>
             <Link href={`/shop`}>
               <img
-                src={`./images/date-syrup.png`}
+                src={`./images/dates-syrup.jpeg`}
                 alt="powdered fruits"
                 className={classes.logo1}
               />
@@ -215,9 +216,9 @@ const Products = () => {
               Date Syrup
             </Typography>
             <Typography variant="body1" className={classes.content1}>
-              flesh of Dates Fruit which have been dried and ground into fine
-              powder.
-              <small className={classes.grams}>200g and 500g </small>
+              Our Dates Syrup is made from the flesh of the Dates Palm Fruit and
+              treated water.
+              <small className={classes.grams}>350ml </small>
             </Typography>
 
             <Link href={`/shop`}>

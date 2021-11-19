@@ -187,7 +187,7 @@ function AboutUs() {
             </Typography>
             <Typography variant="body1" component="p" className={classes.font}>
               We are an organic food processing company into the production of
-              healthy sweeteners made from Dates fruits. We process Dates Fruits
+              healthy sweeteners made from Dates Fruits. We process Dates Fruits
               into powder and syrup forms as a suitable natural replacement for
               refined sugar or other sweeteners in any recipe.
             </Typography>
@@ -209,7 +209,7 @@ function AboutUs() {
                 </Typography>
                 <Typography variant="body1" className={classes.font}>
                   Our infinite motive is to support the health and wellbeing of
-                  homes by providing the best natural sweetners and also enable
+                  homes by providing the best natural sweeteners and also enable
                   financial growth and wealth creation by partnering with
                   distributors worldwide.
                 </Typography>
@@ -313,7 +313,7 @@ function AboutUs() {
                 </Typography>
                 <Typography variant="body1" className={classes.font}>
                   Teamwork, empathy, solidarity, honesty, openness,
-                  selfresponsibility and social responsibility.
+                  self-responsibility and social-responsibility.
                 </Typography>
               </Grid>
               <Grid item xs={12} md={3} className={classes.value}>
