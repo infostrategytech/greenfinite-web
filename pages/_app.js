@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import '../styles/globals.css';
-import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from '../src/theme';
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import "../styles/globals.css";
+import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import theme from "../src/theme";
 // import { useStore } from '../redux/store';
-import { createWrapper } from 'next-redux-wrapper';
-import Router from 'next/router';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistor } from '../redux/store';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import AppLayout from '../components/Layout';
-import { Provider } from 'react-redux';
-import withRedux from 'next-redux-wrapper';
-import { store } from '../redux/store';
-import Spinner from '../components/Spinner';
-import Backdrop from '@material-ui/core/Backdrop';
-import NProgress from 'nprogress';
+import { createWrapper } from "next-redux-wrapper";
+import Router from "next/router";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "../redux/store";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import AppLayout from "../components/Layout";
+import { Provider } from "react-redux";
+import withRedux from "next-redux-wrapper";
+import { store } from "../redux/store";
+import Spinner from "../components/Spinner";
+import Backdrop from "@material-ui/core/Backdrop";
+import NProgress from "nprogress";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: '#fff',
+    color: "#fff",
   },
 }));
 
@@ -32,18 +32,19 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
+    const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
 
-  Router.events.on('routeChangeStart', (url) => {
+
+  Router.events.on("routeChangeStart", (url) => {
     NProgress.start();
     setOpen(true);
   });
 
-  Router.events.on('routeChangeComplete', (url) => {
+  Router.events.on("routeChangeComplete", (url) => {
     NProgress.done();
     setOpen(false);
   });
@@ -56,7 +57,10 @@ function MyApp({ Component, pageProps }) {
     <React.Fragment>
       <Head>
         <title>Greenfinite</title>
-        <meta name="description" content="Producing healthy sweeteners from date fruits" />
+        <meta
+          name="description"
+          content="Producing healthy sweeteners from date fruits"
+        />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"

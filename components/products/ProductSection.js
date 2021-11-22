@@ -199,7 +199,6 @@ const ProductSection = () => {
               spacing={4}
               className={classes.fruitContainer}
             >
-              {/* <Grid item md sm={12} className={classes.order2}> */}
               <Grid item md sm={12} className={classes.order2}>
                 <img
                   src="./images/dates-syrup-lg.png"
