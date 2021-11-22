@@ -5,6 +5,7 @@ module.exports = {
           source: '/webmail',
           destination: 'https://istrategytech.com/webmail',
           permanent: false,
+            
 //           basePath: false,
         },
       ]
