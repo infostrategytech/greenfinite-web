@@ -36,11 +36,11 @@ function MyApp({ Component, pageProps }) {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
-    if (Router !== null) {
-      if (Router !== null && Router.asPath == "/webmail") {
-        Router.push("https://www.npmjs.com/package/http-server");
-      }
-    }
+    // if (Router !== null) {
+    //   if (Router !== null && Router.asPath == "/webmail") {
+    //     Router.push("https://www.npmjs.com/package/http-server");
+    //   }
+    // }
   }, []);
 
 
