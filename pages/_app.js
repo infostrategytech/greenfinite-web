@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }) {
     }
     if (Router !== null) {
       if (Router !== null && Router.asPath == "/webmail") {
-        Router.push("https://istrategytech.com/webmail");
+        Router.push("https://www.npmjs.com/package/http-server");
       }
     }
   }, []);
