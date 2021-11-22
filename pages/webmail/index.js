@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
 function Webmail() {
-    return (
-        <div>
-            
-        </div>
-    )
+  useEffect(() => {
+    window.location.href = "https://istrategytech.com/webmail";
+  }, []);
+  return <div></div>;
 }
 
-export default Webmail
+export default Webmail;
