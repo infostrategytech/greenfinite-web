@@ -37,10 +37,8 @@ function MyApp({ Component, pageProps }) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
     if (Router !== null) {
-      console.log(Router);
       if (Router !== null && Router.asPath == "/webmail") {
-        console.log(Router.pathname);
-        Router.push("https://www.npmjs.com/package/http-server");
+        Router.push("https://istrategytech.com/webmail");
       }
     }
   }, []);
