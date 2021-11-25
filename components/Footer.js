@@ -69,7 +69,7 @@ const Footer = () => {
               (+234) 8034540109
             </Typography>
             <Typography variant="h4" className={classes.footerList}>
-              support@greenfinite.ng{" "}
+              info@greenfinite.ng{" "}
             </Typography>
             <Typography variant="h4" className={classes.footerList}>
               info@greenfinite.ng{" "}

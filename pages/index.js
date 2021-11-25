@@ -127,7 +127,7 @@ export default function Home() {
             <Grid item xs={12} sm={12} md={5} className={classes.order2}>
               <Box>
                 <Typography variant="h3" className={classes.title}>
-                  Healthy sweeteners <br /> made from Date fruits
+                  Healthy sweeteners <br /> made from Dates fruit
                 </Typography>
                 <Typography variant="body1" className={classes.content}>
                   Your favourite alternative to refined sugar made with no
