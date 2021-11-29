@@ -110,14 +110,40 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 30,
     paddingBottom: 30,
   },
-  item5: {
+  product__container: {
+    marginTop: "2rem",
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gap: "3rem",
+    [theme.breakpoints.down("sm")]: {
+      gridTemplateColumns: "repeat(1, 1fr)",
+      rowGap: "3rem",
+    },
+    [theme.breakpoints.up("sm")]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: "3rem",
+    },
     [theme.breakpoints.up("md")]: {
-      paddingLeft: 200,
-      paddingRight: 200,
-      marginTop: 100,
+      gridTemplateColumns: "repeat(4, 1fr)",
+      gap: "3rem",
+    },
+  },
+  item5: {
+    display: "grid",
+    textAlign: "center",
+    gap: "2rem",
+    [theme.breakpoints.up("sm")]: {
+      marginTop: "5rem",
+      gridTemplateColumns: "repeat(3, 1fr)",
+    },
+    [theme.breakpoints.up("md")]: {
+      paddingLeft: 100,
+      paddingRight: 100,
+      marginTop: "7rem",
+      gridTemplateColumns: "repeat(3, 1fr)",
     },
     [theme.breakpoints.down("sm")]: {
-      marginTop: 32,
+      // marginTop: 32,
     },
     marginTop: 50,
   },
@@ -147,8 +173,25 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: 50,
     },
   },
+  value__container: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gap: "3rem",
+    [theme.breakpoints.up("md")]: {
+      gridTemplateColumns: "repeat(4, 1fr)",
+    },
+    [theme.breakpoints.down("md")]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    },
+    [theme.breakpoints.down("sm")]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    },
+    [theme.breakpoints.down("xs")]: {
+      gridTemplateColumns: "repeat(1, 1fr)",
+    },
+  },
   value: {
-    padding: 8,
+    padding: 0,
   },
   clientImg: {
     height: 81,
@@ -157,6 +200,8 @@ const useStyles = makeStyles((theme) => ({
   font: {
     fontFamily: "Poppins",
     fontSize: "15px",
+    paddingLeft: "1rem",
+    paddingRight: "1rem",
   },
   coreValues: {
     backgroundColor: "#EFF8F2",
@@ -165,6 +210,12 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
     },
   },
+  number: {
+    fontSize: 28
+  },
+  subTitle: {
+    
+  }
 }));
 
 function AboutUs() {
@@ -187,7 +238,7 @@ function AboutUs() {
             </Typography>
             <Typography variant="body1" component="p" className={classes.font}>
               We are an organic food processing company into the production of
-              healthy sweeteners made from Dates Fruits. We process Dates Fruits
+              healthy sweeteners made from Dates Fruit. We process Dates Fruit
               into powder and syrup forms as a suitable natural replacement for
               refined sugar or other sweeteners in any recipe.
             </Typography>
@@ -237,8 +288,8 @@ function AboutUs() {
               </Typography>
             </Grid>
 
-            <Grid item container>
-              <Grid item xs={12} md={3} className={classes.value}>
+            <Grid item container className={classes.value__container}>
+              <Grid item className={classes.value}>
                 <Typography
                   variant="h4"
                   component="h4"
@@ -252,7 +303,7 @@ function AboutUs() {
                   hygienically.
                 </Typography>
               </Grid>
-              <Grid item xs={12} md={3} className={classes.value}>
+              <Grid item className={classes.value}>
                 <Typography
                   variant="h4"
                   component="h4"
@@ -264,7 +315,7 @@ function AboutUs() {
                   Strive to give each customer a positive experience.
                 </Typography>
               </Grid>
-              <Grid item xs={12} md={3} className={classes.value}>
+              <Grid item className={classes.value}>
                 <Typography
                   variant="h4"
                   component="h4"
@@ -277,7 +328,7 @@ function AboutUs() {
                   highest standards of hygiene.
                 </Typography>
               </Grid>
-              <Grid item xs={12} md={3} className={classes.value}>
+              <Grid item className={classes.value}>
                 <Typography
                   variant="h4"
                   component="h4"
@@ -290,7 +341,7 @@ function AboutUs() {
                   suppliers and employees.
                 </Typography>
               </Grid>
-              <Grid item xs={12} md={3} className={classes.value}>
+              <Grid item className={classes.value}>
                 <Typography
                   variant="h4"
                   component="h4"
@@ -303,7 +354,7 @@ function AboutUs() {
                   their health and encourage healthier alternatives.
                 </Typography>
               </Grid>
-              <Grid item xs={12} md={3} className={classes.value}>
+              <Grid item className={classes.value}>
                 <Typography
                   variant="h4"
                   component="h4"
@@ -316,7 +367,7 @@ function AboutUs() {
                   self-responsibility and social-responsibility.
                 </Typography>
               </Grid>
-              <Grid item xs={12} md={3} className={classes.value}>
+              <Grid item className={classes.value}>
                 <Typography
                   variant="h4"
                   component="h4"
@@ -329,7 +380,7 @@ function AboutUs() {
                   and compromise-free products that we give to our own children
                 </Typography>
               </Grid>
-              <Grid item xs={12} md={3} className={classes.value}>
+              <Grid item className={classes.value}>
                 <Typography
                   variant="h4"
                   component="h4"
@@ -407,33 +458,34 @@ function AboutUs() {
               Our Products in Numbers
             </Typography>
           </Grid>
-          <Grid item container justifyContent="space-evenly">
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography variant="h4" component="h3">
+
+          <Grid item container justifyContent="space-evenly" className={classes.product__container}>
+            <Grid item className={classes.value}>
+              <Typography variant="h4" component="h3" className={classes.number}>
                 1000
               </Typography>
-              <Typography variant="h6" component="p">
+              <Typography variant="h6" component="p" className={classes.subTitle}>
                 Products Supplied
               </Typography>
             </Grid>
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography variant="h4" component="h3">
+            <Grid item className={classes.value}>
+              <Typography variant="h4" component="h3" className={classes.number}>
                 97
               </Typography>
               <Typography variant="h6" component="p">
                 Distributors
               </Typography>
             </Grid>
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography variant="h4" component="h3">
+            <Grid item className={classes.value}>
+              <Typography variant="h4" component="h3" className={classes.number}>
                 100%
               </Typography>
               <Typography variant="h6" component="p">
                 Satisfied Customers
               </Typography>
             </Grid>
-            <Grid item xs={12} md={3} className={classes.value}>
-              <Typography variant="h4" component="h3">
+            <Grid item className={classes.value}>
+              <Typography variant="h4" component="h3" className={classes.number}>
                 2
               </Typography>
               <Typography variant="h6" component="p">
@@ -444,56 +496,56 @@ function AboutUs() {
         </Grid>
         {/* ROW 5 */}
         <Grid item container className={classes.item5}>
-          <Grid item xs={6} md={3} className={classes.value}>
+          <Grid item >
             <img
               src="./images/next.png"
               alt="next cash and carry"
               className={classes.clientImg}
             />
           </Grid>
-          <Grid item xs={6} md={3} className={classes.value}>
+          <Grid item>
             <img
               src="./images/tonia.png"
               alt="tonia pharmacy"
               className={classes.clientImg}
             />
           </Grid>
-          <Grid item xs={6} md={3} className={classes.value}>
+          <Grid item>
             <img
               src="./images/pyramid.png"
               alt="pyramid pharmacy"
               className={classes.clientImg}
             />
           </Grid>
-          <Grid item xs={6} md={3} className={classes.value}>
+          <Grid item>
             <img
               src="./images/mcray.png"
               alt="mcray supermarket"
               className={classes.clientImg}
             />
           </Grid>
-          <Grid item xs={6} md={3} className={classes.value}>
+          <Grid item>
             <img
               src="./images/bakan-gizo.png"
               alt="bakan gizo"
               className={classes.clientImg}
             />
           </Grid>
-          <Grid item xs={6} md={3} className={classes.value}>
+          <Grid item>
             <img
               src="./images/dunes.png"
               alt="dunes center"
               className={classes.clientImg}
             />
           </Grid>
-          <Grid item xs={6} md={3} className={classes.value}>
+          <Grid item>
             <img
               src="./images/maple.png"
               alt="maple"
               className={classes.clientImg}
             />
           </Grid>
-          <Grid item xs={6} md={3} className={classes.value}>
+          <Grid item>
             <img
               src="./images/tefcon.png"
               alt="tefcon"

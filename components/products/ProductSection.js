@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
   top: {
     display: "flex",
+    alignItems: "center",
+    columnGap: "1rem"
   },
   logo: {
     maxWidth: "100%",

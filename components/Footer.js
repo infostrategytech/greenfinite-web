@@ -128,7 +128,7 @@ const Footer = () => {
                 variant="h4"
                 className={classes.footerList}
               >
-                Date Powder
+                Dates Powder
               </Typography>
 
               <Typography
@@ -136,7 +136,7 @@ const Footer = () => {
                 variant="h4"
                 className={classes.footerList}
               >
-                Date Syrup
+                Dates Syrup
               </Typography>
             </Grid>
           </Grid>
