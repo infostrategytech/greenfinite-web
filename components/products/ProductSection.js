@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
   top: {
     display: "flex",
+    alignItems: "center",
+    columnGap: "1rem"
   },
   logo: {
     maxWidth: "100%",
@@ -153,7 +155,7 @@ const ProductSection = () => {
             >
               <Grid item md>
                 <Typography variant="h3" className={classes.title1}>
-                  Date Powder
+                  Dates Powder
                 </Typography>
                 <Typography variant="body1" className={classes.content1}>
                   {/* Our Dates powder is made from the flesh of Dates Fruit which
@@ -208,7 +210,7 @@ const ProductSection = () => {
               </Grid>
               <Grid item md className={classes.order1}>
                 <Typography variant="h3" className={classes.title1}>
-                  Date Syrup
+                  Dates Syrup
                 </Typography>
                 <Typography variant="body1" className={classes.content1}>
                   Our Dates Syrup is made from the flesh of the Dates Palm Fruit
@@ -216,15 +218,15 @@ const ProductSection = () => {
                 </Typography>
 
                 <Typography variant="h4" className={classes.subtitle2}>
-                  Dates syrup original
+                  Dates Syrup Original
                 </Typography>
 
                 <Typography variant="body1" className={classes.content1}>
-                  Ingredents: Dates Fruits and Treated Water.
+                  Ingredents: Dates Fruit and Treated Water.
                 </Typography>
 
                 <Typography variant="h4" className={classes.subtitle2}>
-                  Dates and cocoa syrup
+                  Dates and Cocoa Syrup
                 </Typography>
 
                 <Typography variant="body1" className={classes.content1}>
@@ -233,12 +235,12 @@ const ProductSection = () => {
                 </Typography>
 
                 <Typography variant="h4" className={classes.subtitle2}>
-                  Dates and cinnamon syrup
+                  Dates and Cinnamon Syrup
                 </Typography>
 
                 <Typography variant="body1" className={classes.content1}>
                   Enjoy the authentic taste of Dates with an infusion of
-                  Cinnamon. <br />Ingredients: Dates Fruits and Cinnamon Powder.
+                  Cinnamon. <br />Ingredients: Dates Fruit and Cinnamon Powder.
                 </Typography>
 
                 <Typography variant="h4" className={classes.subtitle2}>

@@ -187,7 +187,7 @@ const Products = () => {
           </Box>
           <Box>
             <Typography variant="h3" className={classes.title1}>
-              Date Powder
+              Dates Powder
             </Typography>
             <Typography variant="body1" className={classes.content1}>
               Our Dates Powder is made from the flesh of Dates Fruit which have
@@ -213,7 +213,7 @@ const Products = () => {
           </Box>
           <Box>
             <Typography variant="h3" className={classes.title1}>
-              Date Syrup
+              Dates Syrup
             </Typography>
             <Typography variant="body1" className={classes.content1}>
               Our Dates Syrup is made from the flesh of the Dates Palm Fruit and

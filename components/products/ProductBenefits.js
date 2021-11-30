@@ -77,7 +77,7 @@ function ProductBenefits() {
               <ul>
                 <li className={classes.content1}>
                   Dates are a low Glycemic index fruit and suitable for
-                  diabetics and pre diabetics, in moderation.
+                  diabetics and pre-diabetics, in moderation.
                 </li>
                 <li className={classes.content1}>
                   Dates contain potent antioxidants and are high in polyphenols

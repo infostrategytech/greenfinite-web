@@ -69,11 +69,11 @@ const Footer = () => {
               (+234) 8034540109
             </Typography>
             <Typography variant="h4" className={classes.footerList}>
-              support@greenfinite.ng{" "}
-            </Typography>
-            <Typography variant="h4" className={classes.footerList}>
               info@greenfinite.ng{" "}
             </Typography>
+            {/* <Typography variant="h4" className={classes.footerList}>
+              info@greenfinite.ng{" "}
+            </Typography> */}
             <Typography variant="h4" className={classes.footerList}>
               25D, Drive 3, Prince and Princess Estate, Abuja F.C.T
             </Typography>
@@ -128,7 +128,7 @@ const Footer = () => {
                 variant="h4"
                 className={classes.footerList}
               >
-                Date Powder
+                Dates Powder
               </Typography>
 
               <Typography
@@ -136,7 +136,7 @@ const Footer = () => {
                 variant="h4"
                 className={classes.footerList}
               >
-                Date Syrup
+                Dates Syrup
               </Typography>
             </Grid>
           </Grid>

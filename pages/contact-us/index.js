@@ -206,7 +206,7 @@ function ContactUs() {
                         >
                             <EmailOutlinedIcon /> 
                             <span className={classes.contactText}>
-                                support@greenfinite.ng
+                                info@greenfinite.ng
                             </span>
                         </Typography>
                     </Grid>
