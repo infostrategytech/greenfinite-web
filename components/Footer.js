@@ -71,9 +71,9 @@ const Footer = () => {
             <Typography variant="h4" className={classes.footerList}>
               info@greenfinite.ng{" "}
             </Typography>
-            <Typography variant="h4" className={classes.footerList}>
+            {/* <Typography variant="h4" className={classes.footerList}>
               info@greenfinite.ng{" "}
-            </Typography>
+            </Typography> */}
             <Typography variant="h4" className={classes.footerList}>
               25D, Drive 3, Prince and Princess Estate, Abuja F.C.T
             </Typography>
