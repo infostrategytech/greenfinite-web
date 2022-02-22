@@ -1,5 +1,6 @@
 import {
   Grid,
+  Box,
   Typography,
   makeStyles,
   TextField,
@@ -7,10 +8,12 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import Head from "next/head";
+import StateDistributors from "../state-distributors/index";
+import LatestBlog from "../../components/LatestBlog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    paddingTop: 100,
+    paddingTop: "7rem",
   },
   powderImg: {
     [theme.breakpoints.up("md")]: {
@@ -30,9 +33,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   parentContainer: {
+    display: "flex",
     [theme.breakpoints.up("md")]: {
+      flexDirection: "row",
       padding: 100,
-      paddingBottom: 300,
+      paddingBottom: 200,
     },
     [theme.breakpoints.down("sm")]: {
       padding: 16,
@@ -69,6 +74,13 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: 32,
     },
   },
+  blogSection: {
+    background: '#EFF8F2',
+    paddingTop: '3rem',
+    [theme.breakpoints.down("sm")]: {
+      padding: 16
+    }
+  }
 }));
 
 function Distributors() {
@@ -79,28 +91,21 @@ function Distributors() {
         <title>Greenfinite - Distributors</title>
         <meta name="description" content="" />
       </Head>
+
       <Grid container className={classes.parentContainer}>
-        <Grid item container xs={12} md={6} direction="column">
-          <Grid item>
-            <Typography variant="h4" className={classes.headerText}>
-              Want to partner with us?
-            </Typography>
-          </Grid>
-          <Grid item className={classes.img}>
-            <img
-              src="./images/dates-powder.png"
-              alt="dates powder"
-              className={classes.powderImg}
-            />
-          </Grid>
+        <Grid lg={6} md={6} xs={12}>
+          <StateDistributors />
         </Grid>
         <Grid item xs={12} md={6} className={classes.sectionTwo}>
+          <Typography variant="h4" className={classes.headerText}>
+            Want to partner with us?
+          </Typography>
           <Typography
             variant="h4"
             component="h3"
             className={classes.headerText}
           >
-            JOIN US
+            BECOME A DISTRIBUTOR
           </Typography>
           <Typography variant="body1" component="p" className={classes.subtext}>
             Our goal is to empower as many people as possible to make extra
@@ -112,7 +117,7 @@ function Distributors() {
             <TextField
               type="text"
               variant="outlined"
-              label="Your Name"
+              label="First Name and Last Name"
               className={classes.formfield}
               size="small"
             />
@@ -127,6 +132,13 @@ function Distributors() {
               type="text"
               variant="outlined"
               label="Your Phone Number"
+              className={classes.formfield}
+              size="small"
+            />
+            <TextField
+              type="text"
+              variant="outlined"
+              label="Business Name"
               className={classes.formfield}
               size="small"
             />
@@ -148,7 +160,7 @@ function Distributors() {
             <TextField
               type="text"
               variant="outlined"
-              label="Your Message"
+              label="Optional Message"
               multiline
               rows={4}
               className={classes.formfield}
@@ -159,11 +171,15 @@ function Distributors() {
               color="primary"
               size="large"
             >
-              Send
+              JOIN US
             </Button>
           </form>
         </Grid>
       </Grid>
+
+      <Box className={classes.blogSection}>
+        <LatestBlog />
+      </Box>
     </div>
   );
 }

@@ -82,6 +82,37 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "14px",
     },
   },
+  button: {
+    fontFamily: "Poppins",
+    // fontWeight: "400",
+    fontWeight: "500",
+    fontSize: "18px",
+    // fontSize: "16px",
+    cursor: "pointer",
+    transition: "200ms ease-in-out",
+
+    border: 0,
+    borderRadius: "50px",
+    background: "#3D8754",
+    color: "#fff",
+    padding: "10px 20px",
+    textTransform: "capitalize",
+    width: "180px",
+    height: "60px",
+
+    // fontFamily: "Poppins",
+    // margin: "1em 0",
+    // "&:hover": { color: "#3D8754" },
+
+    // color: "#000",
+    "&:hover": {
+      fontWeight: "600",
+      color: "#000",
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: "16px",
+    },
+  },
   account: {
     border: "1px solid #646464",
     borderRadius: "25px",
@@ -198,6 +229,7 @@ function Header() {
                         <ListItem>About us</ListItem>
                       </Link>
                     </Typography>
+
                     <Typography
                       variant="body1"
                       className={classes.links}
@@ -210,7 +242,18 @@ function Header() {
                         <ListItem> Shop</ListItem>
                       </Link>
                     </Typography>
+
                     <Typography
+                      variant="body1"
+                      className={classes.links}
+                      variant="body1"
+                    >
+                      <Link href="/distributors">
+                        <ListItem> Distributors</ListItem>
+                      </Link>
+                    </Typography>
+
+                    {/* <Typography
                       variant="body1"
                       className={classes.links}
                       variant="body1"
@@ -255,13 +298,7 @@ function Header() {
                           </MenuItem>
                         </Menu>
                       </div>
-                      {/* <Link
-                        href="/distributors"
-                        // style={{ textDecoration: "none" }}
-                      >
-                        <ListItem>Distributors</ListItem>
-                      </Link>   */}
-                    </Typography>
+                    </Typography> */}
 
                     <Typography
                       variant="body1"
@@ -275,6 +312,9 @@ function Header() {
                         <ListItem>Contact us</ListItem>
                       </Link>
                     </Typography>
+                    <a style={{ textDecoration: "none" }} href="/blog">
+                      <button className={classes.button}>Blog</button>
+                    </a>
 
                     {/* <Typography
                       onClick={() => router.push("/contact-us")}

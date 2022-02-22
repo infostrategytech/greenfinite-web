@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Container,
@@ -11,13 +11,18 @@ import {
   makeStyles,
   CircularProgress,
 } from "@material-ui/core";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { createOrder, updateOrder } from "../../redux/actions/checkout";
 import Swal from "sweetalert2";
-import { usePaystackPayment } from 'react-paystack';
-import { useRouter } from 'next/router';
-import { CLEAR_CART, SET_ADDRESS, SET_ORDER_ID } from "../../redux/actions/Contants";
-import Head from 'next/head';
+import { usePaystackPayment } from "react-paystack";
+import { useRouter } from "next/router";
+import {
+  CLEAR_CART,
+  SET_ADDRESS,
+  SET_ORDER_ID,
+} from "../../redux/actions/Contants";
+import Head from "next/head";
+import { formatMoney } from "../../UtilityService/Helpers";
 
 const useStyles = makeStyles((theme) => ({
   mainHeader: {
@@ -191,42 +196,42 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 40 + "px",
     border: "none",
     borderRadius: 50,
-    cursor: 'pointer'
+    cursor: "pointer",
   },
-  spinner:{
-    color: '#fff'
+  spinner: {
+    color: "#fff",
   },
-  productImg:{
-    maxWidth: '100%',
+  productImg: {
+    maxWidth: "100%",
   },
-  logoBox:{
-    display: 'flex',
-    alignItems: 'flex-end'
-  }
+  logoBox: {
+    display: "flex",
+    alignItems: "flex-end",
+  },
 }));
 
 function CheckOut() {
   const classes = useStyles();
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const {cart} = useSelector(state=>state.products)
-  const {orderId}= useSelector(state=>state.checkout)
-  const [loading, setLoading] = useState(false)
-  const [totalPrice,setTotalPrice] = useState(0)
-  const [totalPayment, setTotalPayment] = useState(0)
-  const [email, setEmail] = useState('')
-  const [id, setId] = useState('')
-  const [isUpdate,setIsUpdate]= useState(false)
-  const [orderData,setOrderData] = useState({})
-  const [error,setError] = useState(false)
-  const [address,setAddress] = useState({
-    country:'',
-    state: '',
-    location: '',
-    street: ''
-  })
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { cart } = useSelector((state) => state.products);
+  const { orderId } = useSelector((state) => state.checkout);
+  const [loading, setLoading] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPayment, setTotalPayment] = useState(0);
+  const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [orderData, setOrderData] = useState({});
+  const [error, setError] = useState(false);
+  const [address, setAddress] = useState({
+    country: "",
+    state: "",
+    location: "",
+    street: "",
+  });
 
-  let paystackEmail= Math.floor(Math.random()*12903678)
+  let paystackEmail = Math.floor(Math.random() * 12903678);
 
   const config = {
     reference: new Date().getTime(),
@@ -235,155 +240,158 @@ function CheckOut() {
     publicKey: `${process.env.NEXT_PUBLIC_PAYSTACK_KEY}`,
   };
 
-  useEffect(()=>{
-    setId(orderId)
-  },[orderId])
+  useEffect(() => {
+    setId(orderId);
+  }, [orderId]);
 
-  useEffect(()=>{
-    if(id){
-      dispatch(updateOrder(orderData,id,()=>{
-        setLoading(false)
-        setOrderData({})
-        setId('')
-        dispatch({
-          type: SET_ADDRESS,
-          payload: address
+  useEffect(() => {
+    if (id) {
+      dispatch(
+        updateOrder(orderData, id, () => {
+          setLoading(false);
+          setOrderData({});
+          setId("");
+          dispatch({
+            type: SET_ADDRESS,
+            payload: address,
+          });
+          dispatch({
+            type: CLEAR_CART,
+          });
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Order Placed Succesfully",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/check-out/receipt");
+            }
+          });
         })
-        dispatch({
-          type: CLEAR_CART
-        })
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Order Placed Succesfully'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            router.push('/check-out/receipt')
-          }
-        })
-      }))
+      );
     }
-  },[isUpdate])
+  }, [isUpdate]);
 
-  const updatePayment = (data)=>{
-    setLoading(true)
-    setOrderData(data)
-    setIsUpdate(!isUpdate)
-  }
+  const updatePayment = (data) => {
+    setLoading(true);
+    setOrderData(data);
+    setIsUpdate(!isUpdate);
+  };
   const onSuccess = (reference) => {
-    if (reference.status === 'success') {
-      let data = {}
-      data.payment_status = 'fulfilled'
-      data.payment_reference = reference.reference
-      updatePayment(data)
-    }else{
+    if (reference.status === "success") {
+      let data = {};
+      data.payment_status = "fulfilled";
+      data.payment_reference = reference.reference;
+      updatePayment(data);
+    } else {
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Your payment could not be completed'
-      })
+        icon: "error",
+        title: "Error",
+        text: "Your payment could not be completed",
+      });
     }
   };
-
 
   const onClose = () => {
     setLoading(false);
   };
 
-
   useEffect(() => {
     let price = 0;
-    cart.length>0 && cart.forEach(item => {
-      price += (item.qty * item.amount);
-    });
+    cart.length > 0 &&
+      cart.forEach((item) => {
+        price += item.qty * item.amount;
+      });
     setTotalPrice(price);
-    price && setTotalPayment(price+2000)
-    
-    return ()=> dispatch({
-      type: SET_ORDER_ID,
-      payload: ''
-    });
+    price && setTotalPayment(price + 2000);
 
+    return () =>
+      dispatch({
+        type: SET_ORDER_ID,
+        payload: "",
+      });
   }, []);
 
-  const placeOrder = ()=>{
-    if(!address.country || !address.state || !address.street){
+  const placeOrder = () => {
+    if (!address.country || !address.state || !address.street) {
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Please provide all your billing information'
-      })
-      return
+        icon: "error",
+        title: "Error",
+        text: "Please provide all your billing information",
+      });
+      return;
     }
-    if(!email){
-      setError(true)
+    if (!email) {
+      setError(true);
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Please provide your email'
-      })
-      return
+        icon: "error",
+        title: "Error",
+        text: "Please provide your email",
+      });
+      return;
     }
-    setError(false)
-    let itemArray = []
-    if(cart.length>0){
-      cart.map(item=>{
-        let details ={
-          product_id : item.product_id,
-          quantity: item.qty
-        }
-        itemArray.push(details)
-      })
+    setError(false);
+    let itemArray = [];
+    if (cart.length > 0) {
+      cart.map((item) => {
+        let details = {
+          product_id: item.product_id,
+          quantity: item.qty,
+        };
+        itemArray.push(details);
+      });
     }
-    if(itemArray.length>0){
-      setLoading(true)
+    if (itemArray.length > 0) {
+      setLoading(true);
       let data = {
         products: itemArray,
-        recipient_email : email
-      }
-      dispatch(createOrder(data,successful=>{
-        if(successful){
-          setLoading(false)
-          initializePayment(onSuccess, onClose)
-        }else{
-          setLoading(false)
-        }
-      }))
-    }else{
+        recipient_email: email,
+      };
+      dispatch(
+        createOrder(data, (successful) => {
+          if (successful) {
+            setLoading(false);
+            initializePayment(onSuccess, onClose);
+          } else {
+            setLoading(false);
+          }
+        })
+      );
+    } else {
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'No products in order'
-      })
+        icon: "error",
+        title: "Error",
+        text: "No products in order",
+      });
     }
-  }
+  };
 
-  const handleEmail = e=>{
-    email && setError(false)
-    !email && setError(true)
-    setEmail(e.target.value)
-  }
+  const handleEmail = (e) => {
+    email && setError(false);
+    !email && setError(true);
+    setEmail(e.target.value);
+  };
 
-  const handleAddress = e => {
-    const {name,value} = e.target
-    setAddress(prevAddress=>({
+  const handleAddress = (e) => {
+    const { name, value } = e.target;
+    setAddress((prevAddress) => ({
       ...prevAddress,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
+
+  var formatter = new Intl.NumberFormat('en-US', {
+    // style: 'currency',
+    // currency: 'NGN',
+  });
 
   const initializePayment = usePaystackPayment(config);
 
   return (
     <Container style={{ marginTop: 10 + "rem", marginBottom: 20 + "rem" }}>
       <Head>
-          <title>
-              Greenfinite - Checkout
-          </title>
-          <meta
-          name="description"
-          content=""
-          />
+        <title>Greenfinite - Checkout</title>
+        <meta name="description" content="" />
       </Head>
       <Grid container spacing={10}>
         <Grid item xs={12} md={6}>
@@ -421,12 +429,36 @@ function CheckOut() {
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
+                      label="Phone Number"
+                      margin="normal"
+                      name="phone"
+                      variant="outlined"
+                    />
+                  </Grid>
+
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      required
+                      label="Email Address"
+                      margin="normal"
+                      name="emailAddress"
+                      variant="outlined"
+                      onChange={handleEmail}
+                      error={error}
+                    />
+                  </Grid>
+                </Grid>
+
+                <Grid container spacing={3}>
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      fullWidth
                       label="Country/Region"
                       margin="normal"
                       name="country"
                       variant="outlined"
                       onChange={handleAddress}
-
                     />
                   </Grid>
 
@@ -489,7 +521,7 @@ function CheckOut() {
             <Checkbox /> Create an account?
           </Box>
 
-          <Box className={classes.billingDetail}>
+          {/* <Box className={classes.billingDetail}>
             <Box className={classes.billingDetailHeader}>Billing Details</Box>
             <form>
               <Grid container spacing={3}>
@@ -583,34 +615,40 @@ function CheckOut() {
                     margin="normal"
                     name="emailAddress"
                     variant="outlined"
-                    // onChange={e=>setEmail(e.target.value)}
                     onChange={handleEmail}
                     error={error}
                   />
                 </Grid>
               </Grid>
             </form>
-          </Box>
+          </Box> */}
         </Grid>
 
         <Grid item xs={12} md={6}>
           <Box className={classes.orderBox}>
             <Typography className={classes.orderHeader}>Your Order</Typography>
 
-            {cart && cart.length > 0 &&
-              cart.map(item=>(
+            {cart &&
+              cart.length > 0 &&
+              cart.map((item) => (
                 <Box className={classes.orderDetailBox} key={item.name}>
                   <Grid container spacing={2}>
                     <Grid item xs={3}>
                       <Box>
-                        <img src={item?.image_url} alt="product image" className={classes.productImg}/>
+                        <img
+                          src={item?.image_url}
+                          alt="product image"
+                          className={classes.productImg}
+                        />
                       </Box>
                     </Grid>
                     <Grid item xs={9}>
                       <Box>
                         <Typography className={classes.itemNameHeader}>
-                        {item.name} {" "}
-                          <span className={classes.itemNameSubHeader}>({item.net_weight})</span>
+                          {item.name}{" "}
+                          <span className={classes.itemNameSubHeader}>
+                            ({item.net_weight})
+                          </span>
                         </Typography>
 
                         <Typography className={classes.quantityHeader}>
@@ -618,17 +656,19 @@ function CheckOut() {
                         </Typography>
 
                         <Typography className={classes.unitPrice}>
-                        ₦{item.amount}<span className={classes.unitPriceSpan}>{`x${item.qty}`}</span>
+                          {formatMoney(item.amount)}
+                          <span
+                            className={classes.unitPriceSpan}
+                          >{`x${item.qty}`}</span>
                         </Typography>
                       </Box>
                     </Grid>
                   </Grid>
                 </Box>
-              ))
-            }
-            {
-              cart.length === 0 && <Typography variant="body1">No items in cart</Typography>
-            }
+              ))}
+            {cart.length === 0 && (
+              <Typography variant="body1">No items in cart</Typography>
+            )}
 
             <Divider className={classes.divider} />
 
@@ -639,7 +679,7 @@ function CheckOut() {
                 </Grid>
                 <Grid item xs={6} className={classes.priceValueAlign}>
                   <Typography className={classes.priceValue}>
-                   {totalPrice?`₦${totalPrice}`: ''}
+                    {totalPrice ? `${formatMoney(totalPrice)}` : ""}
                   </Typography>
                 </Grid>
               </Grid>
@@ -652,9 +692,7 @@ function CheckOut() {
                   </Typography>
                 </Grid>
                 <Grid item xs={6} className={classes.priceValueAlign}>
-                  <Typography className={classes.priceValue}>
-                    ₦2,000
-                  </Typography>
+                  <Typography className={classes.priceValue}>{formatMoney(2000)}</Typography>
                 </Grid>
               </Grid>
 
@@ -669,7 +707,7 @@ function CheckOut() {
                   </Grid>
                   <Grid item xs={6} className={classes.priceValueAlign}>
                     <Typography className={classes.totalValue}>
-                      {totalPayment ?`₦${totalPayment}`: ''}
+                      {totalPayment ? `${formatMoney(totalPayment)}` : ""}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -682,45 +720,29 @@ function CheckOut() {
               <img src="../images/paymentOptions.png" alt="payment options" />
             </Box> */}
             <Grid container>
-              <Grid 
-                item 
-                xs={2} 
-                className={classes.logoBox}
-              >
-                <img 
+              <Grid item xs={2} className={classes.logoBox}>
+                <img
                   alt="paystack_payment"
                   src="./images/paystack.png"
                   className={classes.productImg}
                 />
               </Grid>
-              <Grid 
-                item 
-                xs={2} 
-                className={classes.logoBox}
-              >
-                <img 
+              <Grid item xs={2} className={classes.logoBox}>
+                <img
                   alt="mastercard_payment"
                   src="./images/mastercard.png"
                   className={classes.productImg}
                 />
               </Grid>
-              <Grid 
-                item 
-                xs={2} 
-                className={classes.logoBox}
-              >
-                <img 
+              <Grid item xs={2} className={classes.logoBox}>
+                <img
                   alt="visa_payment"
                   src="./images/visa.png"
                   className={classes.productImg}
                 />
               </Grid>
-              <Grid 
-                item 
-                xs={2} 
-                className={classes.logoBox}
-              >
-                <img 
+              <Grid item xs={2} className={classes.logoBox}>
+                <img
                   alt="verve_payment"
                   src="./images/verve.png"
                   className={classes.productImg}
@@ -742,16 +764,19 @@ function CheckOut() {
 
             <Box>
               {/* <Link href="shop/2" underline="none"> */}
-                <button 
-                  // href="shop/2" 
-                  className={classes.paymentButton}
-                  onClick={placeOrder}
-                  // onClick={() => initializePayment(onSuccess, onClose)}
-                  disabled={loading}
-                >
-                  {loading?<CircularProgress className={classes.spinner} /> :'Proceed to Payment'}
-                 
-                </button>
+              <button
+                // href="shop/2"
+                className={classes.paymentButton}
+                onClick={placeOrder}
+                // onClick={() => initializePayment(onSuccess, onClose)}
+                disabled={loading}
+              >
+                {loading ? (
+                  <CircularProgress className={classes.spinner} />
+                ) : (
+                  "Proceed to Payment"
+                )}
+              </button>
               {/* </Link> */}
             </Box>
           </Box>

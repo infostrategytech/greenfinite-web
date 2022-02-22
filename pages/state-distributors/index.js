@@ -1,86 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Grid,
   Typography,
   makeStyles,
   TextField,
   Button,
-} from '@material-ui/core';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+} from "@material-ui/core";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import {
   AbujaOffices,
   KwaraOffices,
   LagosOffices,
   OyoOffices,
   KanoOffices,
-} from '../../UtilityService/Helpers';
+} from "../../UtilityService/Helpers";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: '#fff',
-    paddingTop: '100px',
+    // background: '#fff',
+    // paddingTop: '100px',
   },
   container: {
-    marginLeft: '7rem',
-    paddingTop: '4rem',
-    paddingBottom: '6rem',
-    [theme.breakpoints.down('sm')]: {
+    // marginLeft: '7rem',
+    // paddingTop: '4rem',
+    paddingBottom: "8rem",
+    [theme.breakpoints.down("sm")]: {
       marginLeft: 0,
       paddingTop: 0,
     },
   },
   subContainer: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down("sm")]: {
       padding: 10,
     },
   },
   headers: {
-    fontFamily: 'Poppins',
-    fontStyle: 'normal',
+    fontFamily: "Poppins",
+    fontStyle: "normal",
     fontWeight: 600,
     fontSize: 40,
-    lineHeight: '60px',
-    letterSpacing: '0.01em',
-    color: '#000000',
-    [theme.breakpoints.down('sm')]: {
+    lineHeight: "60px",
+    letterSpacing: "0.01em",
+    color: "#000000",
+    [theme.breakpoints.down("sm")]: {
       fontSize: 28,
-      textAlign: 'center',
-      
+      // textAlign: "center",
     },
   },
   subTxt: {
-    fontFamily: 'Poppins',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
+    fontFamily: "Poppins",
+    fontStyle: "normal",
+    fontWeight: "normal",
     fontSize: 20,
-    lineHeight: '30px',
-    letterSpacing: '0.01em',
-    color: '#000000',
-    [theme.breakpoints.down('sm')]: {
+    lineHeight: "30px",
+    letterSpacing: "0.01em",
+    color: "#000000",
+    [theme.breakpoints.down("sm")]: {
       fontSize: 16,
-      textAlign: 'center',
+      // textAlign: "center",
     },
   },
   logoHd: {
-    fontFamily: 'Poppins',
-    fontStyle: 'normal',
+    fontFamily: "Poppins",
+    fontStyle: "normal",
     fontWeight: 600,
     fontSize: 30,
-    lineHeight: '60px',
-    letterSpacing: '0.01em',
-    color: '#000000',
-    [theme.breakpoints.down('sm')]: {
+    lineHeight: "60px",
+    letterSpacing: "0.01em",
+    color: "#000000",
+    [theme.breakpoints.down("sm")]: {
       fontSize: 25,
     },
   },
   logo: {
     padding: 15,
     marginRight: 10,
-    border: '1px solid #3D8754',
-    borderRadius: '100px',
+    border: "1px solid #3D8754",
+    borderRadius: "100px",
   },
 }));
 
@@ -94,12 +93,12 @@ const StateDistributors = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container xs={12} className={classes.container}>
+      <Grid container xs={12} lg={12} md={12} className={classes.container}>
         <Grid
           item
           container
           direction="column"
-          style={{ marginBottom: '1rem' }}
+          style={{ marginBottom: "1rem" }}
         >
           <Typography variant="body1" className={classes.headers}>
             Buy From State Distributors
@@ -112,16 +111,15 @@ const StateDistributors = () => {
           <Grid
             item
             container
-         
             direction="column"
-            style={{ marginTop: '1.5rem' }}
+            style={{ marginTop: "1.5rem" }}
           >
             <Accordion
-              expanded={expanded === 'panel1'}
-              onChange={handleChange('panel1')}
+              expanded={expanded === "panel1"}
+              onChange={handleChange("panel1")}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon style={{ color: ' #28AA63' }} />}
+                expandIcon={<ExpandMoreIcon style={{ color: " #28AA63" }} />}
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
               >
@@ -145,20 +143,17 @@ const StateDistributors = () => {
           <Grid
             item
             container
-           
             direction="column"
-            style={{ marginTop: '1.5rem' }}
+            style={{ marginTop: "1.5rem" }}
           >
             <Accordion
-              expanded={expanded === 'panel2'}
-              onChange={handleChange('panel2')}
-            
+              expanded={expanded === "panel2"}
+              onChange={handleChange("panel2")}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon style={{ color: ' #28AA63' }} />}
+                expandIcon={<ExpandMoreIcon style={{ color: " #28AA63" }} />}
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
-              
               >
                 <Grid item>
                   <span className={classes.logo}>K</span>
@@ -181,15 +176,14 @@ const StateDistributors = () => {
             item
             container
             direction="column"
-            style={{ marginTop: '1.5rem' }}
+            style={{ marginTop: "1.5rem" }}
           >
             <Accordion
-              expanded={expanded === 'panel3'}
-              onChange={handleChange('panel3')}
-              
+              expanded={expanded === "panel3"}
+              onChange={handleChange("panel3")}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon style={{ color: ' #28AA63' }} />}
+                expandIcon={<ExpandMoreIcon style={{ color: " #28AA63" }} />}
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
                 // className={classes.sumBorder}
@@ -214,20 +208,17 @@ const StateDistributors = () => {
           <Grid
             item
             container
-           
             direction="column"
-            style={{ marginTop: '1.5rem' }}
+            style={{ marginTop: "1.5rem" }}
           >
             <Accordion
-              expanded={expanded === 'panel4'}
-              onChange={handleChange('panel4')}
-             
+              expanded={expanded === "panel4"}
+              onChange={handleChange("panel4")}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon style={{ color: ' #28AA63' }} />}
+                expandIcon={<ExpandMoreIcon style={{ color: " #28AA63" }} />}
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
-                
               >
                 <Grid item>
                   <span className={classes.logo}>L</span>
@@ -251,15 +242,15 @@ const StateDistributors = () => {
             container
             // alignItems
             direction="column"
-            style={{ marginTop: '1.5rem' }}
+            style={{ marginTop: "1.5rem" }}
           >
             <Accordion
-              expanded={expanded === 'panel5'}
-              onChange={handleChange('panel5')}
+              expanded={expanded === "panel5"}
+              onChange={handleChange("panel5")}
               // style={{ marginBottom: '1rem' }}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon style={{ color: ' #28AA63' }} />}
+                expandIcon={<ExpandMoreIcon style={{ color: " #28AA63" }} />}
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
                 // className={classes.sumBorder}

@@ -17,7 +17,7 @@ import { addToCart } from "../../redux/actions/cart";
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     display: "flex",
-    padding:'1em'
+    padding: "1em",
   },
   cards: {
     background:
@@ -39,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
   },
   logo1: {
     maxWidth: "100%",
-    // height: "240px",
-    // width: "240px",
+    height: "240px",
+    width: "400px",
     objectFit: "center",
 
     [theme.breakpoints.down("md")]: {
@@ -106,6 +106,62 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     textAlign: "center",
   },
+  becomeADistributor: {
+    display: 'flex',
+    justifyContent: 'center',
+    // width: "80%",
+    marginBottom: "5rem",
+    [theme.breakpoints.down("sm")]: {
+      top: "0",
+      width: "100%",
+    },
+  },
+  becomeADistributorBox: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+
+  },
+  becomeADistributorTitleSection: {
+    display: "flex",
+    flexDirection: "row",
+    columnGap: "4rem",
+    // marginBottom: "0.5rem",
+  },
+  becomeADistributorTitle: {
+    fontFamily: "Poppins",
+    fontStyle: "normal",
+    fontWeight: 500,
+    fontSize: "24px",
+    lineHeight: "60px",
+    letterSpacing: "0.01em",
+    color: "#000000",
+  },
+  becomeADistributorButton: {
+    border: "1px solid #3D8754",
+    boxSizing: "border-box",
+    borderRadius: "50px",
+    padding: "10px 25px",
+    fontFamily: "Poppins",
+    fontStyle: "normal",
+    fontWeight: 600,
+    fontSize: "14px",
+    lineHeight: "21px",
+    letterSpacing: "0.01em",
+    color: "#3D8754",
+  },
+  becomeADistributorText: {
+    fontFamily: "Avenir",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: "14px",
+    lineHeight: "24px",
+    letterSpacing: "0.01em",
+    color: "#000000",
+    textAlign:'center',
+    marginBottom: '1.5rem'
+  },
 }));
 
 const Products = () => {
@@ -127,54 +183,8 @@ const Products = () => {
     dispatch(addToCart(id));
   };
   return (
-    // <Card elevation={0} className={classes.cards}>
-    //   <Grid container className={classes.wrapper}>
-    //     {loading ? (
-    //       <div className={classes.progress}>
-    //         {" "}
-    //         <CircularProgress />
-    //       </div>
-    //     ) : (
-    //       <>
-    //         {products &&
-    //           products.length &&
-    //           products.map((product) => (
-    //             <Grid item xs={12} md={6} className={classes.fruitContainer}>
-    //               <Box>
-    //                 <Link href={`/shop/${product.product_id}`}>
-    //                   <img
-    //                     src={product.image_url}
-    //                     alt="powdered fruits"
-    //                     className={classes.logo1}
-    //                   />
-    //                 </Link>
-    //               </Box>
-    //               <Box>
-    //                 <Typography variant="h3" className={classes.title1}>
-    //                   {product.name}
-    //                 </Typography>
-    //                 <Typography variant="body1" className={classes.content1}>
-    //                   {product.description}
-    //                   <small className={classes.grams}>
-    //                     {product.net_weight}g{" "}
-    //                   </small>
-    //                 </Typography>
-    //                 <Button
-    //                   onClick={() => addCart(product.product_id)}
-    //                   className={classes.button1}
-    //                 >
-    //                   Buy Now
-    //                 </Button>
-    //               </Box>
-    //             </Grid>
-    //           ))}
-    //       </>
-    //     )}
-    //   </Grid>
-    // </Card>
     <Card elevation={0} className={classes.cards}>
       <Grid container className={classes.wrapper}>
-        {/* Dates powder */}
         <Grid item xs={12} md={6} className={classes.fruitContainer}>
           <Box>
             <Link href={`/shop`}>
@@ -200,7 +210,6 @@ const Products = () => {
             </Link>
           </Box>
         </Grid>
-        {/* Dates Syrup */}
         <Grid item xs={12} md={6} className={classes.fruitContainer}>
           <Box>
             <Link href={`/shop`}>
@@ -227,70 +236,26 @@ const Products = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <Box
+        className={classes.becomeADistributor}
+      >
+        <Grid xs={12} lg={6} md={6} sm={12} className={classes.becomeADistributorBox}>
+          <Grid className={classes.becomeADistributorTitleSection}>
+            <Typography className={classes.becomeADistributorTitle}>
+              Become a Distributor
+            </Typography>
+          </Grid>
+          <Typography className={classes.becomeADistributorText}>
+            Our goal is to empower as many people as possible to make extra
+            income by partnering with us . To become a Greenfinite distributor ,
+            please Click the Join Us button
+          </Typography>
+          <Button className={classes.becomeADistributorButton}>Join Now</Button>
+        </Grid>
+      </Box>
     </Card>
   );
 };
 
 export default Products;
-// <Grid container justifyContent="space-between">
-// <Grid
-//   item
-//   container
-//   xs={12}
-//   sm={12}
-//   md={6}
-//   spacing={4}
-//   className={classes.fruitContainer}
-// >
-//   <Grid item>
-//     <img
-//       src="./images/fruit.png"
-//       alt="Powdered nuts"
-//       className={classes.logo1}
-//     />
-//   </Grid>
-//   <Grid item md>
-//     <Typography variant="h3" className={classes.title1}>
-//       Date Powder
-//     </Typography>
-//     <Typography variant="body1" className={classes.content1}>
-//       flesh of Dates Fruit which have been dried and ground into fine
-//       powder.
-//       <small className={classes.grams}>200g and 500g </small>
-//     </Typography>
-//     <Button variat="contained" className={classes.button1}>
-//       Buy Now
-//     </Button>
-//   </Grid>
-// </Grid>
-// <Grid
-//   item
-//   container
-//   xs={12}
-//   sm={12}
-//   md={6}
-//   spacing={4}
-//   className={classes.fruitContainer}
-// >
-//   <Grid item>
-//     <img
-//       src="./images/fruit.png"
-//       alt="Powdered nuts"
-//       className={classes.logo1}
-//     />
-//   </Grid>
-//   <Grid item md>
-//     <Typography variant="h3" className={classes.title1}>
-//       Date Syrup
-//     </Typography>
-//     <Typography variant="body1" className={classes.content1}>
-//       flesh of Dates Fruit which have been dried and ground into fine
-//       powder.
-//       <small className={classes.grams}>200g and 5000g</small>
-//     </Typography>
-//     <Button variat="contained" className={classes.button1}>
-//       Buy Now
-//     </Button>
-//   </Grid>
-// </Grid>
-// </Grid>

@@ -17,6 +17,7 @@ import {
 import { getAllProduct, getSingleProduct } from "../../redux/actions/products";
 import { addToCart, adjustQuantity } from "../../redux/actions/cart";
 import useFunctions from "../../UtilityService/useFunctions";
+import { formatMoney } from "../../UtilityService/Helpers";
 
 const useStyles = makeStyles((theme) => ({
   quantityValue: {
@@ -217,7 +218,7 @@ function ItemDetails() {
                 {product && product.description}
               </Typography>
               <Box className={classes.content}>
-                ₦{product && product.amount}
+                {formatMoney(product && product.amount)}
               </Box>
               {/* <Link href="#"> */}
               <Button

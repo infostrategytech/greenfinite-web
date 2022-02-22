@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid,Typography,makeStyles,Table,TableBody,TableCell,TableContainer,TableHead,TableRow} from '@material-ui/core'
 import Head from 'next/head';
 import { useSelector } from 'react-redux';
+import { formatMoney } from "../../UtilityService/Helpers";
 
 const useStyles = makeStyles((theme) => ({
     root:{
@@ -204,8 +205,8 @@ function Receipt() {
                                     <TableRow  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                         <TableCell>{item?.product?.name}</TableCell>
                                         <TableCell align="right">{item?.quantity}</TableCell>
-                                        <TableCell align="right">{`₦${item?.product?.amount}`}</TableCell>
-                                        <TableCell align="right">{`₦${item?.sub_total}`}</TableCell>
+                                        <TableCell align="right">{`${formatMoney(item?.product?.amount)}`}</TableCell>
+                                        <TableCell align="right">{`${formatMoney(item?.sub_total)}`}</TableCell>
                                     </TableRow>
                                 ))
                             }
@@ -230,7 +231,7 @@ function Receipt() {
                             Notes
                         </Typography>
                         <Typography variant="caption" component="p">
-                            Shipping fee is a flat rate of ₦2000
+                            Shipping fee is a flat rate of {formatMoney(2000)}
                         </Typography>
                     </Grid>
                     <Grid 
@@ -252,7 +253,7 @@ function Receipt() {
                                 variant="h6"
                                 className={classes.bold}
                             >
-                                {`₦${orderDetails.total}`}
+                                {`${formatMoney(orderDetails.total)}`}
                             </Typography>
                         </Grid>
                     </Grid> 

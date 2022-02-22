@@ -21,6 +21,7 @@ import router from "next/router";
 import { addToCart } from "../../redux/actions/cart";
 import { getAllProduct } from "../../redux/actions/products";
 import useFunctions from "../../UtilityService/useFunctions";
+import { formatMoney } from "../../UtilityService/Helpers";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -187,6 +188,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 function Shop() {
   const dispatch = useDispatch();
   const toast = useFunctions();
@@ -200,6 +202,7 @@ function Shop() {
       payload: id,
     });
   };
+
   const addCart = (id) => {
     dispatch(addToCart(id));
     toast();
@@ -300,7 +303,7 @@ function Shop() {
                           </small>
                         </Typography>
                         <Typography variant="h4" className={classes.content}>
-                          ₦{product.amount}
+                          {formatMoney(product.amount)}
                         </Typography>
                         {/* <Link
                         href={`/shop/${product.product_id}`}

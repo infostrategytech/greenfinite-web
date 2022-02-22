@@ -6,14 +6,36 @@ import {
   TextField,
   Button,
   Box,
+  Container,
 } from "@material-ui/core";
 import { mergeClasses } from "@material-ui/styles";
 import Head from "next/head";
 import Image from "next/image";
+import LatestBlog from "../../components/LatestBlog";
+// import { Container } from "next/app";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    paddingTop: 100,
+    paddingTop: 90,
+  },
+  banner: {
+    justifyContent: "center",
+    background: "#EFF8F2",
+    // marginTop: "1rem",
+    // marginBottom: "4rem",
+    padding: "10rem 0",
+  },
+  bannerContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  bannerText: {
+    fontFamily: "Poppins",
+    fontSize: "15px",
+    paddingLeft: "1rem",
+    paddingRight: "1rem",
+    textAlign: "center",
   },
   datesImg: {
     maxWidth: "100%",
@@ -26,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
   parentContainer: {
     [theme.breakpoints.up("md")]: {
-      paddingTop: 50,
+      // paddingTop: 50,
       paddingBottom: 200,
     },
     [theme.breakpoints.down("sm")]: {
@@ -58,13 +80,15 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 16,
     fontFamily: "Poppins",
     [theme.breakpoints.down("md")]: {
-      textAlign: "center",
+      // textAlign: "center",
     },
   },
   subhead: {
     marginBottom: 16,
     fontWeight: 700,
     fontFamily: "Poppins",
+    display: "flex",
+    alignItems: "center",
     [theme.breakpoints.down("md")]: {
       textAlign: "center",
     },
@@ -100,50 +124,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       marginTop: 32,
       textAlign: "justify",
-    },
-    marginTop: 50,
-  },
-  item4: {
-    textAlign: "center",
-    marginTop: 100,
-    backgroundColor: "#EFF8F2",
-    paddingTop: 30,
-    paddingBottom: 30,
-  },
-  product__container: {
-    marginTop: "2rem",
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gap: "3rem",
-    [theme.breakpoints.down("sm")]: {
-      gridTemplateColumns: "repeat(1, 1fr)",
-      rowGap: "3rem",
-    },
-    [theme.breakpoints.up("sm")]: {
-      gridTemplateColumns: "repeat(2, 1fr)",
-      gap: "3rem",
-    },
-    [theme.breakpoints.up("md")]: {
-      gridTemplateColumns: "repeat(4, 1fr)",
-      gap: "3rem",
-    },
-  },
-  item5: {
-    display: "grid",
-    textAlign: "center",
-    gap: "2rem",
-    [theme.breakpoints.up("sm")]: {
-      marginTop: "5rem",
-      gridTemplateColumns: "repeat(3, 1fr)",
-    },
-    [theme.breakpoints.up("md")]: {
-      paddingLeft: 100,
-      paddingRight: 100,
-      marginTop: "7rem",
-      gridTemplateColumns: "repeat(3, 1fr)",
-    },
-    [theme.breakpoints.down("sm")]: {
-      // marginTop: 32,
     },
     marginTop: 50,
   },
@@ -192,6 +172,8 @@ const useStyles = makeStyles((theme) => ({
   },
   value: {
     padding: 0,
+    // display: 'flex',
+    // flexDirection: 'column'
   },
   clientImg: {
     height: 81,
@@ -200,7 +182,7 @@ const useStyles = makeStyles((theme) => ({
   font: {
     fontFamily: "Poppins",
     fontSize: "15px",
-    paddingLeft: "1rem",
+    // paddingLeft: "1rem",
     paddingRight: "1rem",
   },
   coreValues: {
@@ -211,11 +193,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   number: {
-    fontSize: 28
+    fontSize: 28,
   },
-  subTitle: {
-    
-  }
+  subTitle: {},
 }));
 
 function AboutUs() {
@@ -227,8 +207,9 @@ function AboutUs() {
         <meta name="description" content="" />
       </Head>
       <Grid container direction="column" className={classes.parentContainer}>
-        <Box className={classes.boxes}>
-          <Grid item className={classes.item1}>
+        {/* <Box> */}
+        <Grid className={classes.banner}>
+          <Container className={classes.bannerContainer}>
             <Typography
               variant="h3"
               component="h1"
@@ -236,18 +217,27 @@ function AboutUs() {
             >
               About Us
             </Typography>
-            <Typography variant="body1" component="p" className={classes.font}>
+            <Typography
+              variant="body1"
+              component="p"
+              className={classes.bannerText}
+            >
               We are an organic food processing company into the production of
               healthy sweeteners made from Dates Fruit. We process Dates Fruit
               into powder and syrup forms as a suitable natural replacement for
               refined sugar or other sweeteners in any recipe.
             </Typography>
-          </Grid>
+          </Container>
+        </Grid>
+        {/* </Box> */}
+        <Box className={classes.boxes}>
+          <Grid item className={classes.item1}></Grid>
           {/* ROW 2 */}
           <Grid item container className={classes.item2}>
             <Grid item xs={12} md={6}>
               <Box className={classes.box}>
                 <Typography variant="h4" className={classes.subhead}>
+                  <img src="/images/about/our-vision.png" />
                   Our Vision
                 </Typography>
                 <Typography variant="body1" className={classes.font}>
@@ -256,6 +246,7 @@ function AboutUs() {
               </Box>
               <Box className={classes.box}>
                 <Typography variant="h4" className={classes.subhead}>
+                  <img src="/images/about/our-mission.png" />
                   Our Mission
                 </Typography>
                 <Typography variant="body1" className={classes.font}>
@@ -290,6 +281,7 @@ function AboutUs() {
 
             <Grid item container className={classes.value__container}>
               <Grid item className={classes.value}>
+                <img src="/images/about/values/quality.png" />
                 <Typography
                   variant="h4"
                   component="h4"
@@ -304,6 +296,7 @@ function AboutUs() {
                 </Typography>
               </Grid>
               <Grid item className={classes.value}>
+                <img src="/images/about/values/customer-centric.png" />
                 <Typography
                   variant="h4"
                   component="h4"
@@ -316,6 +309,7 @@ function AboutUs() {
                 </Typography>
               </Grid>
               <Grid item className={classes.value}>
+                <img src="/images/about/values/safe.png" />
                 <Typography
                   variant="h4"
                   component="h4"
@@ -329,6 +323,7 @@ function AboutUs() {
                 </Typography>
               </Grid>
               <Grid item className={classes.value}>
+                <img src="/images/about/values/integrity.png" />
                 <Typography
                   variant="h4"
                   component="h4"
@@ -342,6 +337,7 @@ function AboutUs() {
                 </Typography>
               </Grid>
               <Grid item className={classes.value}>
+                <img src="/images/about/values/education.png" />
                 <Typography
                   variant="h4"
                   component="h4"
@@ -355,6 +351,7 @@ function AboutUs() {
                 </Typography>
               </Grid>
               <Grid item className={classes.value}>
+                <img src="/images/about/values/coporate-value.png" />
                 <Typography
                   variant="h4"
                   component="h4"
@@ -368,6 +365,7 @@ function AboutUs() {
                 </Typography>
               </Grid>
               <Grid item className={classes.value}>
+                <img src="/images/about/values/excellent.png" />
                 <Typography
                   variant="h4"
                   component="h4"
@@ -381,6 +379,9 @@ function AboutUs() {
                 </Typography>
               </Grid>
               <Grid item className={classes.value}>
+                <Box>
+                  <img src="/images/about/values/creative-idea.png" />
+                </Box>
                 <Typography
                   variant="h4"
                   component="h4"
@@ -388,7 +389,7 @@ function AboutUs() {
                 >
                   Creativity
                 </Typography>
-                <Typography variant="body1" className={classes.font}>
+                <Typography className={classes.font}>
                   Innovate, develop and adapt to change drivers.
                 </Typography>
               </Grid>
@@ -451,108 +452,9 @@ function AboutUs() {
           </Grid>
         </Grid>
 
-        {/* ROW 4 */}
-        <Grid item container direction="column" className={classes.item4}>
-          <Grid item>
-            <Typography variant="h4" className={classes.subhead}>
-              Our Products in Numbers
-            </Typography>
-          </Grid>
-
-          <Grid item container justifyContent="space-evenly" className={classes.product__container}>
-            <Grid item className={classes.value}>
-              <Typography variant="h4" component="h3" className={classes.number}>
-                1000
-              </Typography>
-              <Typography variant="h6" component="p" className={classes.subTitle}>
-                Products Supplied
-              </Typography>
-            </Grid>
-            <Grid item className={classes.value}>
-              <Typography variant="h4" component="h3" className={classes.number}>
-                97
-              </Typography>
-              <Typography variant="h6" component="p">
-                Distributors
-              </Typography>
-            </Grid>
-            <Grid item className={classes.value}>
-              <Typography variant="h4" component="h3" className={classes.number}>
-                100%
-              </Typography>
-              <Typography variant="h6" component="p">
-                Satisfied Customers
-              </Typography>
-            </Grid>
-            <Grid item className={classes.value}>
-              <Typography variant="h4" component="h3" className={classes.number}>
-                2
-              </Typography>
-              <Typography variant="h6" component="p">
-                States
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        {/* ROW 5 */}
-        <Grid item container className={classes.item5}>
-          <Grid item >
-            <img
-              src="./images/next.png"
-              alt="next cash and carry"
-              className={classes.clientImg}
-            />
-          </Grid>
-          <Grid item>
-            <img
-              src="./images/tonia.png"
-              alt="tonia pharmacy"
-              className={classes.clientImg}
-            />
-          </Grid>
-          <Grid item>
-            <img
-              src="./images/pyramid.png"
-              alt="pyramid pharmacy"
-              className={classes.clientImg}
-            />
-          </Grid>
-          <Grid item>
-            <img
-              src="./images/mcray.png"
-              alt="mcray supermarket"
-              className={classes.clientImg}
-            />
-          </Grid>
-          <Grid item>
-            <img
-              src="./images/bakan-gizo.png"
-              alt="bakan gizo"
-              className={classes.clientImg}
-            />
-          </Grid>
-          <Grid item>
-            <img
-              src="./images/dunes.png"
-              alt="dunes center"
-              className={classes.clientImg}
-            />
-          </Grid>
-          <Grid item>
-            <img
-              src="./images/maple.png"
-              alt="maple"
-              className={classes.clientImg}
-            />
-          </Grid>
-          <Grid item>
-            <img
-              src="./images/tefcon.png"
-              alt="tefcon"
-              className={classes.clientImg}
-            />
-          </Grid>
-        </Grid>
+        <Box>
+          <LatestBlog />
+        </Box>
       </Grid>
     </div>
   );
