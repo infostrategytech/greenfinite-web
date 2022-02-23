@@ -107,8 +107,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   becomeADistributor: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
     // width: "80%",
     marginBottom: "5rem",
     [theme.breakpoints.down("sm")]: {
@@ -117,11 +117,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   becomeADistributorBox: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
   },
   becomeADistributorTitleSection: {
     display: "flex",
@@ -159,8 +158,8 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "24px",
     letterSpacing: "0.01em",
     color: "#000000",
-    textAlign:'center',
-    marginBottom: '1.5rem'
+    textAlign: "center",
+    marginBottom: "1.5rem",
   },
 }));
 
@@ -237,10 +236,14 @@ const Products = () => {
         </Grid>
       </Grid>
 
-      <Box
-        className={classes.becomeADistributor}
-      >
-        <Grid xs={12} lg={6} md={6} sm={12} className={classes.becomeADistributorBox}>
+      <Box className={classes.becomeADistributor}>
+        <Grid
+          xs={12}
+          lg={6}
+          md={6}
+          sm={12}
+          className={classes.becomeADistributorBox}
+        >
           <Grid className={classes.becomeADistributorTitleSection}>
             <Typography className={classes.becomeADistributorTitle}>
               Become a Distributor
@@ -251,7 +254,12 @@ const Products = () => {
             income by partnering with us . To become a Greenfinite distributor ,
             please Click the Join Us button
           </Typography>
-          <Button className={classes.becomeADistributorButton}>Join Now</Button>
+
+          <Link href="/distributors">
+            <Button className={classes.becomeADistributorButton}>
+              Join Now
+            </Button>
+          </Link>
         </Grid>
       </Box>
     </Card>
