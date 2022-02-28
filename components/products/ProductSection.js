@@ -186,7 +186,7 @@ const ProductSection = () => {
               </Grid>
               <Grid item md sm={12} className={classes.imgContainer}>
                 <img
-                  src="./images/productgroup.png"
+                  src="./images/gi2.png"
                   alt="Powdered nuts"
                   className={classes.logo1}
                 />
