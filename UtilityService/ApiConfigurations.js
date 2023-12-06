@@ -2,8 +2,9 @@ import axios from "axios";
 import { handleApiError } from "./ApiErrors";
 import { string, object, oneOf, bool } from "prop-types";
 
-// const base_url = process.env.NEXT_PUBLIC_BASE_URL;
-const base_url = "https://greenfinite-app.herokuapp.com/api/v1/";
+const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+console.log("base_url :", base_url)
+// const base_url = "https://greenfinite-app.herokuapp.com/api/v1/";
 const axiosInstance = axios.create({
   baseURL: base_url,
 });
