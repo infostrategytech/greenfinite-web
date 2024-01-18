@@ -264,8 +264,8 @@ const MobileCartView = () => {
           Shipping fee is a flat rate of {formatMoney(2000)}
         </small>
         {cart.length > 0 &&
-          cart.map((item) => (
-            <Grid container className={classes.wrapper}>
+          cart.map((item,index) => (
+            <Grid container className={classes.wrapper} key={index}>
               {/* Dates Syrup */}
               <Grid item xs={12} className={classes.fruitContainer}>
                 <Box>

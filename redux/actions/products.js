@@ -34,6 +34,7 @@ export const getSingleProduct = (data, cb) => async (dispatch) => {
 export const getAllProduct = (cb) => async (dispatch) => {
   try {
     const res = await callApi("products", "GET");
+    console.log("response sent :", res);
 
     if (res.code === "00") {
       dispatch({

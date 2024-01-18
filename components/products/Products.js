@@ -165,6 +165,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Products = () => {
   const { products } = useSelector((state) => state.products);
+  console.log("products :", products);
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -238,13 +239,13 @@ const Products = () => {
 
       <Box className={classes.becomeADistributor}>
         <Grid
-          xs={12}
-          lg={6}
-          md={6}
-          sm={12}
+          
           className={classes.becomeADistributorBox}
         >
-          <Grid className={classes.becomeADistributorTitleSection}>
+          <Grid className={classes.becomeADistributorTitleSection} xs={12}
+          lg={6}
+          md={6}
+          sm={12}>
             <Typography className={classes.becomeADistributorTitle}>
               Become a Distributor
             </Typography>

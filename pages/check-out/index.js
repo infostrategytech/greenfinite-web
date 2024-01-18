@@ -223,6 +223,7 @@ function CheckOut() {
   const [id, setId] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
   const [orderData, setOrderData] = useState({});
+  const [info, setInfo] = useState("");
   const [error, setError] = useState(false);
   const [address, setAddress] = useState({
     country: "",
@@ -230,6 +231,9 @@ function CheckOut() {
     location: "",
     street: "",
   });
+  const [redirectLink, setRedirectLink] = useState("");
+
+  console.log("OrderID :", orderId);
 
   let paystackEmail = Math.floor(Math.random() * 12903678);
 
@@ -267,7 +271,7 @@ function CheckOut() {
               router.push("/check-out/receipt");
             }
           });
-        })
+        }),
       );
     }
   }, [isUpdate]);
@@ -277,6 +281,7 @@ function CheckOut() {
     setOrderData(data);
     setIsUpdate(!isUpdate);
   };
+
   const onSuccess = (reference) => {
     if (reference.status === "success") {
       let data = {};
@@ -332,6 +337,7 @@ function CheckOut() {
     }
     setError(false);
     let itemArray = [];
+    console.log("cart-checkout :", cart);
     if (cart.length > 0) {
       cart.map((item) => {
         let details = {
@@ -342,20 +348,45 @@ function CheckOut() {
       });
     }
     if (itemArray.length > 0) {
+      console.log("itemArray :", itemArray);
+      console.log("email :", email);
       setLoading(true);
+       setRedirectLink(orderId[0]?.payRedirectUrl);
       let data = {
         products: itemArray,
         recipient_email: email,
+        info,
       };
       dispatch(
         createOrder(data, (successful) => {
+          console.log("Date-Checkout :", data);
+          console.log("successful :", successful);
+
           if (successful) {
             setLoading(false);
-            initializePayment(onSuccess, onClose);
+            
+            // initializePayment(onSuccess, onClose);
+            // const paymentRedirectUrl = orderId[0]?.payRedirectUrl;
+            // if (paymentRedirectUrl) {
+            //   console.log("paymentRedirectUrl :", paymentRedirectUrl);
+            //   router.push(paymentRedirectUrl);
+            // } else {
+            //   console.error("No payment redirect URL found in orderId");
+
+            // }
+            router
+              .push(
+                redirectLink,
+                undefined,
+                { shallow: true },
+              )
+              .then(() => {
+                console.log("redirect");
+              });
           } else {
             setLoading(false);
           }
-        })
+        }),
       );
     } else {
       Swal.fire({
@@ -366,10 +397,16 @@ function CheckOut() {
     }
   };
 
+  console.log("redirectLink :", redirectLink);
+
   const handleEmail = (e) => {
     email && setError(false);
     !email && setError(true);
     setEmail(e.target.value);
+  };
+
+  const handleInfo = (e) => {
+    setInfo(e.target.value);
   };
 
   const handleAddress = (e) => {
@@ -380,7 +417,7 @@ function CheckOut() {
     }));
   };
 
-  var formatter = new Intl.NumberFormat('en-US', {
+  var formatter = new Intl.NumberFormat("en-US", {
     // style: 'currency',
     // currency: 'NGN',
   });
@@ -506,9 +543,12 @@ function CheckOut() {
                       fullWidth
                       id="outlined-multiline-static"
                       label="Order Note"
+                      name="info"
                       multiline
                       rows={4}
                       variant="outlined"
+                      value={info}
+                      onChange={handleInfo}
                       // defaultValue="Default Value"
                     />
                   </Grid>
@@ -631,7 +671,7 @@ function CheckOut() {
             {cart &&
               cart.length > 0 &&
               cart.map((item) => (
-                <Box className={classes.orderDetailBox} key={item.name}>
+                <Box className={classes.orderDetailBox} key={item.product_id}>
                   <Grid container spacing={2}>
                     <Grid item xs={3}>
                       <Box>
@@ -692,7 +732,9 @@ function CheckOut() {
                   </Typography>
                 </Grid>
                 <Grid item xs={6} className={classes.priceValueAlign}>
-                  <Typography className={classes.priceValue}>{formatMoney(2000)}</Typography>
+                  <Typography className={classes.priceValue}>
+                    {formatMoney(2000)}
+                  </Typography>
                 </Grid>
               </Grid>
 

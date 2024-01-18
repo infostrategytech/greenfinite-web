@@ -260,7 +260,7 @@ function Shop() {
           <>
             {products &&
               products.length &&
-              products.map((product) => (
+              products.map((product, index) => (
                 <Grid
                   item
                   container
@@ -269,6 +269,7 @@ function Shop() {
                   md={3}
                   spacing={2}
                   style={{ marginBottom: "1em" }}
+                  key={index}
                 >
                   <Grid item className={classes.item}>
                     <Card className={classes.card} elevation={0}>
