@@ -19,8 +19,6 @@ export function publicRoute(url, method, data, config) {
         // "Content-Type": "application/json",
       };
 
-      console.log("config :", config)
-
       return config;
     },
     (error) => Promise.reject(error),
@@ -49,7 +47,7 @@ export function publicRoute(url, method, data, config) {
     }
     if (method === "PUT") {
       return axiosInstance
-        .put(url, config)
+        .put(url, data, config)
         .then((res) => resolve(res.data))
         .catch((err) => reject(handleApiError(err)));
     }

@@ -97,10 +97,11 @@ const useStyles = makeStyles((theme) => ({
 
 function Receipt() {
   const classes = useStyles();
-  const { orderDetails, address, payment_reference } = useSelector(
-    (state) => state.checkout,
-  );
+  const { orderDetails, address } = useSelector((state) => state.checkout);
   const { products } = useSelector((state) => state.products);
+  const { paymentReference, setPaymentReference } = useState("");
+
+
 
   console.log("products :", products);
 
@@ -111,8 +112,13 @@ function Receipt() {
 
   if (transId) {
     console.log("ello");
-    dispatch(updateOrderStatus(transId));
+    
+    dispatch(
+      updateOrderStatus({ payment_reference: transId }, transId),
+    );
   }
+
+ 
 
   return (
     <div className={classes.root}>

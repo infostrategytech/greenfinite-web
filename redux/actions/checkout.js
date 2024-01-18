@@ -1,5 +1,5 @@
 import callApi from "../../UtilityService/ApiConfigurations";
-import { SET_ORDER_DETAILS, SET_ORDER_ID } from "./Contants";
+import { SET_ORDER_DETAILS, SET_ORDER_ID, SET_TRACKING_ID } from "./Contants";
 import Swal from "sweetalert2";
 
 export const createOrder = (data, cb) => async (dispatch) => {
@@ -65,11 +65,11 @@ export const updateOrder = (data, id, cb) => async (dispatch) => {
   }
 };
 
-export const updateOrderStatus = (id) => async (dispatch) => {
+export const updateOrderStatus = (data, id) => async (dispatch) => {
   try {
     console.log("Updating order status for id:", id);
     
-    const res = await callApi(`orders/${id}`, "PUT");
+    const res = await callApi(`orders/${id}`, "PUT", data);
     
     console.log("Updated data:", res);
 
