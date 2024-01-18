@@ -318,6 +318,7 @@ function CheckOut() {
   }, []);
 
   const placeOrder = () => {
+   
     if (!address.country || !address.state || !address.street) {
       Swal.fire({
         icon: "error",
@@ -348,23 +349,19 @@ function CheckOut() {
       });
     }
     if (itemArray.length > 0) {
-      console.log("itemArray :", itemArray);
-      console.log("email :", email);
       setLoading(true);
-       setRedirectLink(orderId[0]?.payRedirectUrl);
+      //  setRedirectLink(orderId[0]?.payRedirectUrl);
       let data = {
         products: itemArray,
         recipient_email: email,
         info,
       };
       dispatch(
-        createOrder(data, (successful) => {
-          console.log("Date-Checkout :", data);
-          console.log("successful :", successful);
+        createOrder(data, (res) => {
 
-          if (successful) {
+          if (res.status === "success") {
             setLoading(false);
-            
+            //  setRedirectLink(res.data[0].payRedirectUrl);
             // initializePayment(onSuccess, onClose);
             // const paymentRedirectUrl = orderId[0]?.payRedirectUrl;
             // if (paymentRedirectUrl) {
@@ -376,13 +373,8 @@ function CheckOut() {
             // }
             router
               .push(
-                redirectLink,
-                undefined,
-                { shallow: true },
+                res.data[0].payRedirectUrl
               )
-              .then(() => {
-                console.log("redirect");
-              });
           } else {
             setLoading(false);
           }

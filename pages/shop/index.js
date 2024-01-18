@@ -56,10 +56,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
-    maxWidth: "100%",
+
+    height:"150px",
+    width:"100%",
     // height: "240px",
     // width: "280px",
-    // objectFit: "cover",
+    objectFit: "contain",
     // [theme.breakpoints.down("md")]: {
     //   height: "140px",
     //   width: "140px",
@@ -276,8 +278,8 @@ function Shop() {
                       <Box>
                         <Link href={`/shop/${product.product_id}`}>
                           <img
-                            src={product.image_url}
-                            alt="product"
+                            src={product.image_url ? product.image_url : "/images/placeholder_image.png"}
+                            alt={product.name}
                             className={classes.logo}
                           />
                         </Link>

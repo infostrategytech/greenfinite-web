@@ -98,23 +98,29 @@ const useStyles = makeStyles((theme) => ({
 function Receipt() {
   const classes = useStyles();
   const { orderDetails, address } = useSelector((state) => state.checkout);
-  const { products } = useSelector((state) => state.products);
-  const { paymentReference, setPaymentReference } = useState("");
+  const [paymentDetails, setPaymentDetails] = useState()
 
+  console.log(paymentDetails)
 
-
-  console.log("products :", products);
-
-  const { orderId } = useSelector((state) => state.checkout);
   const dispatch = useDispatch();
   const router = useRouter();
   const { transId } = router.query;
 
+
+
   if (transId) {
-    console.log("ello");
     
     dispatch(
-      updateOrderStatus({ payment_reference: transId }, transId),
+      updateOrderStatus(transId, (res) => {
+        if(res.status === "success") {
+         dispatch(
+         orderReceipt(transId, (res) => {
+        if(res.status === "success"){
+          setPaymentDetails(res.data)
+        }
+        }))
+        }
+      })
     );
   }
 
@@ -210,25 +216,25 @@ function Receipt() {
                 </TableRow>
               </TableHead>
               {/* <TableBody>
-                {orderDetails.items &&
-                  orderDetails.items.length > 0 &&
-                  orderDetails.items.map((item, index) => (
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                      key={index}
-                    >
-                      <TableCell>{item?.product?.name}</TableCell>
-                      <TableCell align="right">{item?.quantity}</TableCell>
-                      <TableCell align="right">{`${formatMoney(
-                        item?.product?.amount,
-                      )}`}</TableCell>
-                      <TableCell align="right">{`${formatMoney(
-                        item?.sub_total,
-                      )}`}</TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody> */}
-              <TableBody>
+                // {orderDetails.items &&
+                //   orderDetails.items.length > 0 &&
+                //   orderDetails.items.map((item, index) => (
+                //     <TableRow
+                //       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                //       key={index}
+                //     >
+                //       <TableCell>{item?.product?.name}</TableCell>
+                //       <TableCell align="right">{item?.quantity}</TableCell>
+                //       <TableCell align="right">{`${formatMoney(
+                //         item?.product?.amount,
+                //       )}`}</TableCell>
+                //       <TableCell align="right">{`${formatMoney(
+                //         item?.sub_total,
+                //       )}`}</TableCell>
+                //     </TableRow>
+                //   ))}
+              // </TableBody> */}
+              {/* <TableBody>
                 {products.length > 0 &&
                   products?.map((product) => (
                     <TableRow key={product.product_id}>
@@ -237,7 +243,7 @@ function Receipt() {
                       <TableCell>{product.name}</TableCell>
                     </TableRow>
                   ))}
-              </TableBody>
+              </TableBody> */}
             </Table>
           </TableContainer>
         </Grid>
