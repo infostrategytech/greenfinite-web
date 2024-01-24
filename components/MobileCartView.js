@@ -261,10 +261,10 @@ const MobileCartView = () => {
           </span>
         </Typography>
         <small className={classes.deliveryFee1}>
-          Shipping fee is a flat rate of {formatMoney(2000)}
+          fee is a flat rate of {formatMoney(2000)}
         </small>
         {cart.length > 0 &&
-          cart.map((item,index) => (
+          cart.map((item, index) => (
             <Grid container className={classes.wrapper} key={index}>
               {/* Dates Syrup */}
               <Grid item xs={12} className={classes.fruitContainer}>

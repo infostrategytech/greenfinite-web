@@ -12,6 +12,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "axios": "^0.24.0",
+    "moment": "^2.30.1",
     "next": "10.2.0",
     "next-redux-wrapper": "^7.0.5",
     "nextjs-redirect": "^5.0.2",

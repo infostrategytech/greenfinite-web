@@ -15,7 +15,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { formatMoney } from "../../UtilityService/Helpers";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { updateOrderStatus } from "../../redux/actions/checkout";
+import { updateOrderStatus, orderReceipt } from "../../redux/actions/checkout";
+import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -91,40 +92,59 @@ const useStyles = makeStyles((theme) => ({
     color: "#A1A1A1",
   },
   link: {
-    color: "#3C8753",
+    color: "green",
+    marginLeft: "30px",
   },
 }));
 
 function Receipt() {
   const classes = useStyles();
-  const { orderDetails, address } = useSelector((state) => state.checkout);
-  const [paymentDetails, setPaymentDetails] = useState()
-
-  console.log(paymentDetails)
+  const { orderDetails, address, updatedOrder } = useSelector(
+    (state) => state.checkout,
+  );
+  const [paymentDetails, setPaymentDetails] = useState();
+  const { products, product } = useSelector((state) => state.products);
+  const [receiptDate, setReceiptDate] = useState(null);
 
   const dispatch = useDispatch();
   const router = useRouter();
   const { transId } = router.query;
 
-
-
-  if (transId) {
-    
-    dispatch(
-      updateOrderStatus(transId, (res) => {
-        if(res.status === "success") {
-         dispatch(
-         orderReceipt(transId, (res) => {
-        if(res.status === "success"){
-          setPaymentDetails(res.data)
-        }
-        }))
-        }
-      })
-    );
-  }
-
- 
+  useEffect(() => {
+    if (transId) {
+      dispatch(
+        updateOrderStatus(transId, (res) => {
+          console.log("update res :", res);
+          if (res.status === "success") {
+            setReceiptDate(res.data[0].paid_at);
+            Swal.fire({
+              icon: "success",
+              title: res.message,
+              html: `
+                <div>
+                  <p><strong>Order id</strong>: ${res.data[0].order_id}</p>
+                  <p><strong>Reference</strong>: ${res.data[0].payment_reference}</p>
+                  <p><strong>Description</strong>: ${res.data[0].info}</p>
+                  <p><strong>Status</strong>: ${res.data[0].payment_status}</p>
+                  <p><strong>Total</strong>: ${res.data[0].total}</p>
+                  <p><strong>Paid at</strong>: ${res.data[0].paid_at}</p>
+                </div>
+              `,
+              showCloseButton: false,
+              showCancelButton: false,
+            });
+            dispatch(
+              orderReceipt(transId, (res) => {
+                if (res.status === "success") {
+                  setPaymentDetails(res.data);
+                }
+              }),
+            );
+          }
+        }),
+      );
+    }
+  }, [transId]);
 
   return (
     <div className={classes.root}>
@@ -138,12 +158,12 @@ function Receipt() {
             <Typography variant="body1" component="h5" className={classes.bold}>
               Your Order is Confirmed
             </Typography>
-            <Typography variant="body2" component="p">
+            {/* <Typography variant="body2" component="p">
               Delivery Date:
             </Typography>
             <Typography variant="body2" className={classes.date}>
               {orderDetails?.delivery_date}
-            </Typography>
+            </Typography> */}
           </Grid>
           <Grid item>
             <img
@@ -192,13 +212,13 @@ function Receipt() {
               </Typography>
             </Grid>
             <Grid item>
-              <Typography variant="body1">{orderDetails.paid_at}</Typography>
+              <Typography variant="body1">{receiptDate}</Typography>
             </Grid>
           </Grid>
         </Grid>
 
         {/* ORDER ITEMS TABLE */}
-        <Grid item className={classes.tableRow}>
+        {/* <Grid item className={classes.tableRow}>
           <TableContainer component={"div"}>
             <Table aria-label="order details table">
               <TableHead className={classes.tableHead}>
@@ -215,41 +235,12 @@ function Receipt() {
                   </TableCell>
                 </TableRow>
               </TableHead>
-              {/* <TableBody>
-                // {orderDetails.items &&
-                //   orderDetails.items.length > 0 &&
-                //   orderDetails.items.map((item, index) => (
-                //     <TableRow
-                //       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                //       key={index}
-                //     >
-                //       <TableCell>{item?.product?.name}</TableCell>
-                //       <TableCell align="right">{item?.quantity}</TableCell>
-                //       <TableCell align="right">{`${formatMoney(
-                //         item?.product?.amount,
-                //       )}`}</TableCell>
-                //       <TableCell align="right">{`${formatMoney(
-                //         item?.sub_total,
-                //       )}`}</TableCell>
-                //     </TableRow>
-                //   ))}
-              // </TableBody> */}
-              {/* <TableBody>
-                {products.length > 0 &&
-                  products?.map((product) => (
-                    <TableRow key={product.product_id}>
-                      <TableCell>{product.name}</TableCell>
-                      <TableCell>{product.name}</TableCell>
-                      <TableCell>{product.name}</TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody> */}
             </Table>
           </TableContainer>
-        </Grid>
+        </Grid> */}
 
         {/* NOTES AND TOTAL */}
-        <Grid
+        {/* <Grid
           item
           container
           justifyContent="space-between"
@@ -280,7 +271,7 @@ function Receipt() {
               </Typography>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid> */}
 
         {/* ADDRESS */}
         <Grid item>
@@ -309,9 +300,12 @@ function Receipt() {
         </Grid>
       </Grid>
 
-      <Link href="/" className={classes.link}>
+      {/* <Link
+        href="/"
+       className={classes.link}
+      >
         Back Home
-      </Link>
+      </Link> */}
     </div>
   );
 }

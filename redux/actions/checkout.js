@@ -1,5 +1,10 @@
 import callApi from "../../UtilityService/ApiConfigurations";
-import { SET_ORDER_DETAILS, SET_ORDER_ID, SET_TRACKING_ID } from "./Contants";
+import {
+  SET_ORDER_DETAILS,
+  SET_ORDER_ID,
+  SET_TRACKING_ID,
+  UPDATE_ORDER_STATUS,
+} from "./Contants";
 import Swal from "sweetalert2";
 
 export const createOrder = (data, cb) => async (dispatch) => {
@@ -62,27 +67,19 @@ export const updateOrderStatus = (id, cb) => async (dispatch) => {
     console.log("Updating order status for id:", id);
 
     const res = await callApi(`orders/${id}`, "PUT", { payment_reference: id });
-
-    console.log("Updated data:", res);
-
     if (res.code === "00") {
-      Swal.fire({
-        title: res.message,
-        html: `
-    <div>
-      <p><strong>Order id</strong>: ${res.data[0].order_id}</p>
-      <p><strong>Reference</strong>: ${res.data[0].payment_reference}</p>
-      <p><strong>Description</strong>: ${res.data[0].info}</p>
-      <p><strong>Status</strong>: ${res.data[0].payment_status}</p>
-      <p><strong>Total</strong>: ${res.data[0].total}</p>
-      <p><strong>Paid at</strong>: ${res.data[0].paid_at}</p>
-    </div>
-  `,
-        showCloseButton: false,
-        showCancelButton: false,
+      console.log("respponse response:", res)
+      dispatch({
+        type: SET_TRACKING_ID,
+        payload: res.data
+      })
+    
+      dispatch({
+        type: UPDATE_ORDER_STATUS,
+        payload: res.data,
       });
 
-      cb({ status: "success" });
+      cb({ status: "success", data: res.data });
       return;
     }
     throw new Error(res.message);

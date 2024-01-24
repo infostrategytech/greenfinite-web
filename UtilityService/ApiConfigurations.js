@@ -11,13 +11,9 @@ const axiosInstance = axios.create({
 });
 
 export function publicRoute(url, method, data, config) {
-
   axiosInstance.interceptors.request.use(
     (config) => {
-    
-      config.headers = {
-        // "Content-Type": "application/json",
-      };
+      config.headers = {};
 
       return config;
     },
