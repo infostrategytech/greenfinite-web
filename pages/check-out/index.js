@@ -233,7 +233,7 @@ function CheckOut() {
   });
   const [redirectLink, setRedirectLink] = useState("");
 
-  console.log("OrderID :", orderId);
+  console.log("cart :", cart);
 
   let paystackEmail = Math.floor(Math.random() * 12903678);
 
@@ -318,7 +318,6 @@ function CheckOut() {
   }, []);
 
   const placeOrder = () => {
-   
     if (!address.country || !address.state || !address.street) {
       Swal.fire({
         icon: "error",
@@ -344,10 +343,12 @@ function CheckOut() {
         let details = {
           product_id: item.product_id,
           quantity: item.qty,
+          amount: item.amount,
         };
         itemArray.push(details);
       });
     }
+    console.log("itemArray :", itemArray);
     if (itemArray.length > 0) {
       setLoading(true);
       //  setRedirectLink(orderId[0]?.payRedirectUrl);
@@ -356,9 +357,9 @@ function CheckOut() {
         recipient_email: email,
         info,
       };
+      console.log("data :", data);
       dispatch(
         createOrder(data, (res) => {
-
           if (res.status === "success") {
             setLoading(false);
             //  setRedirectLink(res.data[0].payRedirectUrl);
@@ -371,14 +372,10 @@ function CheckOut() {
             //   console.error("No payment redirect URL found in orderId");
 
             // }
-            router
-              .push(
-                res.data[0].payRedirectUrl
-              )
+            router.push(res.data[0].payRedirectUrl);
           } else {
             setLoading(false);
           }
-          
         }),
       );
     } else {
