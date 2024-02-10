@@ -97,7 +97,7 @@ export const orderReceipt = (id, cb) => async (dispatch) => {
   try {
     console.log("Updating order status for id:", id);
 
-    const res = await callApi(`orders/${id}`, "PUT", { payment_reference: id });
+    const res = await callApi(`order-record/${id}`, "GET");
 
     console.log("Updated data:", res);
 

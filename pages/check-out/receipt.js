@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Grid,
   Typography,
@@ -6,9 +6,12 @@ import {
   Table,
   TableBody,
   TableCell,
+  Button,
   TableContainer,
   TableHead,
   TableRow,
+  withStyles,
+  Box,
 } from "@material-ui/core";
 import Head from "next/head";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,6 +20,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { updateOrderStatus, orderReceipt } from "../../redux/actions/checkout";
 import Swal from "sweetalert2";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       padding: 100,
       paddingTop: 50,
-      paddingBottom: 300,
+      paddingBottom: 100,
     },
     [theme.breakpoints.down("sm")]: {
       padding: 16,
@@ -97,11 +102,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
 function Receipt() {
   const classes = useStyles();
   const { orderDetails, address, updatedOrder } = useSelector(
     (state) => state.checkout,
   );
+
+  const pdfRef = useRef();
+
+  console.log("orderDetails :", orderDetails);
   const [paymentDetails, setPaymentDetails] = useState();
   const { products, product } = useSelector((state) => state.products);
   const [receiptDate, setReceiptDate] = useState(null);
@@ -122,12 +149,12 @@ function Receipt() {
               title: res.message,
               html: `
                 <div>
-                  <p><strong>Order id</strong>: ${res.data[0].order_id}</p>
-                  <p><strong>Reference</strong>: ${res.data[0].payment_reference}</p>
-                  <p><strong>Description</strong>: ${res.data[0].info}</p>
-                  <p><strong>Status</strong>: ${res.data[0].payment_status}</p>
-                  <p><strong>Total</strong>: ${res.data[0].total}</p>
-                  <p><strong>Paid at</strong>: ${res.data[0].paid_at}</p>
+                  <p><strong>Order id</strong>: ${res?.data[0].order_id}</p>
+                  <p><strong>Reference</strong>: ${res?.data[0].payment_reference}</p>
+                  <p><strong>Description</strong>: ${res?.data[0].info}</p>
+                  <p><strong>Status</strong>: ${res?.data[0].payment_status}</p>
+                  <p><strong>Total</strong>: ${res?.data[0].total}</p>
+                  <p><strong>Paid at</strong>: ${res?.data[0].paid_at}</p>
                 </div>
               `,
               showCloseButton: false,
@@ -136,6 +163,7 @@ function Receipt() {
             dispatch(
               orderReceipt(transId, (res) => {
                 if (res.status === "success") {
+                  console.log("payment data", res.data);
                   setPaymentDetails(res.data);
                 }
               }),
@@ -146,24 +174,47 @@ function Receipt() {
     }
   }, [transId]);
 
+  const downloadPDF = () => {
+    const input = pdfRef.current;
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4", true);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 30;
+      pdf.addImage(
+        imgData,
+        "PNG",
+        imgX,
+        imgY,
+        imgWidth * ratio,
+        imgHeight * ratio,
+      );
+      pdf.save("receipt.pdf");
+    });
+  };
+
   return (
     <div className={classes.root}>
       <Head>
         <title>Greenfinite - Receipt</title>
         <meta name="description" content="" />
       </Head>
-      <Grid container direction="column" className={classes.parentContainer}>
+      <Grid
+        container
+        direction="column"
+        className={classes.parentContainer}
+        ref={pdfRef}
+      >
         <Grid item container justifyContent="space-between">
           <Grid item>
             <Typography variant="body1" component="h5" className={classes.bold}>
               Your Order is Confirmed
             </Typography>
-            {/* <Typography variant="body2" component="p">
-              Delivery Date:
-            </Typography>
-            <Typography variant="body2" className={classes.date}>
-              {orderDetails?.delivery_date}
-            </Typography> */}
           </Grid>
           <Grid item>
             <img
@@ -197,10 +248,12 @@ function Receipt() {
               </Typography>
             </Grid>
             <Grid item>
-              <Typography variant="body1">{orderDetails?.order_id}</Typography>
+              <Typography variant="body1">
+                {paymentDetails?.order_id}
+              </Typography>
             </Grid>
           </Grid>
-          <Grid
+          {/* <Grid
             item
             container
             justifyContent="space-between"
@@ -214,11 +267,11 @@ function Receipt() {
             <Grid item>
               <Typography variant="body1">{receiptDate}</Typography>
             </Grid>
-          </Grid>
+          </Grid> */}
         </Grid>
 
         {/* ORDER ITEMS TABLE */}
-        {/* <Grid item className={classes.tableRow}>
+        <Grid item className={classes.tableRow}>
           <TableContainer component={"div"}>
             <Table aria-label="order details table">
               <TableHead className={classes.tableHead}>
@@ -235,12 +288,31 @@ function Receipt() {
                   </TableCell>
                 </TableRow>
               </TableHead>
+
+              <TableBody>
+                {paymentDetails?.body.map((product) => (
+                  <StyledTableRow key={product.product_id}>
+                    <StyledTableCell component="th" scope="row">
+                      {product.product_name}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {product.quantity}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {product.unit_cost}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {product.sub_total}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
             </Table>
           </TableContainer>
-        </Grid> */}
+        </Grid>
 
         {/* NOTES AND TOTAL */}
-        {/* <Grid
+        <Grid
           item
           container
           justifyContent="space-between"
@@ -267,14 +339,14 @@ function Receipt() {
             </Grid>
             <Grid item>
               <Typography variant="h6" className={classes.bold}>
-                {`${formatMoney(orderDetails.total)}`}
+                {`${formatMoney(paymentDetails?.total)}`}
               </Typography>
             </Grid>
           </Grid>
-        </Grid> */}
+        </Grid>
 
         {/* ADDRESS */}
-        <Grid item>
+        {/* <Grid item>
           <Typography variant="body1" component="p" className={classes.bold}>
             Delivery Address
           </Typography>
@@ -287,25 +359,36 @@ function Receipt() {
           <Typography variant="body1" component="p">
             {address.country}
           </Typography>
-        </Grid>
+        </Grid> */}
 
         {/* DIVIDER */}
         <Grid item className={classes.bottomDividerBox}>
           <hr className={classes.divider} />
         </Grid>
-        <Grid item className={classes.dev}>
+        <Grid
+          item
+          className={classes.dev}
+          sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
+        >
           <Typography variant="caption" className={classes.lightText}>
             Invoice powered by Greenfinite Ltd.
           </Typography>
+          <br />
         </Grid>
       </Grid>
-
-      {/* <Link
-        href="/"
-       className={classes.link}
-      >
-        Back Home
-      </Link> */}
+      <Box sx={{ display: "flex", justifyContent: "center", marginBottom: "50px", }}>
+        <Button
+          onClick={downloadPDF}
+          variant="outlined"
+          sx={{
+            color: "#3C8753",
+            border: "none",
+            marginTop: "10px",
+          }}
+        >
+          Download Receipt
+        </Button>
+      </Box>
     </div>
   );
 }
