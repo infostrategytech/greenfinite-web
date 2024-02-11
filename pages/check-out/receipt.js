@@ -147,7 +147,7 @@ function Receipt() {
             Swal.fire({
               icon: "success",
               title: res.message,
-              html: `
+               html: typeof res.data === "object" ? `
                 <div>
                   <p><strong>Order id</strong>: ${res?.data[0].order_id}</p>
                   <p><strong>Reference</strong>: ${res?.data[0].payment_reference}</p>
@@ -156,7 +156,7 @@ function Receipt() {
                   <p><strong>Total</strong>: ${res?.data[0].total}</p>
                   <p><strong>Paid at</strong>: ${res?.data[0].paid_at}</p>
                 </div>
-              `,
+              ` : res.data,
               showCloseButton: false,
               showCancelButton: false,
             });
