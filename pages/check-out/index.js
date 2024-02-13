@@ -351,7 +351,6 @@ function CheckOut() {
     console.log("itemArray :", itemArray);
     if (itemArray.length > 0) {
       setLoading(true);
-      //  setRedirectLink(orderId[0]?.payRedirectUrl);
       let data = {
         products: itemArray,
         recipient_email: email,
@@ -360,21 +359,13 @@ function CheckOut() {
       console.log("data :", data);
       dispatch(
         createOrder(data, (res) => {
+          console.log("request response :", res)
           if (res.status === "success") {
             setLoading(false);
-            //  setRedirectLink(res.data[0].payRedirectUrl);
-            // initializePayment(onSuccess, onClose);
-            // const paymentRedirectUrl = orderId[0]?.payRedirectUrl;
-            // if (paymentRedirectUrl) {
-            //   console.log("paymentRedirectUrl :", paymentRedirectUrl);
-            //   router.push(paymentRedirectUrl);
-            // } else {
-            //   console.error("No payment redirect URL found in orderId");
-
-            // }
             router.push(res.data[0].payRedirectUrl);
           } else {
             setLoading(false);
+            router.push('/check-out')
           }
         }),
       );
@@ -387,7 +378,6 @@ function CheckOut() {
     }
   };
 
-  console.log("redirectLink :", redirectLink);
 
   const handleEmail = (e) => {
     email && setError(false);

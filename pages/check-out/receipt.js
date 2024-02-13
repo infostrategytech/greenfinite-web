@@ -147,7 +147,9 @@ function Receipt() {
             Swal.fire({
               icon: "success",
               title: res.message,
-               html: typeof res.data === "object" ? `
+              html:
+                typeof res.data === "object"
+                  ? `
                 <div>
                   <p><strong>Order id</strong>: ${res?.data[0].order_id}</p>
                   <p><strong>Reference</strong>: ${res?.data[0].payment_reference}</p>
@@ -156,7 +158,8 @@ function Receipt() {
                   <p><strong>Total</strong>: ${res?.data[0].total}</p>
                   <p><strong>Paid at</strong>: ${res?.data[0].paid_at}</p>
                 </div>
-              ` : res.data,
+              `
+                  : res.data,
               showCloseButton: false,
               showCancelButton: false,
             });
@@ -168,6 +171,19 @@ function Receipt() {
                 }
               }),
             );
+          } else {
+            Swal.fire({
+              icon: "error",
+              // title: "Transaction not successful",
+              html: `
+                <div>
+                  <p>Transaction not successful</p>
+                </div>
+              `,
+              showCloseButton: false,
+              showCancelButton: false,
+            });
+            router.push("/check-out");
           }
         }),
       );
@@ -376,7 +392,9 @@ function Receipt() {
           <br />
         </Grid>
       </Grid>
-      <Box sx={{ display: "flex", justifyContent: "center", marginBottom: "50px", }}>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", marginBottom: "50px" }}
+      >
         <Button
           onClick={downloadPDF}
           variant="outlined"
