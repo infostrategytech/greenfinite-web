@@ -122,11 +122,13 @@ const StyledTableRow = withStyles((theme) => ({
 
 function Receipt() {
   const classes = useStyles();
-  const { orderDetails, address, updatedOrder } = useSelector(
+  const { orderDetails, address, paymentId } = useSelector(
     (state) => state.checkout,
   );
 
   const pdfRef = useRef();
+
+  console.log("paymentId :", paymentId);
 
   console.log("orderDetails :", orderDetails);
   const [paymentDetails, setPaymentDetails] = useState();
@@ -135,12 +137,12 @@ function Receipt() {
 
   const dispatch = useDispatch();
   const router = useRouter();
-  const { transId } = router.query;
+  // const { transId } = router.query;
 
   useEffect(() => {
-    if (transId) {
+    if (paymentId) {
       dispatch(
-        updateOrderStatus(transId, (res) => {
+        updateOrderStatus(paymentId, (res) => {
           console.log("update res :", res);
           if (res.status === "success") {
             setReceiptDate(res.data[0].paid_at);
@@ -164,7 +166,7 @@ function Receipt() {
               showCancelButton: false,
             });
             dispatch(
-              orderReceipt(transId, (res) => {
+              orderReceipt(paymentId, (res) => {
                 if (res.status === "success") {
                   console.log("payment data", res.data);
                   setPaymentDetails(res.data);
@@ -188,7 +190,7 @@ function Receipt() {
         }),
       );
     }
-  }, [transId]);
+  }, [paymentId]);
 
   const downloadPDF = () => {
     const input = pdfRef.current;

@@ -7,12 +7,12 @@ import { productsReducer } from "./products";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["products", "product", "id", "cart"],
+  whitelist: ["products", "product", "id", "cart", "checkout"],
 };
 
 const rootReducer = combineReducers({
   products: productsReducer,
-  checkout: checkoutReducer
+  checkout: checkoutReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

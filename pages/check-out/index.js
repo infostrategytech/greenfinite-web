@@ -20,6 +20,7 @@ import {
   CLEAR_CART,
   SET_ADDRESS,
   SET_ORDER_ID,
+  GET_PAYMENT_REF
 } from "../../redux/actions/Contants";
 import Head from "next/head";
 import { formatMoney } from "../../UtilityService/Helpers";
@@ -317,6 +318,8 @@ function CheckOut() {
       });
   }, []);
 
+  let payRedirectUrl;
+
   const placeOrder = () => {
     if (!address.country || !address.state || !address.street) {
       Swal.fire({
@@ -359,13 +362,19 @@ function CheckOut() {
       console.log("data :", data);
       dispatch(
         createOrder(data, (res) => {
-          console.log("request response :", res)
+          console.log("request response :", res);
           if (res.status === "success") {
             setLoading(false);
+            dispatch({
+              type: GET_PAYMENT_REF,
+              payload: res.data[0].paymentTicketRef
+            })
+            // localStorage.setItem("ticketRef", JSON.stringify(res.data[0].paymentTicketRef));
+            payRedirectUrl = res.data[0].payRedirectUrl;
             router.push(res.data[0].payRedirectUrl);
           } else {
             setLoading(false);
-            router.push('/check-out')
+            router.push("/check-out");
           }
         }),
       );
@@ -377,7 +386,6 @@ function CheckOut() {
       });
     }
   };
-
 
   const handleEmail = (e) => {
     email && setError(false);

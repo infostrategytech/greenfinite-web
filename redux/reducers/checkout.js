@@ -4,7 +4,8 @@ import {
   SET_ORDER_ID,
   SET_TRACKING_ID,
   UPDATE_ORDER_STATUS,
-  CLEAR_ORDER_STATUS
+  CLEAR_ORDER_STATUS,
+  GET_PAYMENT_REF,
 } from "../actions/Contants";
 
 const initState = {
@@ -12,7 +13,8 @@ const initState = {
   orderDetails: {},
   address: {},
   payment_reference: "",
-  updatedOrder: null
+  updatedOrder: null,
+  paymentId: null,
 };
 
 export const checkoutReducer = (state = initState, action) => {
@@ -45,7 +47,12 @@ export const checkoutReducer = (state = initState, action) => {
     case CLEAR_ORDER_STATUS:
       return {
         ...state,
-        updatedOrder: null
+        updatedOrder: null,
+      };
+    case GET_PAYMENT_REF:
+      return {
+        ...state,
+        paymentId: action.payload,
       };
     default:
       return state;

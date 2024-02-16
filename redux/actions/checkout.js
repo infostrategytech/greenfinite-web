@@ -4,6 +4,7 @@ import {
   SET_ORDER_ID,
   SET_TRACKING_ID,
   UPDATE_ORDER_STATUS,
+  GET_PAYMENT_REF
 } from "./Contants";
 import Swal from "sweetalert2";
 
@@ -15,6 +16,10 @@ export const createOrder = (data, cb) => async (dispatch) => {
     if (res.code === "00") {
       dispatch({
         type: SET_ORDER_ID,
+        payload: res.data,
+      });
+      dispatch({
+        type: GET_PAYMENT_REF,
         payload: res.data,
       });
       cb({ status: "success", data: res.data });
@@ -68,12 +73,12 @@ export const updateOrderStatus = (id, cb) => async (dispatch) => {
 
     const res = await callApi(`orders/${id}`, "PUT", { payment_reference: id });
     if (res.code === "00") {
-      console.log("respponse response:", res)
+      console.log("respponse response:", res);
       dispatch({
         type: SET_TRACKING_ID,
-        payload: res.data
-      })
-    
+        payload: res.data,
+      });
+
       dispatch({
         type: UPDATE_ORDER_STATUS,
         payload: res.data,
