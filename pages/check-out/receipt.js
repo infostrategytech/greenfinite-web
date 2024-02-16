@@ -22,6 +22,7 @@ import { updateOrderStatus, orderReceipt } from "../../redux/actions/checkout";
 import Swal from "sweetalert2";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { CLEAR_CART } from "../../redux/actions/Contants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -173,6 +174,9 @@ function Receipt() {
                 }
               }),
             );
+            dispatch({
+              type: CLEAR_CART,
+            });
           } else {
             Swal.fire({
               icon: "error",
