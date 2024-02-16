@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     height: "50px",
     width: "150px",
+    cursor: "pointer",
   },
   links: {
     fontFamily: "Poppins",
@@ -207,7 +208,6 @@ function Header() {
                     <Typography
                       variant="body1"
                       className={classes.links}
-                      variant="body1"
                     >
                       <Link
                         href="/"
@@ -219,7 +219,6 @@ function Header() {
                     <Typography
                       variant="body1"
                       className={classes.links}
-                      variant="body1"
                     >
                       <Link
                         className={`${classes.links} ${classes.account}`}
@@ -233,7 +232,6 @@ function Header() {
                     <Typography
                       variant="body1"
                       className={classes.links}
-                      variant="body1"
                     >
                       <Link
                         href="/shop"
@@ -246,7 +244,6 @@ function Header() {
                     <Typography
                       variant="body1"
                       className={classes.links}
-                      variant="body1"
                     >
                       <Link href="/distributors">
                         <ListItem> Distributors</ListItem>
@@ -303,7 +300,6 @@ function Header() {
                     <Typography
                       variant="body1"
                       className={classes.links}
-                      variant="body1"
                     >
                       <Link
                         href="/contact-us"
@@ -348,8 +344,6 @@ function Header() {
                       variant="body1"
                       className={classes.links}
                       onClick={() => router.push("/cart")}
-                      variant="body1"
-                      className={classes.links}
                     >
                       <IconButton>
                         <Badge badgeContent={count} color="primary">

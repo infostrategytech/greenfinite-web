@@ -179,6 +179,7 @@ function Cart() {
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const { cart } = useSelector((state) => state.products);
+  console.log("cart :", cart);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
@@ -239,7 +240,7 @@ function Cart() {
               </Grid>
             </Grid>
             {cart && cart.length > 0 ? (
-              cart.map((item) => <CartItem item={item} />)
+              cart.map((item, index) => <CartItem item={item} key={index} />)
             ) : (
               <Typography variant="h6">Cart is empty</Typography>
             )}

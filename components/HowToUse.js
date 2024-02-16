@@ -81,9 +81,9 @@ function HowToUse() {
                 height="100%"
                 src="https://www.youtube.com/embed/o7Im1p9Oj2s"
                 title=""
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
+                allowFullscreen
               ></iframe>
             </Grid>
           </Grid>

@@ -56,10 +56,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
-    maxWidth: "100%",
+
+    height:"150px",
+    width:"100%",
     // height: "240px",
     // width: "280px",
-    // objectFit: "cover",
+    objectFit: "contain",
     // [theme.breakpoints.down("md")]: {
     //   height: "140px",
     //   width: "140px",
@@ -260,7 +262,7 @@ function Shop() {
           <>
             {products &&
               products.length &&
-              products.map((product) => (
+              products.map((product, index) => (
                 <Grid
                   item
                   container
@@ -269,14 +271,15 @@ function Shop() {
                   md={3}
                   spacing={2}
                   style={{ marginBottom: "1em" }}
+                  key={index}
                 >
                   <Grid item className={classes.item}>
                     <Card className={classes.card} elevation={0}>
                       <Box>
                         <Link href={`/shop/${product.product_id}`}>
                           <img
-                            src={product.image_url}
-                            alt="product"
+                            src={product.image_url ? product.image_url : "/images/placeholder_image.png"}
+                            alt={product.name}
                             className={classes.logo}
                           />
                         </Link>

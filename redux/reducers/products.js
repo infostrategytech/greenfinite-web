@@ -15,9 +15,12 @@ const initState = {
   id: "",
 };
 
+console.log("latest prod :", initState.products);
+
 export const productsReducer = (state = initState, action) => {
   switch (action.type) {
     case GET_ALL_PRODUCTS:
+      
       return {
         ...state,
         products: action.payload,
@@ -29,19 +32,20 @@ export const productsReducer = (state = initState, action) => {
       };
     case ADD_TO_CART:
       const item = state.products.find(
-        (prod) => prod.product_id === action.payload
+        (prod) => prod.product_id === action.payload,
       );
 
       const isInCart = state.cart.find((item) =>
-        item.product_id === action.payload ? true : false
+        item.product_id === action.payload ? true : false,
       );
 
       return {
         ...state,
-        cart: isInCart  ? state.cart.map((item) =>
+        cart: isInCart
+          ? state.cart.map((item) =>
               item.product_id === action.payload
                 ? { ...item, qty: item.qty + 1 }
-                : item
+                : item,
             )
           : [...state.cart, { ...item, qty: 1 }],
       };
@@ -51,7 +55,7 @@ export const productsReducer = (state = initState, action) => {
         cart: state.cart.map((item) =>
           item.product_id === action.payload
             ? { ...item, qty: item.qty - 1 }
-            : item
+            : item,
         ),
       };
     case REMOVE_FROM_CART:

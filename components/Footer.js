@@ -56,7 +56,7 @@ const Footer = () => {
   return (
     <>
       <Box className={classes.wrapper}>
-        <Grid container xs={12} sm={12} md={10}>
+        <Grid container>
           <Grid item xs={12} sm={12} md={6}>
             <Box>
               <img
